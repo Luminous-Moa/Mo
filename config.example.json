@@ -1,0 +1,12 @@
+{
+  "bindHost": "127.0.0.1",
+  "port": 47831,
+  "publicOrigin": "https://example.trycloudflare.com",
+  "allowedRoots": ["C:\\Codex\\Projects"],
+  "transport": "stdio",
+  "codexExe": "C:\\Users\\YOUR_USER\\AppData\\Local\\OpenAI\\Codex\\bin\\VERSION\\codex.exe",
+  "codexHome": "C:\\Users\\YOUR_USER\\.codex",
+  "userProfile": "C:\\Users\\YOUR_USER",
+  "cloudflaredPath": "C:\\path\\to\\cloudflared.exe",
+  "uploadLimits": { "fileBytes": 20971520, "messageFiles": 5, "messageBytes": 52428800, "storeBytes": 1073741824, "stagedTtlHours": 8, "retentionDays": 14 }
+}

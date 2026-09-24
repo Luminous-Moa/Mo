@@ -1,0 +1,10 @@
+{
+  "name": "codex-remote-web",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "test": "node --test test/*.test.mjs",
+    "check": "node --check server.mjs && node --check bridge/app-server.mjs && node --check setup.mjs"
+  }
+}

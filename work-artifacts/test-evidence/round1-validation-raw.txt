@@ -1,0 +1,62 @@
+Round 1 (codexremote-ui-upload-fix-round1) raw validation output, transcribed verbatim from the engineer session.
+Run directory: C:\Codex\Scratch\claude-code-worker\runs\1790166839265-34980-72466cca-b4e7-406f-9c69-fcb3baa55f63
+No failing runs occurred in round 1, so there are no failure logs to keep.
+
+$ & 'C:\Codex\Apps\Development-SDKs-2026-09-20\node-lts\node.exe' --check server.mjs
+(no output, exit 0)
+$ & 'C:\Codex\Apps\Development-SDKs-2026-09-20\node-lts\node.exe' --check public/app.js
+(no output, exit 0)
+$ & 'C:\Codex\Apps\Development-SDKs-2026-09-20\node-lts\node.exe' --check bridge/app-server.mjs
+(no output, exit 0)
+$ & 'C:\Codex\Apps\Development-SDKs-2026-09-20\node-lts\node.exe' --check test/ui-fixture.mjs
+(no output, exit 0)
+$ & 'C:\Codex\Apps\Development-SDKs-2026-09-20\node-lts\node.exe' --check setup.mjs
+(no output, exit 0)
+$ & 'C:\Codex\Apps\Development-SDKs-2026-09-20\node-lts\node.exe' --check lib/uploads.mjs
+(no output, exit 0)
+Note: public/ui-core.js has no allowed --check command; it is imported by test/ui-core.test.mjs and test/uploads.test.mjs, so a syntax error would fail those files.
+
+$ & 'C:\Codex\Apps\Development-SDKs-2026-09-20\node-lts\node.exe' --test test/*.test.mjs   (final run)
+✔ auth, csrf, origin, logout and allowed project path boundary (131.7048ms)
+✔ turn idempotency reserves the first dispatch (48.7094ms)
+✔ model catalog requires auth, follows pages, hides unavailable IDs, and exposes canonical models (47.22ms)
+✔ turn forwards selected model and effort but omits overrides when neither is selected (48.1123ms)
+✔ selected model uses its supported default reasoning effort (47.4874ms)
+✔ invalid model and effort requests do not dispatch a turn (49.5445ms)
+✔ request IDs include model choice and reserve one delayed catalog dispatch (48.9599ms)
+✔ model pagination limit rejects without caching a partial catalog (47.7822ms)
+✔ session expiry and denied thread operations (144.2756ms)
+✔ approval uses controlled-thread item context and explicit resolution (63.9234ms)
+✔ JSONL preserves split UTF-8 and resolves approval explicitly (1.2473ms)
+✔ paste keeps normal text paste whenever the clipboard carries text, even with files (Excel range + image) (0.4339ms)
+✔ attachment notice renders as chips whether it is a separate part or merged into the prompt text (0.9465ms)
+✔ text that merely looks like a notice header is shown as the user wrote it; images without a notice get chips (0.5768ms)
+✔ upload requires login, exact Origin and CSRF, and uploading alone never starts a turn (130.003ms)
+✔ upload limits: per file, per message count and bytes, store total; config can only lower them (120.4218ms)
+✔ content is verified by signature, UTF-8 and macro-free OOXML; extension or MIME alone is not trusted (122.1095ms)
+✔ client file names cannot choose the storage path, escape it, or overwrite existing files (79.4328ms)
+﹣ a file symlink planted at the generated name is not followed or overwritten (152.0999ms) # file symlink creation not permitted on this host (EPERM); junction escapes are covered separately
+✔ upload storage refuses junction/symlink escapes and placement inside allowed project roots (121.6287ms)
+✔ attachment IDs are bound to the uploading session, thread and project (78.6517ms)
+✔ turn forwards verified attachment paths, local images and an untrusted-input notice; fake Codex reads them (157.6033ms)
+✔ attachment turns are idempotent, never double-dispatch, and failed dispatch keeps files without auto-retry (210.5024ms)
+✔ image preview is authenticated, owner-only, non-images are not served, and responses are inert (54.3644ms)
+✔ retention: logout discards unsent uploads, in-use files are kept, expiry touches only tracked files, manifest survives restart (83.8757ms)
+✔ static UI is served with security headers and loads nothing from external origins (28.1938ms)
+✔ metadata preflight answers predictable rejections as JSON, stores nothing, and needs CSRF + Origin (58.0704ms)
+✔ an upload aborted mid-stream leaves no partial file, index entry or quota reservation (79.8694ms)
+✔ DELETE of an attachment requires login, CSRF and the exact Origin; rejected deletes keep the file (51.704ms)
+✔ Codex rejection (JSON-RPC error) is definitive; unknown outcomes mark files attempted and an explicit resend works (86.8071ms)
+✔ bridge tags JSON-RPC error responses as definitive and leaves timeouts untagged (46.3131ms)
+✔ upload store refuses a non-empty folder it did not create and leaves every byte in it untouched (100.6833ms)
+✔ manifest replacement retries transient lock errors, then fails loudly without deleting or overwriting (945.8853ms)
+✔ history that merges prompt and attachment notice into one text part still renders prompt text and chips without paths (188.3734ms)
+✔ fixture scenarios: approval, question and slow interrupt round-trip through the server (1297.9928ms)
+ℹ tests 35
+ℹ suites 0
+ℹ pass 34
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 1
+ℹ todo 0
+ℹ duration_ms 4279.5611

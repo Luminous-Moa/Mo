@@ -1,0 +1,31 @@
+✔ auth, csrf, origin, logout and allowed project path boundary (90.9652ms)
+✔ turn idempotency reserves the first dispatch (48.4208ms)
+✔ model catalog requires auth, follows pages, hides unavailable IDs, and exposes canonical models (46.2835ms)
+✔ turn forwards selected model and effort but omits overrides when neither is selected (46.3953ms)
+✔ selected model uses its supported default reasoning effort (47.9243ms)
+✔ invalid model and effort requests do not dispatch a turn (46.9036ms)
+✔ request IDs include model choice and reserve one delayed catalog dispatch (49.4578ms)
+✔ model pagination limit rejects without caching a partial catalog (45.6122ms)
+✔ session expiry and denied thread operations (44.6853ms)
+✔ approval uses controlled-thread item context and explicit resolution (54.0191ms)
+✔ JSONL preserves split UTF-8 and resolves approval explicitly (1.4042ms)
+✔ upload requires login, exact Origin and CSRF, and uploading alone never starts a turn (73.9411ms)
+✔ upload limits: per file, per message count and bytes, store total; config can only lower them (122.5634ms)
+✔ content is verified by signature, UTF-8 and macro-free OOXML; extension or MIME alone is not trusted (98.4528ms)
+✔ client file names cannot choose the storage path, escape it, or overwrite existing files (74.7916ms)
+ℹ file symlink not permitted here (EPERM); planted-link overwrite case skipped
+✔ upload storage refuses junction/symlink escapes and placement inside allowed project roots (118.5324ms)
+✔ attachment IDs are bound to the uploading session, thread and project (78.9187ms)
+✔ turn forwards verified attachment paths, local images and an untrusted-input notice; fake Codex reads them (432.2577ms)
+✔ attachment turns are idempotent, never double-dispatch, and failed dispatch keeps files without auto-retry (133.761ms)
+✔ image preview is authenticated, owner-only, non-images are not served, and responses are inert (55.2995ms)
+✔ retention: logout discards unsent uploads, in-use files are kept, expiry touches only tracked files, manifest survives restart (84.5612ms)
+✔ static UI is served with security headers and loads nothing from external origins (27.9096ms)
+ℹ tests 22
+ℹ suites 0
+ℹ pass 22
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1372.3085

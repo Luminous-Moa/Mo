@@ -1,0 +1,75 @@
+Main-triaged F1/F2/F3 fix (codexremote-dispatch-main-triaged-fix) raw validation output, transcribed verbatim from the engineer session.
+Run directory: C:\Codex\Scratch\claude-code-worker\runs\1790170329108-15328-6d41559c-51cf-4748-b3dc-8deb60165412
+These are the final runs; no source changed after them. An earlier run in this session was also 49 pass / 1 skip / 0 fail
+(before three small additions: /dispatch-state.js in the static-asset test, a resolveDispatch absence assertion, and
+the package.json check entry). No failing run occurred, so there are no failure logs to keep.
+
+$ & 'C:\Codex\Apps\Development-SDKs-2026-09-20\node-lts\node.exe' --test test/*.test.mjs
+✔ only trusted structured answers finalize; gateway 5xx/52x, non-JSON and odd shapes are unknown (0.9979ms)
+✔ an attempt freezes its body; the same task cannot start another; drafts edited meanwhile survive success (1.0023ms)
+✔ tray reconciliation keeps attachments of dispatching/unresolved sends even when the staged list omits them (0.1901ms)
+✔ unresolved A (model+attachment) survives send B, selector reset, tray resync and a timed-out check; manual check confirms exactly one turn (150.3311ms)
+✔ a 502/504/non-JSON answer to the first send stays unresolved and the real outcome is recovered later (54.9376ms)
+✔ rejected and uncertain final answers close the attempt; runDispatch never builds a new request (102.9324ms)
+✔ app.js uses the shared dispatch book and has no global retry slot left (1.1562ms)
+✔ auth, csrf, origin, logout and allowed project path boundary (98.4901ms)
+✔ turn idempotency reserves the first dispatch (48.6947ms)
+✔ model catalog requires auth, follows pages, hides unavailable IDs, and exposes canonical models (46.6017ms)
+✔ turn forwards selected model and effort but omits overrides when neither is selected (47.1269ms)
+✔ selected model uses its supported default reasoning effort (46.2142ms)
+✔ invalid model and effort requests do not dispatch a turn (47.5108ms)
+✔ request IDs include model choice and reserve one delayed catalog dispatch (46.3624ms)
+✔ model pagination limit rejects without caching a partial catalog (47.0459ms)
+✔ session expiry and denied thread operations (46.1516ms)
+✔ approval uses controlled-thread item context and explicit resolution (53.2137ms)
+✔ JSONL preserves split UTF-8 and resolves approval explicitly (1.4711ms)
+✔ interrupt works immediately after turn/start answers, before any turn/started notification (382.3126ms)
+✔ a turn that completes before its start response is not resurrected, and late/old notifications cannot flip state (51.5931ms)
+✔ 202 dispatching is not success: replaying the identical request resolves to the real final outcome (309.988ms)
+✔ history flattened with join("") (no separator) renders prompt text, chips and a clean task title (79.7913ms)
+✔ paste keeps normal text paste whenever the clipboard carries text, even with files (Excel range + image) (0.8882ms)
+✔ attachment notice renders as chips whether it is a separate part or merged into the prompt text (1.0604ms)
+✔ a notice glued to the prompt with no separator (history flattened with join("")) still splits cleanly (0.1903ms)
+✔ bracketed text is only removed when it is a complete generated notice (0.1942ms)
+✔ task titles never show the attachment notice, even from a truncated preview (0.1494ms)
+✔ dispatch confirmation replays the identical request on 202 and stops on the first final answer (0.4299ms)
+✔ text that merely looks like a notice header is shown as the user wrote it; images without a notice get chips (0.1575ms)
+✔ upload requires login, exact Origin and CSRF, and uploading alone never starts a turn (85.1298ms)
+✔ upload limits: per file, per message count and bytes, store total; config can only lower them (128.1486ms)
+✔ content is verified by signature, UTF-8 and macro-free OOXML; extension or MIME alone is not trusted (115.8026ms)
+✔ client file names cannot choose the storage path, escape it, or overwrite existing files (76.5148ms)
+﹣ a file symlink planted at the generated name is not followed or overwritten (49.1477ms) # file symlink creation not permitted on this host (EPERM); junction escapes are covered separately
+✔ upload storage refuses junction/symlink escapes and placement inside allowed project roots (121.435ms)
+✔ attachment IDs are bound to the uploading session, thread and project (74.6285ms)
+✔ turn forwards verified attachment paths, local images and an untrusted-input notice; fake Codex reads them (159.0505ms)
+✔ attachment turns are idempotent, never double-dispatch, and failed dispatch keeps files without auto-retry (208.5612ms)
+✔ image preview is authenticated, owner-only, non-images are not served, and responses are inert (54.269ms)
+✔ retention: logout discards unsent uploads, in-use files are kept, expiry touches only tracked files, manifest survives restart (222.1035ms)
+✔ static UI is served with security headers and loads nothing from external origins (29.3268ms)
+✔ metadata preflight answers predictable rejections as JSON, stores nothing, and needs CSRF + Origin (54.6852ms)
+✔ an upload aborted mid-stream leaves no partial file, index entry or quota reservation (87.6467ms)
+✔ DELETE of an attachment requires login, CSRF and the exact Origin; rejected deletes keep the file (49.5124ms)
+✔ Codex rejection (JSON-RPC error) is definitive; unknown outcomes mark files attempted and an explicit resend works (73.6254ms)
+✔ bridge tags JSON-RPC error responses as definitive and leaves timeouts untagged (46.0539ms)
+✔ upload store refuses a non-empty folder it did not create and leaves every byte in it untouched (98.2104ms)
+✔ manifest replacement retries transient lock errors, then fails loudly without deleting or overwriting (952.342ms)
+✔ history that merges prompt and attachment notice into one text part still renders prompt text and chips without paths (108.786ms)
+✔ fixture scenarios: approval, question and slow interrupt round-trip through the server (264.9785ms)
+ℹ tests 50
+ℹ suites 0
+ℹ pass 49
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 1
+ℹ todo 0
+ℹ duration_ms 3147.1383
+
+$ node --check server.mjs            → (no output, exit 0)
+$ node --check public/app.js         → (no output, exit 0)
+$ node --check bridge/app-server.mjs → (no output, exit 0)
+$ node --check test/ui-fixture.mjs   → (no output, exit 0)
+$ node --check setup.mjs             → (no output, exit 0)
+$ node --check lib/uploads.mjs       → (no output, exit 0)
+$ node --check public/ui-core.js     → (no output, exit 0)
+$ node --check public/dispatch-state.js → (no output, exit 0)
+(each invoked as & 'C:\Codex\Apps\Development-SDKs-2026-09-20\node-lts\node.exe' --check <file>)

@@ -1,0 +1,3 @@
+# Store bytes as-is: knowledge/graph.sqlite3 records SHA256 fingerprints of tracked files,
+# and work-artifacts evidence lists file hashes. Line-ending conversion would break both.
+* -text

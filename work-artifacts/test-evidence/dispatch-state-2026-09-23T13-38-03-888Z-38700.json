@@ -1,0 +1,40 @@
+{
+  "suite": "dispatch-state.test.mjs",
+  "startedAt": "2026-09-23T13:38:03.888Z",
+  "node": "v24.21.0",
+  "checks": [
+    {
+      "name": "classification",
+      "ok": "sent",
+      "okWithoutResult": "unknown",
+      "okHtml": "unknown",
+      "pending": "pending",
+      "oddAccepted": "unknown",
+      "rejected": "rejected",
+      "rejectedShapeless": "failed",
+      "uncertain": "uncertain",
+      "badGateway": "unknown",
+      "gatewayTimeout": "unknown",
+      "cloudflare520": "unknown",
+      "internal500": "unknown",
+      "htmlError": "unknown",
+      "session": "auth",
+      "network": "unknown"
+    },
+    {
+      "name": "unresolved-a-then-b",
+      "checks": 4,
+      "identicalBodies": true,
+      "appServerTurnsForA": 1,
+      "model": "fixture-deep",
+      "effort": "medium",
+      "attachmentForwarded": true
+    },
+    {
+      "name": "gateway-errors",
+      "first": "server",
+      "second": "unknown",
+      "recovered": "sent"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "name": "codex-remote-web",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "test": "node --test test/*.test.mjs",
+    "check": "node --check server.mjs && node --check bridge/app-server.mjs && node --check lib/uploads.mjs && node --check public/app.js && node --check public/ui-core.js && node --check public/dispatch-state.js && node --check setup.mjs && node --check test/ui-fixture.mjs",
+    "fixture": "node test/ui-fixture.mjs"
+  }
+}

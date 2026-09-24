@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "project": "CodexRemoteWeb",
+  "purpose": "다음 개발에서 목적·설계 이유·코드·검증·실패 이력과 원격 이어가기 진단 결과를 연결해 맥락을 이어간다.",
+  "read_first": "AI-READ-FIRST.md",
+  "overview": "knowledge/OVERVIEW.md",
+  "database": "knowledge/graph.sqlite3",
+  "manager": "scripts/knowledge.py",
+  "python": "C:/Users/glalm/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe",
+  "status_command": "python -X utf8 scripts/knowledge.py status",
+  "check_command": "python -X utf8 scripts/knowledge.py check",
+  "project_node": "project.codexremoteweb",
+  "goal_node": "goal.remote_continuity",
+  "initial_session": "session.20260924-knowledge-bootstrap",
+  "exports": "knowledge/exports/revision-{revision:06d}/",
+  "work_inputs": "C:/Codex/Scratch/CodexRemoteWebKnowledge/",
+  "canonical_source": "SQLite; exports are generated views, not writable truth",
+  "operator": "main only; workers must not open entry/database/backups/exports or run graph management commands",
+  "secrets": "Never store access passwords, password hashes, session keys, auth tokens, account IDs or Quick Tunnel URLs",
+  "knowledge_validation": "knowledge/VALIDATION.md"
+}

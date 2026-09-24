@@ -1,0 +1,863 @@
+warning: in the working copy of 'C:\Codex\2026-09-22\new-chat\work\codex-remote-web\ui-upload\candidate-final/.gitignore', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'C:\Codex\2026-09-22\new-chat\work\codex-remote-web\ui-upload\candidate-delivery/.gitignore', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'C:\Codex\2026-09-22\new-chat\work\codex-remote-web\ui-upload\candidate-final/README.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'C:\Codex\2026-09-22\new-chat\work\codex-remote-web\ui-upload\candidate-delivery/README.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'C:\Codex\2026-09-22\new-chat\work\codex-remote-web\ui-upload\candidate-final/bridge/app-server.mjs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'C:\Codex\2026-09-22\new-chat\work\codex-remote-web\ui-upload\candidate-delivery/bridge/app-server.mjs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'C:\Codex\2026-09-22\new-chat\work\codex-remote-web\ui-upload\candidate-final/config.example.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'C:\Codex\2026-09-22\new-chat\work\codex-remote-web\ui-upload\candidate-delivery/config.example.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'C:\Codex\2026-09-22\new-chat\work\codex-remote-web\ui-upload\candidate-final/lib/uploads.mjs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'C:\Codex\2026-09-22\new-chat\work\codex-remote-web\ui-upload\candidate-delivery/lib/uploads.mjs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'C:\Codex\2026-09-22\new-chat\work\codex-remote-web\ui-upload\candidate-final/package.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'C:\Codex\2026-09-22\new-chat\work\codex-remote-web\ui-upload\candidate-delivery/package.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'C:\Codex\2026-09-22\new-chat\work\codex-remote-web\ui-upload\candidate-final/public/app.js', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'C:\Codex\2026-09-22\new-chat\work\codex-remote-web\ui-upload\candidate-delivery/public/app.js', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'C:\Codex\2026-09-22\new-chat\work\codex-remote-web\ui-upload\candidate-final/public/icon.svg', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'C:\Codex\2026-09-22\new-chat\work\codex-remote-web\ui-upload\candidate-delivery/public/icon.svg', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'C:\Codex\2026-09-22\new-chat\work\codex-remote-web\ui-upload\candidate-final/public/index.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'C:\Codex\2026-09-22\new-chat\work\codex-remote-web\ui-upload\candidate-delivery/public/index.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'C:\Codex\2026-09-22\new-chat\work\codex-remote-web\ui-upload\candidate-final/public/styles.css', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'C:\Codex\2026-09-22\new-chat\work\codex-remote-web\ui-upload\candidate-delivery/public/styles.css', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'C:\Codex\2026-09-22\new-chat\work\codex-remote-web\ui-upload\candidate-final/public/ui-core.js', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'C:\Codex\2026-09-22\new-chat\work\codex-remote-web\ui-upload\candidate-delivery/public/ui-core.js', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'C:\Codex\2026-09-22\new-chat\work\codex-remote-web\ui-upload\candidate-final/server.mjs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'C:\Codex\2026-09-22\new-chat\work\codex-remote-web\ui-upload\candidate-delivery/server.mjs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'C:\Codex\2026-09-22\new-chat\work\codex-remote-web\ui-upload\candidate-final/setup.mjs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'C:\Codex\2026-09-22\new-chat\work\codex-remote-web\ui-upload\candidate-delivery/setup.mjs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'C:\Codex\2026-09-22\new-chat\work\codex-remote-web\ui-upload\candidate-final/start.ps1', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'C:\Codex\2026-09-22\new-chat\work\codex-remote-web\ui-upload\candidate-delivery/start.ps1', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'C:\Codex\2026-09-22\new-chat\work\codex-remote-web\ui-upload\candidate-final/stop.ps1', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'C:\Codex\2026-09-22\new-chat\work\codex-remote-web\ui-upload\candidate-delivery/stop.ps1', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'C:\Codex\2026-09-22\new-chat\work\codex-remote-web\ui-upload\candidate-final/test/fake-codex.mjs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'C:\Codex\2026-09-22\new-chat\work\codex-remote-web\ui-upload\candidate-delivery/test/fake-codex.mjs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'C:\Codex\2026-09-22\new-chat\work\codex-remote-web\ui-upload\candidate-final/test/fixture-files.mjs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'C:\Codex\2026-09-22\new-chat\work\codex-remote-web\ui-upload\candidate-delivery/test/fixture-files.mjs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'C:\Codex\2026-09-22\new-chat\work\codex-remote-web\ui-upload\candidate-final/test/remote.test.mjs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'C:\Codex\2026-09-22\new-chat\work\codex-remote-web\ui-upload\candidate-delivery/test/remote.test.mjs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'C:\Codex\2026-09-22\new-chat\work\codex-remote-web\ui-upload\candidate-final/test/turn-state.test.mjs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'C:\Codex\2026-09-22\new-chat\work\codex-remote-web\ui-upload\candidate-delivery/test/turn-state.test.mjs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'C:\Codex\2026-09-22\new-chat\work\codex-remote-web\ui-upload\candidate-final/test/ui-core.test.mjs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'C:\Codex\2026-09-22\new-chat\work\codex-remote-web\ui-upload\candidate-delivery/test/ui-core.test.mjs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'C:\Codex\2026-09-22\new-chat\work\codex-remote-web\ui-upload\candidate-final/test/ui-fixture.mjs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'C:\Codex\2026-09-22\new-chat\work\codex-remote-web\ui-upload\candidate-delivery/test/ui-fixture.mjs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'C:\Codex\2026-09-22\new-chat\work\codex-remote-web\ui-upload\candidate-final/test/uploads.test.mjs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'C:\Codex\2026-09-22\new-chat\work\codex-remote-web\ui-upload\candidate-delivery/test/uploads.test.mjs', LF will be replaced by CRLF the next time Git touches it
+diff --git "a/C:\\Codex\\2026-09-22\\new-chat\\work\\codex-remote-web\\ui-upload\\candidate-final/README.md" "b/C:\\Codex\\2026-09-22\\new-chat\\work\\codex-remote-web\\ui-upload\\candidate-delivery/README.md"
+index 5dca2b9..38f99b8 100644
+--- "a/C:\\Codex\\2026-09-22\\new-chat\\work\\codex-remote-web\\ui-upload\\candidate-final/README.md"
++++ "b/C:\\Codex\\2026-09-22\\new-chat\\work\\codex-remote-web\\ui-upload\\candidate-delivery/README.md"
+@@ -56,15 +56,24 @@ Cloudflare 앞단 인증은 이 프로젝트가 제공하지 않습니다. Quick
+ | app-server가 JSON-RPC 오류로 거부(예: 모델이 이미지 입력 미지원) | 422 `rejected: true`, "Codex가 요청을 거부했습니다: …" | 보내지 않은 상태로 돌아감. 그대로 다시 보내거나 제거(서버 파일 삭제) 가능 |
+ | 시간 초과·연결 끊김 등 결과를 알 수 없음 | 409 `uncertain: true` | "전송 결과 불확실"로 표시(`attempted`). 자동 재전송 없음. 사용자가 다시 보내기를 누르면 새 요청으로 보내고, 목록에서 빼면 파일은 보관 기간 동안 남음(Codex가 이미 받았을 수 있음) |
+ 
+-같은 `requestId` 재요청은 첫 결과(200/409/422)를 그대로 돌려주며 idempotency digest에는 첨부 ID 목록이 포함됩니다. 브라우저는 서버 응답을 전혀 받지 못한 경우에만 같은 내용에 같은 `requestId`를 재사용하므로, 네트워크 재시도가 두 번째 turn을 만들지 않습니다. JSON-RPC 오류 응답만 "확정 거부"로 보고, 그 밖의 오류는 모두 불확실로 취급합니다.
+-
+-202(`dispatching`)는 성공이 아닙니다. 같은 `requestId`의 첫 전송이 서버에서 아직 진행 중이라는 뜻이므로, 화면은 입력·첨부·requestId를 그대로 두고 "전송 확인 중"으로 표시한 뒤 **완전히 같은 요청**을 1.5초 간격으로 최대 12번 다시 보내 최종 결과(200/409/422)를 받습니다. 이 재요청은 서버에서 새 turn을 만들지 않습니다. 끝내 확인하지 못하면 입력을 유지한 채 알리고, 사용자가 같은 내용으로 다시 보내면 결과만 다시 확인합니다.
++같은 `requestId` 재요청은 서버가 기억하는 동안(10분) 첫 결과(200/409/422)를 그대로 돌려주며, idempotency digest에는 첨부 ID 목록이 포함됩니다. JSON-RPC 오류 응답만 "확정 거부"로 봅니다.
++
++**결과를 모르는 전송** (`public/dispatch-state.js`, 화면과 테스트가 같은 코드를 씀)
++- 보내기를 누르면 그 작업의 전송 기록을 만들고 본문 전체(글, 첨부 ID, 모델, 추론 수준, requestId)를 그대로 고정합니다. 작업마다 따로 보관하므로 다른 작업의 전송, 작업 전환, 모델·추론 선택 변경, 초안 수정이 이 기록을 바꾸지 못합니다.
++- 최종 결과로 인정하는 것은 서버의 정해진 응답 형태뿐입니다: 200 `{result}`, 422 `{rejected:true}`, 409 `{uncertain:true}`, 첫 요청에 대한 구조화된 4xx 거부. 응답 없음, 게이트웨이 5xx/52x, JSON이 아닌 응답, 모양이 다른 응답은 모두 "결과 모름"입니다. 로그인 만료는 기존 로그아웃 흐름을 따르며 성공으로 추측하지 않습니다.
++- 202(`dispatching`)는 성공이 아닙니다. 첫 전송이 서버에서 아직 진행 중이므로 **완전히 같은 본문**을 1.5초 간격으로 최대 16번(약 24초, bridge의 turn/start 제한 20초보다 김) 다시 보냅니다. 이 재요청은 새 turn을 만들지 않고, 최종 형태의 응답이나 결과 모름에서 멈춥니다.
++- 결과를 모르면 그 작업의 입력창 위에 "이전 전송의 결과를 아직 모릅니다" 카드가 뜹니다. 카드에는 보낸 글, 첨부 개수, 모델이 표시됩니다. 그 작업에서는 새로 보낼 수 없고, 입력 중인 글과 선택은 그대로 보관됩니다. 전송에 쓴 첨부는 서버 목록에서 빠져도 트레이에 "결과 확인 대기"로 남으며 지울 수 없습니다. 결과를 모른다고 자동으로 새 요청을 보내지 않습니다.
++  - **결과 다시 확인**: 고정된 본문을 그대로 다시 보냅니다. 서버가 그 요청을 받은 적이 없다면 이때 원래 내용이 한 번 전송되고, 두 번 실행되지는 않습니다. 성공이 확인되면 보낸 그 글만 초안에서 지우고, 그 사이 고친 글은 남깁니다.
++  - **확인 포기**: 명시적으로 기록을 버립니다. 이미 전송됐을 수 있으니 대화 기록을 확인한 뒤 필요할 때만 다시 보내세요.
++  - 서버가 requestId를 기억하는 10분이 지날 때를 대비해, 화면은 9분 뒤부터 결과 다시 확인을 막고 포기만 허용합니다. 서버가 잊은 요청을 다시 보내면 두 번째 turn이 생길 수 있기 때문입니다.
++- 이 보장은 **같은 페이지 세션 안에서만** 유효합니다. 기록은 메모리에만 있어(개인 프롬프트를 브라우저 저장소에 쓰지 않음) 새로고침, 로그아웃, 세션 만료 때 사라집니다. 서버 재시작 뒤나 10분이 지난 뒤에는 서버도 기억하지 못합니다.
+ 
+ **초안과 중단**
+ - 입력 중인 글은 작업마다 메모리에만 보관합니다(브라우저 저장소에 쓰지 않음). 다른 작업을 열거나 새 작업을 만들었다 돌아와도, 같은 작업을 다시 눌러도 유지됩니다. 전송에 성공하면 보낸 바로 그 글만 지웁니다. 전송 중 다른 작업에서 쓴 글은 그대로입니다. 로그아웃하면 모두 지웁니다.
+ - 서버는 turn/start 응답에 담긴 turn ID를 바로 활성 turn으로 등록하므로, turn/started 알림이 오기 전에도 "중단"이 동작합니다. 활성 turn ID는 App Server가 준 값만 쓰고, 클라이언트가 보낸 turn ID는 비교에만 씁니다(다르면 409로 거부해 다른 turn을 멈추지 않음). 응답보다 먼저 끝난 turn은 다시 활성으로 되살아나지 않고, 예전 turn의 늦은 완료 알림은 새 turn을 지우지 않습니다.
+ - turn이 중단·오류·실패로 끝나거나 Codex 연결이 끊기면, 열려 있는 작업에서 스트리밍 중이던 응답을 받은 데까지 남기고 "중단됨 · 여기까지 받은 내용입니다" 같은 끝 상태로 바꿉니다.
+-- 첨부 설정을 불러오지 못하면 "사용할 수 없음"이 아니라 "불러오지 못함"으로 표시합니다. 작업 목록 옆 새로고침이나 자동 재시도(10초 간격, 최대 5번)로 다시 받습니다.
++- 첨부 설정을 불러오지 못하면 "사용할 수 없음"이 아니라 "불러오지 못함"으로 표시합니다. 작업 목록 옆 새로고침이나 폴링 자동 재시도(10초 간격, 실패가 5번 쌓일 때까지)로 다시 받습니다. 한 번 정상으로 받은 뒤 새로고침만 실패하면, 마지막 정상 설정을 유지한 채 "새로고침 실패 · 자동 재시도" 안내만 보입니다. 설정이 다시 사용 가능으로 바뀌면 열린 작업의 트레이를 서버 목록과 다시 맞춥니다. 전송 중이거나 결과를 모르는 첨부는 이때도 트레이에서 지우지 않습니다.
++- 터치 기기에서 서랍으로 작업을 고르면, 화면 키보드가 뜨지 않도록 입력창 대신 작업 제목(편집 불가, `tabindex=-1`)으로 포커스를 옮깁니다. 정밀 포인터에서는 이전처럼 입력창으로 옮깁니다.
+ 
+ **제한** (config의 `uploadLimits`로 더 낮출 수만 있습니다)
+ 
+diff --git "a/C:\\Codex\\2026-09-22\\new-chat\\work\\codex-remote-web\\ui-upload\\candidate-final/package.json" "b/C:\\Codex\\2026-09-22\\new-chat\\work\\codex-remote-web\\ui-upload\\candidate-delivery/package.json"
+index 9a6572a..e33f290 100644
+--- "a/C:\\Codex\\2026-09-22\\new-chat\\work\\codex-remote-web\\ui-upload\\candidate-final/package.json"
++++ "b/C:\\Codex\\2026-09-22\\new-chat\\work\\codex-remote-web\\ui-upload\\candidate-delivery/package.json"
+@@ -5,7 +5,7 @@
+   "type": "module",
+   "scripts": {
+     "test": "node --test test/*.test.mjs",
+-    "check": "node --check server.mjs && node --check bridge/app-server.mjs && node --check lib/uploads.mjs && node --check public/app.js && node --check public/ui-core.js &&node --check setup.mjs && node --check test/ui-fixture.mjs",
++    "check": "node --check server.mjs && node --check bridge/app-server.mjs && node --check lib/uploads.mjs && node --check public/app.js && node --check public/ui-core.js && node --check public/dispatch-state.js && node --check setup.mjs && node --check test/ui-fixture.mjs",
+     "fixture": "node test/ui-fixture.mjs"
+   }
+ }
+diff --git "a/C:\\Codex\\2026-09-22\\new-chat\\work\\codex-remote-web\\ui-upload\\candidate-final/public/app.js" "b/C:\\Codex\\2026-09-22\\new-chat\\work\\codex-remote-web\\ui-upload\\candidate-delivery/public/app.js"
+index 6fa1fbd..301d965 100644
+--- "a/C:\\Codex\\2026-09-22\\new-chat\\work\\codex-remote-web\\ui-upload\\candidate-final/public/app.js"
++++ "b/C:\\Codex\\2026-09-22\\new-chat\\work\\codex-remote-web\\ui-upload\\candidate-delivery/public/app.js"
+@@ -1,4 +1,5 @@
+-import { MIB, FILE_TYPES, formatBytes, extOf, baseName, pasteAction, parseUserContent, titleText, resolveDispatch } from './ui-core.js';
++import { MIB, FILE_TYPES, formatBytes, extOf, baseName, pasteAction, parseUserContent, titleText } from './ui-core.js';
++import { DispatchBook, draftAfterSend, reconcileTray, REPLAY_WINDOW_MS } from './dispatch-state.js';
+ 
+ const DEFAULT_LIMITS = { fileBytes: 20 * MIB, messageFiles: 5, messageBytes: 50 * MIB };
+ const KIND_ICON = { document: 'doc', table: 'table', text: 'text', image: 'image' };
+@@ -35,7 +36,7 @@ const SERVER_MESSAGES = {
+ 
+ const state = {
+   csrf: null, cursor: 0, thread: null, tasks: [], controlled: new Set(), models: [], activeTurns: {},
+-  dispatchingThread: null, confirming: false, pendingSend: null, polling: false, connection: null, taskSignature: '',
++  dispatch: new DispatchBook(), polling: false, connection: null, taskSignature: '',
+   uploads: { enabled: false, status: 'unknown', limits: { ...DEFAULT_LIMITS }, storage: null, retries: 0 }, trays: new Map(), agentText: new Map(), drafts: new Map(), attachmentSeq: 0
+ };
+ 
+@@ -312,24 +313,29 @@ function updateControls() {
+   const thread = state.thread; const controlled = Boolean(thread?.controlled); const running = isRunning(thread?.id);
+   const tray = currentTray(); const busyUploads = tray.some(isBusyItem);
+   const ready = tray.filter(item => item.status === 'ready'); const hasText = $('prompt').value.trim().length > 0;
+-  const here = dispatchingHere();
++  const here = dispatchingHere(); const entry = thread ? state.dispatch.get(thread.id) : null;
++  const unresolved = entry?.phase === 'unresolved'; const confirming = entry?.phase === 'confirming';
+   $('prompt').disabled = !controlled || here;
+   $('attach').disabled = !controlled || here || !state.uploads.enabled;
+   $('model').disabled = here || !state.models.length;
+   $('effort').disabled = here || !state.models.length;
+-  $('send').disabled = !controlled || running || Boolean(state.dispatchingThread) || busyUploads || (!hasText && !ready.length);
++  // While a previous send's result is unknown, no new send is possible from this task: the draft stays editable
++  // and is kept, and the only way forward is the explicit result check (same request) or giving it up.
++  $('send').disabled = !controlled || running || Boolean(entry) || busyUploads || (!hasText && !ready.length);
+   $('send').classList.toggle('is-busy', here);
+-  $('send-label').textContent = here ? (state.confirming ? '전송 확인 중' : '보내는 중') : '보내기';
++  $('send-label').textContent = here ? (confirming ? '전송 확인 중' : '보내는 중') : '보내기';
++  renderPendingAttempt();
+   $('interrupt').hidden = !running;
+   $('prompt').placeholder = !thread ? '작업을 선택하면 메시지를 보낼 수 있습니다'
+     : !controlled ? '이어가기 후 메시지를 보낼 수 있습니다'
+     : running ? 'Codex가 작업 중입니다. 다음 메시지를 미리 적어 둘 수 있습니다'
+     : 'Codex에게 요청할 내용을 입력하세요';
+-  const hint = here && state.confirming ? '이전 전송이 아직 처리 중입니다. 같은 요청으로 결과를 확인하고 있습니다 (새 turn은 만들지 않음)'
++  const hint = confirming ? '이전 전송이 아직 처리 중입니다. 같은 요청으로 결과를 확인하고 있습니다 (새 turn은 만들지 않음)'
++    : unresolved ? '이전 전송의 결과를 먼저 확인하세요. 입력 중인 글과 선택은 그대로 보관됩니다'
+     : busyUploads ? '업로드가 끝나면 보낼 수 있습니다'
+     : thread && !controlled ? '이 작업을 이어가기 해야 메시지와 파일을 보낼 수 있습니다'
+-    : !here && state.dispatchingThread ? '다른 작업의 전송이 끝나면 보낼 수 있습니다'
+     : state.uploads.status === 'error' ? '첨부 설정을 불러오지 못했습니다. 작업 목록 옆 새로고침으로 다시 시도하세요'
++    : state.uploads.refreshFailed ? '첨부 설정 새로고침에 실패해 마지막으로 받은 설정을 쓰고 있습니다. 자동으로 다시 시도합니다'
+     : running && (hasText || ready.length) ? '현재 작업이 끝나면 보낼 수 있습니다'
+     : ready.some(item => item.attempted) ? '전송 결과가 불확실했던 첨부가 있습니다. 다시 보내거나 목록에서 빼세요'
+     : ready.length && !hasText ? '메시지 없이 보내면 Codex가 첨부 파일을 검토하고 요약합니다'
+@@ -338,10 +344,14 @@ function updateControls() {
+   $('composer-hint').textContent = hint;
+   // Actionable hints stay visible on small screens; only the routine keyboard tip is hidden there.
+   $('composer-hint').classList.toggle('is-actionable', hint !== DEFAULT_HINT);
+-  for (const button of $('attachments').querySelectorAll('button')) button.disabled = here || Boolean(button.closest('.is-removing'));
++  const guarded = thread ? state.dispatch.protectedIds(thread.id) : new Set();
++  for (const node of $('attachments').querySelectorAll('.attachment')) {
++    const item = tray.find(value => String(value.key) === node.dataset.key);
++    node.querySelector('button').disabled = here || node.classList.contains('is-removing') || Boolean(item?.id && guarded.has(item.id));
++  }
+   renderHeader();
+ }
+-function dispatchingHere() { return Boolean(state.dispatchingThread && state.dispatchingThread === state.thread?.id); }
++function dispatchingHere() { return Boolean(state.thread && state.dispatch.busy(state.thread.id)); }
+ 
+ /* ---------- Drafts (in memory only, per task) ---------- */
+ function saveDraft() {
+@@ -352,8 +362,9 @@ function saveDraft() {
+ function restoreDraft(threadId) { $('prompt').value = state.drafts.get(threadId) || ''; autosize(); }
+ // After a successful send, remove exactly the text that was sent, wherever that task's draft now lives.
+ function consumeDraft(threadId, sent) {
+-  if (state.thread?.id === threadId && $('prompt').value === sent) { $('prompt').value = ''; autosize(); }
+-  if (state.drafts.get(threadId) === sent) state.drafts.delete(threadId);
++  if (state.thread?.id === threadId) { $('prompt').value = draftAfterSend($('prompt').value, sent); autosize(); }
++  const kept = draftAfterSend(state.drafts.get(threadId) || '', sent);
++  if (kept) state.drafts.set(threadId, kept); else state.drafts.delete(threadId);
+ }
+ 
+ /* ---------- Models ---------- */
+@@ -409,9 +420,10 @@ async function selectTask(task) {
+   state.thread = thread; state.loadingThread = thread;
+   restoreDraft(id);
+   clearFeed(); resetTurnChoices(); renderTasks(); renderTray(); closeSidebar(); updateControls();
+-  // Keep keyboard focus useful: on desktop the clicked task button keeps it (renderTasks restores it);
+-  // from the mobile drawer, move to the composer or back to the menu button.
+-  if (fromDrawer) ($('prompt').disabled ? $('open-sidebar') : $('prompt')).focus();
++  // Keep keyboard focus useful: on desktop the clicked task button keeps it (renderTasks restores it).
++  // From the drawer on a touch device, focus the (non-editable) task heading so no on-screen keyboard pops up;
++  // with a precise pointer (narrow desktop window) go straight to the composer when it is usable.
++  if (fromDrawer) (matchMedia('(pointer: coarse)').matches || $('prompt').disabled ? $('task-title') : $('prompt')).focus();
+   let data = null;
+   try { data = await api('/api/tasks/read', { method: 'POST', body: JSON.stringify({ threadId: id }) }); }
+   catch (error) { if (state.thread === thread && error.status !== 401) { state.loadingThread = null; addNotice('error', '작업을 불러오지 못했습니다', error.message); } }
+@@ -462,14 +474,18 @@ function fromServer(item, threadId) {
+ 
+ // status: 'enabled' | 'disabled' (server policy: no uploadDir) | 'error' (could not ask; retried by Refresh and,
+ // a few times, by polling). A failed request is never presented as the server having uploads turned off.
++// A failed refresh after a good load keeps the last good settings (refreshFailed) instead of blocking attachments.
+ async function loadUploadConfig() {
+-  const retries = state.uploads.retries || 0;
++  const retries = state.uploads.retries || 0; const wasEnabled = state.uploads.status === 'enabled';
+   try {
+     const data = await api('/api/uploads');
+-    state.uploads = { enabled: Boolean(data.enabled), status: data.enabled ? 'enabled' : 'disabled', limits: { ...DEFAULT_LIMITS, ...(data.limits || {}) }, storage: data.storage || null, retries: 0 };
++    state.uploads = { enabled: Boolean(data.enabled), status: data.enabled ? 'enabled' : 'disabled', limits: { ...DEFAULT_LIMITS, ...(data.limits || {}) }, storage: data.storage || null, retries: 0, refreshFailed: false };
++    // Coming back to "enabled" (e.g. after a failed first load): bring the open task's tray in line with the server.
++    if (!wasEnabled && state.uploads.enabled && state.thread?.controlled) syncTray(state.thread.id).catch(() => {});
+   } catch (error) {
+     if (error.status === 401) return;
+-    state.uploads = { ...state.uploads, enabled: false, status: 'error', retries: retries + 1, retryAt: Date.now() + 10_000 };
++    const retry = { retries: retries + 1, retryAt: Date.now() + 10_000 };
++    state.uploads = wasEnabled ? { ...state.uploads, ...retry, refreshFailed: true } : { ...state.uploads, ...retry, enabled: false, status: 'error' };
+   }
+   const { limits, storage, status } = state.uploads;
+   const usage = storage && storage.usedBytes > storage.limitBytes * 0.8 ? ` · 저장소 ${formatBytes(storage.usedBytes)} / ${formatBytes(storage.limitBytes)} 사용 중` : '';
+@@ -485,17 +501,12 @@ async function syncTray(threadId) {
+   if (!state.uploads.enabled || !state.controlled.has(threadId)) { renderTray(); return; }
+   const started = Date.now();
+   const data = await api(`/api/uploads?threadId=${encodeURIComponent(threadId)}`);
+-  const listed = new Map((data.attachments || []).map(item => [item.id, item]));
++  // Attachments of a dispatching or unresolved send are claimed/sent server-side and not listed; they stay in the tray.
++  const { dropped, added } = reconcileTray(trayFor(threadId), data.attachments || [], state.dispatch.protectedIds(threadId), started);
++  for (const item of dropped) removeFromTray(item);
+   const tray = trayFor(threadId);
+-  for (const item of [...tray]) {
+-    if (item.status !== 'ready') continue;
+-    const server = listed.get(item.id);
+-    if (server) item.attempted = Boolean(server.attempted);
+-    else if (item.readyAt < started) removeFromTray(item);
+-  }
+-  const known = new Set(tray.map(item => item.id).filter(Boolean));
+-  let restored = 0;
+-  for (const item of listed.values()) if (!known.has(item.id)) { tray.push(fromServer(item, threadId)); restored++; }
++  for (const item of added) tray.push(fromServer(item, threadId));
++  const restored = added.length;
+   if (data.storage) state.uploads.storage = data.storage;
+   renderTray(); updateControls();
+   return restored;
+@@ -521,6 +532,7 @@ function attachmentMeta(item) {
+   if (item.status === 'uploading') return `업로드 중 ${Math.round(item.progress * 100)}% · ${formatBytes(item.size)}`;
+   if (item.status === 'removing') return '제거하는 중…';
+   if (item.status === 'error') return item.error;
++  if (state.dispatch.protectedIds(item.threadId).has(item.id)) return state.dispatch.unresolved(item.threadId) ? '이전 전송 결과 확인 대기 · 보관 중' : '전송 중';
+   if (item.attempted) return '전송 결과 불확실 · 다시 보내거나 뺄 수 있음';
+   return `${item.label} · ${formatBytes(item.size)}`;
+ }
+@@ -538,7 +550,7 @@ function attachmentNode(item) {
+     : item.status === 'error' ? ['닫기', `${item.name} 오류 닫기`]
+     : item.attempted ? ['목록에서 빼기 (파일은 보관)', `${item.name} 목록에서 빼기`]
+     : ['첨부 제거', `${item.name} 첨부 제거`];
+-  const button = el('button', { class: 'icon-btn', type: 'button', title: action[0], 'aria-label': action[1], disabled: item.status === 'removing' || state.dispatchingThread === item.threadId }, icon('close'));
++  const button = el('button', { class: 'icon-btn', type: 'button', title: action[0], 'aria-label': action[1], disabled: item.status === 'removing' || state.dispatch.busy(item.threadId) || state.dispatch.protectedIds(item.threadId).has(item.id) }, icon('close'));
+   button.addEventListener('click', () => attachmentAction(item));
+   const node = el('li', { class: `attachment is-${item.status}${item.status === 'removing' ? ' is-busy' : ''}${item.attempted && item.status === 'ready' ? ' is-attempted' : ''}`, 'data-key': item.key },
+     thumb, el('span', { class: 'attachment-text' }, el('span', { class: 'attachment-name', text: item.name, title: item.name }), el('span', { class: 'attachment-meta', text: attachmentMeta(item) })), button);
+@@ -655,60 +667,100 @@ async function apiRaw(path, options = {}) {
+   let response;
+   try { response = await fetch(path, { ...options, headers: { 'content-type': 'application/json', 'x-csrf-token': state.csrf || '', ...(options.headers || {}) } }); }
+   catch { throw Object.assign(new Error('서버에 연결할 수 없습니다.'), { status: 0 }); }
+-  const payload = await response.json().catch(() => ({}));
++  // Non-JSON bodies (proxy error pages) are reported as such so they can never finalize a send.
++  const textBody = await response.text().catch(() => '');
++  let payload = null; let json = false;
++  try { payload = JSON.parse(textBody); json = true; } catch { /* not JSON */ }
+   if (response.status === 401) handleUnauthorized();
+-  return { status: response.status, payload };
++  return { status: response.status, payload, json };
+ }
+ 
++// Each task keeps at most one send whose result is not final (state.dispatch). Its body — text, attachment IDs,
++// model, effort, requestId — is frozen when the user presses 보내기; later task switches, selector changes, draft edits
++// or other tasks' sends never alter it. Result checks always replay exactly that body.
+ async function sendMessage() {
+   const thread = state.thread;
+-  if (!thread?.controlled || state.dispatchingThread || isRunning(thread.id)) return;
++  if (!thread?.controlled || state.dispatch.get(thread.id) || isRunning(thread.id)) return;
+   const tray = trayFor(thread.id);
+   if (tray.some(isBusyItem)) { toast('업로드가 끝난 뒤 보낼 수 있습니다.', 'info'); return; }
+   const sentText = $('prompt').value; const prompt = sentText.trim();
+   const ready = tray.filter(item => item.status === 'ready');
+   if (!prompt && !ready.length) return;
+-  const body = { threadId: thread.id, prompt };
+-  if (ready.length) body.attachments = ready.map(item => item.id);
+-  if ($('model').value) body.model = $('model').value;
+-  if ($('effort').value) body.effort = $('effort').value;
+-  // The request ID is reused only for identical content whose outcome is still unknown, so no retry — automatic
+-  // confirmation or a later explicit click — can ever start a second turn.
+-  const fingerprint = JSON.stringify(body);
+-  if (state.pendingSend?.fingerprint !== fingerprint) state.pendingSend = { fingerprint, requestId: newRequestId() };
+-  body.requestId = state.pendingSend.requestId;
+-  const payload = JSON.stringify(body); const sentIds = new Set(body.attachments || []);
+-  state.dispatchingThread = thread.id; state.confirming = false; renderTray(); updateControls();
+-  // 202 = the first attempt with this requestId is still in flight on the server: keep everything and replay the
+-  // identical request (bounded) until a final 200/409/422 answer.
+-  const result = await resolveDispatch(() => apiRaw('/api/turns/start', { method: 'POST', body: payload }), {
+-    onPending: () => { if (state.dispatchingThread === thread.id) { state.confirming = true; updateControls(); } }
+-  });
+-  state.dispatchingThread = null; state.confirming = false;
+-  if (result.status === 401 || !state.csrf) return;
++  state.dispatch.begin({ threadId: thread.id, requestId: newRequestId(), prompt, sentText,
++    attachments: ready.map(item => ({ id: item.id, name: item.name, size: item.size })),
++    model: $('model').value || null, effort: $('effort').value || null });
++  await runAttempt(thread.id, true);
++}
++
++async function runAttempt(threadId, firstCall) {
++  renderTray(); updateControls();
++  let result;
++  try {
++    // 202 = still in flight on the server: the identical body is replayed (bounded); nothing new is ever created.
++    result = await state.dispatch.run(threadId, body => apiRaw('/api/turns/start', { method: 'POST', body }), { firstCall, onPending: () => updateControls() });
++  } catch (error) { toast(error.message); return; }
++  if (result.stale || result.outcome === 'auth' || !state.csrf) return;
++  finishAttempt(threadId, result);
++}
++
++const UNKNOWN_REASONS = {
++  network: '서버 응답을 받지 못했습니다.',
++  server: '서버나 중간 프록시가 오류(5xx) 응답을 보냈습니다.',
++  malformed: '서버 응답 형식을 알아볼 수 없습니다.',
++  timeout: '전송이 아직 서버에서 처리 중입니다.',
++  'no-record': '서버가 이 요청을 더는 기억하지 않습니다.'
++};
++
++async function finishAttempt(threadId, result) {
++  const { record } = result;
+   if (result.outcome === 'sent') {
+-    state.pendingSend = null;
+-    for (const item of [...tray]) if (item.id && sentIds.has(item.id)) removeFromTray(item);
+-    consumeDraft(thread.id, sentText);
+-    const turnId = result.payload?.result?.turn?.id || result.payload?.result?.id || result.payload?.result?.turnId;
+-    if (turnId) state.activeTurns[thread.id] = String(turnId);
++    const sentIds = new Set(record.attachments.map(item => item.id));
++    for (const item of [...trayFor(threadId)]) if (item.id && sentIds.has(item.id)) removeFromTray(item);
++    consumeDraft(threadId, record.sentText);
++    const value = result.payload.result; const turnId = value.turn?.id || value.id || value.turnId;
++    if (turnId) state.activeTurns[threadId] = String(turnId);
++    announce('메시지를 보냈습니다.');
+   } else if (result.outcome === 'unknown') {
+-    // No final answer: keep the text, attachments and requestId; sending the same content again only re-checks.
+-    toast(result.timedOut
+-      ? '전송이 아직 처리 중이라 결과를 확인하지 못했습니다. 잠시 뒤 같은 내용으로 다시 보내면 새 turn 없이 결과만 확인합니다.'
+-      : '서버에 연결할 수 없어 전송 결과를 확인하지 못했습니다. 같은 내용으로 다시 보내면 중복 전송 없이 결과를 확인합니다.');
++    toast(`${UNKNOWN_REASONS[result.reason] || '전송 결과를 알 수 없습니다.'} 보낸 글과 첨부는 그대로 보관합니다. 입력창 위 '결과 다시 확인'으로 같은 요청을 다시 확인하세요.`);
++  } else if (result.outcome === 'expired') {
++    toast('중복 방지 기록 보존 시간이 지나 더는 확인할 수 없습니다. 대화 기록에서 실제로 전송됐는지 확인한 뒤 확인을 포기하세요.');
+   } else {
+-    // A final answer (409 uncertain, 422 rejected, other 4xx): inputs stay; the next click is a new explicit attempt.
+-    state.pendingSend = null;
++    // Final answer from the server (422 rejected, 409 uncertain, 4xx refusal): the attempt is closed.
+     toast(friendly(result.payload?.error) || `보내지 못했습니다 (${result.status})`);
+-    await syncTray(thread.id).catch(() => {});
++    await syncTray(threadId).catch(() => {});
+   }
+   renderTray(); updateControls();
+   // Return focus to the composer only if the user has not moved it somewhere else meanwhile.
+   const active = document.activeElement;
+-  if (state.thread === thread && !matchMedia('(pointer: coarse)').matches && !$('prompt').disabled && (!active || active === document.body || active === $('send'))) $('prompt').focus();
++  if (state.thread?.id === threadId && !matchMedia('(pointer: coarse)').matches && !$('prompt').disabled && (!active || active === document.body || active === $('send') || active === $('pending-check'))) $('prompt').focus();
++}
++
++function renderPendingAttempt() {
++  const box = $('pending-attempt'); const entry = state.thread ? state.dispatch.get(state.thread.id) : null;
++  if (!entry || entry.phase === 'dispatching' || entry.phase === 'idle') { box.hidden = true; return; }
++  const { record } = entry; box.hidden = false;
++  const expired = state.dispatch.expired(record.threadId); const checking = entry.phase === 'confirming';
++  const preview = record.sentText.trim() ? `"${record.sentText.trim().replace(/\s+/g, ' ').slice(0, 40)}${record.sentText.trim().length > 40 ? '…' : ''}"` : '(글 없이 첨부만)';
++  const parts = [`보낸 내용 ${preview}`];
++  if (record.attachments.length) parts.push(`첨부 ${record.attachments.length}개`);
++  if (record.model) parts.push(`모델 ${record.model}${record.effort ? ` · 추론 ${EFFORT_LABELS[record.effort] || record.effort}` : ''}`);
++  const title = checking ? '이전 전송 결과를 확인하는 중…' : '이전 전송의 결과를 아직 모릅니다';
++  const detail = checking ? parts.join(' · ')
++    : expired ? `${parts.join(' · ')}. 중복 방지 기록 보존 시간(${Math.round(REPLAY_WINDOW_MS / 60000)}분)이 지나 더는 확인할 수 없습니다. 대화 기록을 확인한 뒤 확인을 포기하세요.`
++    : `${parts.join(' · ')}. ${UNKNOWN_REASONS[entry.reason] || ''} '결과 다시 확인'은 이 요청을 그대로 다시 보냅니다. 서버가 받은 적이 없다면 이때 한 번 전송되고, 두 번 실행되지는 않습니다.`;
++  if ($('pending-title').textContent !== title) $('pending-title').textContent = title;
++  if ($('pending-detail').textContent !== detail) $('pending-detail').textContent = detail;
++  $('pending-check').hidden = checking || expired; $('pending-discard').hidden = checking;
+ }
+ 
++$('pending-check').addEventListener('click', () => { if (state.thread && state.dispatch.unresolved(state.thread.id)) runAttempt(state.thread.id, false); });
++$('pending-discard').addEventListener('click', () => {
++  const thread = state.thread; if (!thread) return;
++  const record = state.dispatch.discard(thread.id); if (!record) return;
++  toast('이전 전송 확인을 그만두었습니다. 실제로 전송됐을 수 있으니 대화 기록을 확인한 뒤 필요할 때만 다시 보내세요.', 'info');
++  syncTray(thread.id).catch(() => {}); renderTray(); updateControls();
++});
++
+ /* ---------- Approvals ---------- */
+ function setCardBusy(card, busy) { for (const control of card.querySelectorAll('button, input, select')) control.disabled = busy; }
+ 
+@@ -843,7 +895,7 @@ async function poll() {
+     else if (wasOnline && !data.connected) finalizeStreaming('Codex 연결이 끊겨 응답이 중단되었을 수 있습니다 · 여기까지 받은 내용입니다');
+     renderTasks(false); updateControls();
+     if (state.tasksStale) { state.tasksStale = false; refreshTasks().catch(() => {}); }
+-    if (state.uploads.status === 'error' && state.uploads.retries < 5 && Date.now() >= (state.uploads.retryAt || 0)) loadUploadConfig();
++    if ((state.uploads.status === 'error' || state.uploads.refreshFailed) && state.uploads.retries < 5 && Date.now() >= (state.uploads.retryAt || 0)) loadUploadConfig();
+   } catch (error) {
+     if (error.status !== 401 && state.csrf) setConnection('retry');
+   } finally { state.polling = false; }
+@@ -853,7 +905,8 @@ async function poll() {
+ function resetSession() {
+warning: in the working copy of 'C:\Codex\2026-09-22\new-chat\work\codex-remote-web\ui-upload\candidate-delivery/public/dispatch-state.js', LF will be replaced by CRLF the next time Git touches it
+   for (const tray of state.trays.values()) for (const item of [...tray]) { item.cancelled = true; item.xhr?.abort(); revokePreview(item); }
+   clearTimeout(state.traySyncTimer);
+-  Object.assign(state, { csrf: null, cursor: 0, primed: false, thread: null, loadingThread: null, tasks: [], activeTurns: {}, dispatchingThread: null, confirming: false, pendingSend: null, connection: null, taskSignature: '' });
++  Object.assign(state, { csrf: null, cursor: 0, primed: false, thread: null, loadingThread: null, tasks: [], activeTurns: {}, connection: null, taskSignature: '' });
++  state.dispatch = new DispatchBook(); // in-memory only: unresolved sends are forgotten with the session
+   state.controlled = new Set(); state.trays = new Map(); state.agentText = new Map(); state.drafts = new Map();
+   state.uploads = { enabled: false, status: 'unknown', limits: { ...DEFAULT_LIMITS }, storage: null, retries: 0 };
+   $('password').value = ''; $('prompt').value = ''; autosize();
+diff --git "a/C:\\Codex\\2026-09-22\\new-chat\\work\\codex-remote-web\\ui-upload\\candidate-delivery/public/dispatch-state.js" "b/C:\\Codex\\2026-09-22\\new-chat\\work\\codex-remote-web\\ui-upload\\candidate-delivery/public/dispatch-state.js"
+new file mode 100644
+index 0000000..20996d3
+--- /dev/null
++++ "b/C:\\Codex\\2026-09-22\\new-chat\\work\\codex-remote-web\\ui-upload\\candidate-delivery/public/dispatch-state.js"
+@@ -0,0 +1,110 @@
++// Per-task record of turn dispatches whose final outcome is not yet known. DOM-free: used by app.js and the tests.
++//
++// Scope, stated honestly: records live in this page's memory only. A reload, logout or session expiry forgets them
++// (no private prompt is written to browser storage). The server remembers a requestId for 10 minutes, so a result
++// check is only offered inside REPLAY_WINDOW_MS; after that the server could no longer tell "already ran" apart from
++// "never seen", and replaying might start a second turn.
++export const REPLAY_WINDOW_MS = 9 * 60_000;
++// 16 × 1.5 s ≈ 24 s, longer than the bridge's 20 s turn/start timeout, so an in-flight dispatch normally resolves.
++export const CONFIRM_ATTEMPTS = 16;
++export const CONFIRM_DELAY_MS = 1500;
++
++// Only these trusted server shapes may finalize an attempt; anything else (gateway 5xx/52x, HTML error pages,
++// malformed JSON, unexpected shapes) is 'unknown'. `firstCall`: a structured 4xx to the very first request is a
++// definitive pre-dispatch refusal; on a later check it only means the server no longer has the record.
++export function classifyResponse(response, { firstCall = false } = {}) {
++  if (!response) return { kind: 'unknown', reason: 'network' };
++  const { status, payload, json } = response;
++  if (status === 401) return { kind: 'auth' };
++  if (!json || !payload || typeof payload !== 'object' || Array.isArray(payload)) return { kind: 'unknown', reason: status >= 500 ? 'server' : 'malformed' };
++  if (status === 200) return payload.result && typeof payload.result === 'object' ? { kind: 'sent' } : { kind: 'unknown', reason: 'malformed' };
++  if (status === 202) return payload.status === 'dispatching' ? { kind: 'pending' } : { kind: 'unknown', reason: 'malformed' };
++  if (status === 422 && payload.rejected === true && typeof payload.error === 'string') return { kind: 'rejected' };
++  if (status === 409 && payload.uncertain === true) return { kind: 'uncertain' };
++  if (status >= 400 && status < 500 && typeof payload.error === 'string') return firstCall ? { kind: 'failed' } : { kind: 'unknown', reason: 'no-record' };
++  return { kind: 'unknown', reason: status >= 500 ? 'server' : 'malformed' };
++}
++
++// send() → { status, payload, json } (throws when no HTTP answer arrived). Replays the SAME send (same body) while the
++// server answers 202, up to `attempts` times; never builds a new request.
++// Outcomes: sent | rejected | uncertain | failed | unknown | auth.
++export async function runDispatch(send, { firstCall = false, attempts = CONFIRM_ATTEMPTS, delayMs = CONFIRM_DELAY_MS, sleep = ms => new Promise(resolve => setTimeout(resolve, ms)), onPending = () => {} } = {}) {
++  for (let attempt = 0; ; attempt++) {
++    let response = null;
++    try { response = await send(); } catch { response = null; }
++    const verdict = classifyResponse(response, { firstCall: firstCall && attempt === 0 });
++    if (verdict.kind !== 'pending') return { outcome: verdict.kind, reason: verdict.reason, status: response?.status, payload: response?.payload };
++    if (attempt >= attempts) return { outcome: 'unknown', reason: 'timeout', timedOut: true, status: 202 };
++    onPending(attempt + 1);
++    await sleep(delayMs);
++  }
++}
++
++// Draft text left after a confirmed send: only the exact text that was sent is consumed.
++export function draftAfterSend(current, sent) { return current === sent ? '' : current; }
++
++// Merges the server's staged-attachment list into a task tray. Attachments that belong to a dispatching or unresolved
++// attempt are kept even though the server no longer lists them (they are claimed or already sent).
++export function reconcileTray(tray, serverItems, protectedIds, startedAt) {
++  const listed = new Map(serverItems.map(item => [item.id, item]));
++  const kept = []; const dropped = [];
++  for (const item of tray) {
++    if (item.status !== 'ready') { kept.push(item); continue; }
++    const server = listed.get(item.id);
++    if (server) { item.attempted = Boolean(server.attempted); kept.push(item); }
++    else if (protectedIds.has(item.id) || item.readyAt >= startedAt) kept.push(item);
++    else dropped.push(item);
++  }
++  const known = new Set(kept.map(item => item.id).filter(Boolean));
++  return { kept, dropped, added: serverItems.filter(item => !known.has(item.id)) };
++}
++
++export class DispatchBook {
++  constructor({ now = () => Date.now() } = {}) { this.entries = new Map(); this.now = now; }
++
++  get(threadId) { return this.entries.get(threadId) || null; }
++  busy(threadId) { const entry = this.get(threadId); return Boolean(entry && entry.phase !== 'unresolved'); }
++  unresolved(threadId) { return this.get(threadId)?.phase === 'unresolved'; }
++  protectedIds(threadId) { return new Set(this.get(threadId)?.record.attachments.map(item => item.id) || []); }
++  expired(threadId) { const entry = this.get(threadId); return Boolean(entry && this.now() - entry.record.createdAt >= REPLAY_WINDOW_MS); }
++
++  // Freezes everything that defines the attempt; later selector, draft or tray changes cannot alter it.
++  begin({ threadId, requestId, prompt, sentText, attachments = [], model = null, effort = null }) {
++    if (this.entries.has(threadId)) throw new Error('This task already has an unresolved send');
++    const body = { threadId, prompt };
++    if (attachments.length) body.attachments = attachments.map(item => item.id);
++    if (model) body.model = model;
++    if (effort) body.effort = effort;
++    body.requestId = requestId;
++    const record = Object.freeze({ threadId, requestId, body: JSON.stringify(body), sentText, model, effort, createdAt: this.now(),
++      attachments: Object.freeze(attachments.map(item => Object.freeze({ ...item }))) });
++    const entry = { record, phase: 'idle', reason: null };
++    this.entries.set(threadId, entry);
++    return entry;
++  }
++
++  // Runs the first dispatch (firstCall) or a result check of an unresolved attempt with the exact stored body.
++  async run(threadId, transport, { firstCall = false, ...options } = {}) {
++    const entry = this.get(threadId);
++    if (!entry) throw new Error('No send to run for this task');
++    if (entry.phase === 'dispatching' || entry.phase === 'confirming') throw new Error('This send is already being checked');
++    if (!firstCall && this.expired(threadId)) return { outcome: 'expired', record: entry.record };
++    entry.phase = firstCall ? 'dispatching' : 'confirming'; entry.reason = null;
++    const result = await runDispatch(() => transport(entry.record.body), { ...options, firstCall,
++      onPending: attempt => { entry.phase = 'confirming'; options.onPending?.(attempt); } });
++    if (this.get(threadId) !== entry) return { ...result, record: entry.record, stale: true };
++    if (result.outcome === 'unknown') { entry.phase = 'unresolved'; entry.reason = result.reason; }
++    else this.entries.delete(threadId); // final (sent/rejected/uncertain/failed) or auth (session is being cleared)
++    return { ...result, record: entry.record };
++  }
++
++  // Explicit user decision to stop checking an unresolved attempt (e.g. after the replay window).
++  discard(threadId) {
++    const entry = this.get(threadId);
++    if (!entry || entry.phase !== 'unresolved') return null;
++    this.entries.delete(threadId);
++    return entry.record;
++  }
++
++  clear() { this.entries.clear(); }
++}
+diff --git "a/C:\\Codex\\2026-09-22\\new-chat\\work\\codex-remote-web\\ui-upload\\candidate-final/public/index.html" "b/C:\\Codex\\2026-09-22\\new-chat\\work\\codex-remote-web\\ui-upload\\candidate-delivery/public/index.html"
+index 1bf53c4..baead4f 100644
+--- "a/C:\\Codex\\2026-09-22\\new-chat\\work\\codex-remote-web\\ui-upload\\candidate-final/public/index.html"
++++ "b/C:\\Codex\\2026-09-22\\new-chat\\work\\codex-remote-web\\ui-upload\\candidate-delivery/public/index.html"
+@@ -67,7 +67,7 @@
+       <header class="topbar">
+         <button id="open-sidebar" class="icon-btn mobile-only" type="button" aria-label="작업 목록 열기" aria-controls="sidebar" aria-expanded="false"><svg class="icon" aria-hidden="true"><use href="#i-menu"/></svg></button>
+         <div class="title-block">
+-          <h1 id="task-title">작업을 선택하세요</h1>
++          <h1 id="task-title" tabindex="-1">작업을 선택하세요</h1>
+           <p id="task-meta" class="task-meta"></p>
+         </div>
+         <span id="task-badge" class="badge" hidden></span>
+@@ -90,6 +90,14 @@
+       <form id="composer" class="composer" novalidate>
+         <div class="composer-card" id="composer-card">
+           <div id="drop-hint" class="drop-hint" hidden><svg class="icon icon-lg" aria-hidden="true"><use href="#i-upload"/></svg><span>여기에 놓으면 첨부됩니다</span></div>
++          <div id="pending-attempt" class="pending-attempt" role="status" hidden>
++            <svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg>
++            <div class="pending-text"><strong id="pending-title"></strong><span id="pending-detail"></span></div>
++            <div class="pending-actions">
++              <button id="pending-check" class="btn btn-primary btn-sm" type="button">결과 다시 확인</button>
++              <button id="pending-discard" class="btn btn-ghost btn-sm" type="button" title="이 전송의 결과 확인을 그만둡니다. 서버에 이미 전송됐을 수 있습니다.">확인 포기</button>
++            </div>
++          </div>
+           <ul id="attachments" class="attachments" aria-label="첨부 파일" hidden></ul>
+           <label for="prompt" class="sr-only">Codex에 보낼 메시지</label>
+           <textarea id="prompt" class="prompt" rows="1" maxlength="16384" placeholder="작업을 선택하면 메시지를 보낼 수 있습니다" aria-describedby="composer-hint" disabled></textarea>
+diff --git "a/C:\\Codex\\2026-09-22\\new-chat\\work\\codex-remote-web\\ui-upload\\candidate-final/public/styles.css" "b/C:\\Codex\\2026-09-22\\new-chat\\work\\codex-remote-web\\ui-upload\\candidate-delivery/public/styles.css"
+index e79f899..54143a7 100644
+--- "a/C:\\Codex\\2026-09-22\\new-chat\\work\\codex-remote-web\\ui-upload\\candidate-final/public/styles.css"
++++ "b/C:\\Codex\\2026-09-22\\new-chat\\work\\codex-remote-web\\ui-upload\\candidate-delivery/public/styles.css"
+@@ -253,6 +253,13 @@ h1, h2, p { margin: 0; }
+ .attachment.is-attempted { border-color: color-mix(in srgb, var(--warn) 45%, var(--border)); background: var(--warn-soft); }
+ .attachment.is-attempted .attachment-meta { color: var(--warn); white-space: normal; }
+ .attachment.is-checking .attachment-meta { color: var(--text-2); }
++.pending-attempt { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 8px 10px; margin: 12px 12px 0; padding: 10px 12px; border: 1px solid color-mix(in srgb, var(--warn) 45%, var(--border)); border-radius: 10px; background: var(--warn-soft); font-size: 13px; }
++.pending-attempt > .icon { margin-top: 2px; color: var(--warn); }
++.pending-text { display: grid; gap: 2px; flex: 1 1 240px; min-width: 0; color: var(--text-2); overflow-wrap: anywhere; }
++.pending-text strong { color: var(--text); }
++.pending-actions { display: flex; gap: 6px; margin-left: auto; }
++#task-title:focus { outline: none; }
++#task-title:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; border-radius: 4px; }
+ .msg-terminal { margin-top: 8px; font-size: 12px; font-weight: 600; color: var(--warn); }
+ .empty-state.is-loading .empty-mark { animation: pulse 1.2s ease-in-out infinite; }
+ .attachment.is-uploading .attachment-meta { color: var(--text-2); }
+diff --git "a/C:\\Codex\\2026-09-22\\new-chat\\work\\codex-remote-web\\ui-upload\\candidate-final/public/ui-core.js" "b/C:\\Codex\\2026-09-22\\new-chat\\work\\codex-remote-web\\ui-upload\\candidate-delivery/public/ui-core.js"
+index 1920f57..664c3e9 100644
+--- "a/C:\\Codex\\2026-09-22\\new-chat\\work\\codex-remote-web\\ui-upload\\candidate-final/public/ui-core.js"
++++ "b/C:\\Codex\\2026-09-22\\new-chat\\work\\codex-remote-web\\ui-upload\\candidate-delivery/public/ui-core.js"
+@@ -1,4 +1,5 @@
+ // DOM-free helpers shared by app.js and the Node tests.
++import { runDispatch } from './dispatch-state.js';
+ export const MIB = 1024 * 1024;
+ export const NOTICE_TITLE = 'Codex 원격 웹 첨부 파일';
+ export const FILE_TYPES = { pdf: ['document', 'PDF'], docx: ['document', 'Word'], csv: ['table', 'CSV'], xlsx: ['table', 'Excel'], txt: ['text', '텍스트'], md: ['text', 'Markdown'], json: ['text', 'JSON'], png: ['image', 'PNG'], jpg: ['image', 'JPEG'], jpeg: ['image', 'JPEG'], webp: ['image', 'WEBP'] };
+@@ -69,21 +70,10 @@ export function titleText(raw, fallback = '새 작업') {
+   return head || (cut >= 0 ? '첨부 파일' : fallback);
+ }
+ 
+-// Resolves a turn dispatch. 202 means the first attempt is still in flight on the server; the identical request
+-// (same requestId + payload) is replayed a bounded number of times, which never starts a second turn.
+-// request() → { status, payload } and throws only when no HTTP answer arrived.
+-// Outcomes: sent | rejected (422) | uncertain (409 uncertain) | failed (other answers) | unknown (no final answer).
+-export async function resolveDispatch(request, { attempts = 12, delayMs = 1500, sleep = ms => new Promise(resolve => setTimeout(resolve, ms)), onPending = () => {} } = {}) {
+-  for (let attempt = 0; ; attempt++) {
+-    let response;
+-    try { response = await request(); } catch (error) { return { outcome: 'unknown', error }; }
+-    const { status, payload } = response;
+-    if (status === 200) return { outcome: 'sent', payload };
+-    if (status !== 202) return { outcome: status === 422 ? 'rejected' : status === 409 && payload?.uncertain ? 'uncertain' : 'failed', status, payload };
+-    if (attempt >= attempts) return { outcome: 'unknown', timedOut: true };
+-    onPending(attempt + 1);
+-    await sleep(delayMs);
+-  }
++// First-call dispatch resolution; the implementation (trusted-shape classification, bounded identical replays on 202)
++// lives in dispatch-state.js, which the UI uses directly. request() → { status, payload[, json] }.
++export function resolveDispatch(request, options = {}) {
++  return runDispatch(async () => { const response = await request(); return { ...response, json: response.json ?? response.payload != null }; }, { firstCall: true, ...options });
+ }
+ 
+ // userMessage content (separate parts or one merged text) → { texts, files } for display.
+diff --git "a/C:\\Codex\\2026-09-22\\new-chat\\work\\codex-remote-web\\ui-upload\\candidate-final/server.mjs" "b/C:\\Codex\\2026-09-22\\new-chat\\work\\codex-remote-web\\ui-upload\\candidate-delivery/server.mjs"
+index 1862b77..49cf4b3 100644
+--- "a/C:\\Codex\\2026-09-22\\new-chat\\work\\codex-remote-web\\ui-upload\\candidate-final/server.mjs"
++++ "b/C:\\Codex\\2026-09-22\\new-chat\\work\\codex-remote-web\\ui-upload\\candidate-delivery/server.mjs"
+@@ -546,7 +546,7 @@ export class RemoteServer {
+   }
+ 
+   async static(res, pathname) {
+warning: in the working copy of 'C:\Codex\2026-09-22\new-chat\work\codex-remote-web\ui-upload\candidate-delivery/test/dispatch-state.test.mjs', LF will be replaced by CRLF the next time Git touches it
+-    const files = new Map([['/', 'index.html'], ['/app.js', 'app.js'], ['/styles.css', 'styles.css'], ['/icon.svg', 'icon.svg'], ['/ui-core.js', 'ui-core.js']]);
++    const files = new Map([['/', 'index.html'], ['/app.js', 'app.js'], ['/styles.css', 'styles.css'], ['/icon.svg', 'icon.svg'], ['/ui-core.js', 'ui-core.js'], ['/dispatch-state.js', 'dispatch-state.js']]);
+     const file = files.get(pathname); if (!file) return text(res, 404, 'Not found', this.securityHeaders());
+     const content = await readFile(path.join(ROOT, 'public', file));
+     const type = file.endsWith('.js') ? 'application/javascript; charset=utf-8' : file.endsWith('.css') ? 'text/css; charset=utf-8' : file.endsWith('.svg') ? 'image/svg+xml' : 'text/html; charset=utf-8';
+diff --git "a/C:\\Codex\\2026-09-22\\new-chat\\work\\codex-remote-web\\ui-upload\\candidate-delivery/test/dispatch-state.test.mjs" "b/C:\\Codex\\2026-09-22\\new-chat\\work\\codex-remote-web\\ui-upload\\candidate-delivery/test/dispatch-state.test.mjs"
+new file mode 100644
+index 0000000..1c15788
+--- /dev/null
++++ "b/C:\\Codex\\2026-09-22\\new-chat\\work\\codex-remote-web\\ui-upload\\candidate-delivery/test/dispatch-state.test.mjs"
+@@ -0,0 +1,200 @@
++// F1–F3 (main-triaged): per-task unresolved sends keep their exact identity across task switches, selector changes,
++// other tasks' sends and tray resyncs; only trusted response shapes finalize. Uses the production dispatch-state.js.
++import test, { after } from 'node:test';
++import assert from 'node:assert/strict';
++import http from 'node:http';
++import os from 'node:os';
++import path from 'node:path';
++import { fileURLToPath } from 'node:url';
++import { mkdtemp, mkdir, readFile, realpath, writeFile } from 'node:fs/promises';
++import { randomBytes, scrypt as scryptCallback } from 'node:crypto';
++import { promisify } from 'node:util';
++import { RemoteServer } from '../server.mjs';
++import { FakeCodex } from './fake-codex.mjs';
++import { png } from './fixture-files.mjs';
++import { DispatchBook, classifyResponse, reconcileTray, draftAfterSend, runDispatch, REPLAY_WINDOW_MS } from '../public/dispatch-state.js';
++
++const scrypt = promisify(scryptCallback);
++const repo = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
++const evidence = { suite: 'dispatch-state.test.mjs', startedAt: new Date().toISOString(), node: process.version, checks: [] };
++const note = (name, detail = {}) => evidence.checks.push({ name, ...detail });
++after(async () => {
++  const dir = path.join(repo, 'work-artifacts', 'test-evidence'); await mkdir(dir, { recursive: true });
++  await writeFile(path.join(dir, `dispatch-state-${evidence.startedAt.replace(/[:.]/g, '-')}-${process.pid}.json`), JSON.stringify(evidence, null, 2), { flag: 'wx' });
++});
++
++async function start(t) {
++  const base = await realpath(await mkdtemp(path.join(os.tmpdir(), 'crw-dispatch-')));
++  const root = path.join(base, 'projects'); await mkdir(path.join(root, 'one'), { recursive: true });
++  const project = await realpath(path.join(root, 'one'));
++  const salt = randomBytes(16); const hash = await scrypt('pw', salt, 32);
++  const app = new FakeCodex({ project });
++  const server = new RemoteServer({ bindHost: '127.0.0.1', port: 0, publicOrigin: 'http://127.0.0.1', allowedRoots: [root], uploadDir: path.join(base, 'data', 'uploads'), password: { salt: salt.toString('base64url'), hash: hash.toString('base64url') } }, { appServer: app });
++  await server.start(); t.after(() => server.stop());
++  const x = { app, server, port: server.address().port, project };
++  const login = await raw(x, 'POST', '/api/login', { body: JSON.stringify({ password: 'pw' }) });
++  x.auth = { cookie: login.headers['set-cookie'][0].split(';')[0], csrf: login.payload.csrf };
++  x.thread = async () => (await raw(x, 'POST', '/api/tasks/start', { ...x.auth, body: JSON.stringify({ cwd: project }) })).payload.result.thread.id;
++  return x;
++}
++// Same contract as app.js apiRaw(): { status, payload, json }, throws only without an HTTP answer.
++function raw(x, method, url, { cookie, csrf, body, headers = {} } = {}) {
++  return new Promise((resolve, reject) => {
++    const payload = body == null ? null : Buffer.isBuffer(body) ? body : Buffer.from(body);
++    const req = http.request({ hostname: '127.0.0.1', port: x.port, path: url, method, headers: { Host: '127.0.0.1', Origin: 'http://127.0.0.1', ...(payload ? { 'content-type': Buffer.isBuffer(body) ? 'application/octet-stream' : 'application/json', 'content-length': payload.length } : {}), ...(cookie ? { Cookie: cookie } : {}), ...(csrf ? { 'x-csrf-token': csrf } : {}), ...headers } }, res => {
++      const chunks = []; res.on('data', chunk => chunks.push(chunk));
++      res.on('end', () => { const text = Buffer.concat(chunks).toString('utf8'); let parsed = null; let json = false; try { parsed = JSON.parse(text); json = true; } catch { /* not JSON */ } resolve({ status: res.statusCode, headers: res.headers, payload: parsed, json }); });
++    });
++    req.on('error', reject); req.end(payload ?? undefined);
++  });
++}
++const turnStart = (x, body) => raw(x, 'POST', '/api/turns/start', { ...x.auth, body });
++const staged = async (x, threadId) => (await raw(x, 'GET', `/api/uploads?threadId=${threadId}`, x.auth)).payload.attachments;
++async function waitFor(check, timeout = 3000) {
++  const deadline = Date.now() + timeout;
++  for (;;) { const value = await check(); if (value) return value; if (Date.now() > deadline) throw new Error('waitFor timed out'); await new Promise(resolve => setTimeout(resolve, 10)); }
++}
++const quick = { delayMs: 10 };
++
++test('only trusted structured answers finalize; gateway 5xx/52x, non-JSON and odd shapes are unknown', () => {
++  const cases = {
++    ok: [{ status: 200, json: true, payload: { result: { turn: { id: 't' } } } }, 'sent'],
++    okWithoutResult: [{ status: 200, json: true, payload: { ok: true } }, 'unknown'],
++    okHtml: [{ status: 200, json: false, payload: null }, 'unknown'],
++    pending: [{ status: 202, json: true, payload: { status: 'dispatching' } }, 'pending'],
++    oddAccepted: [{ status: 202, json: true, payload: {} }, 'unknown'],
++    rejected: [{ status: 422, json: true, payload: { rejected: true, error: 'Codex가 요청을 거부했습니다: x' } }, 'rejected'],
++    rejectedShapeless: [{ status: 422, json: true, payload: { error: 'x' } }, 'failed'],
++    uncertain: [{ status: 409, json: true, payload: { uncertain: true, error: 'x' } }, 'uncertain'],
++    badGateway: [{ status: 502, json: false, payload: null }, 'unknown'],
++    gatewayTimeout: [{ status: 504, json: false, payload: null }, 'unknown'],
++    cloudflare520: [{ status: 520, json: true, payload: { error: 'origin error' } }, 'unknown'],
++    internal500: [{ status: 500, json: true, payload: { error: 'Internal server error' } }, 'unknown'],
++    htmlError: [{ status: 403, json: false, payload: null }, 'unknown'],
++    session: [{ status: 401, json: true, payload: { error: 'Login required' } }, 'auth'],
++    network: [null, 'unknown']
++  };
++  for (const [name, [response, kind]] of Object.entries(cases)) assert.equal(classifyResponse(response, { firstCall: true }).kind, kind, name);
++  assert.equal(classifyResponse({ status: 404, json: true, payload: { error: 'x' } }, { firstCall: true }).kind, 'failed', 'first call: structured refusal before dispatch');
++  assert.equal(classifyResponse({ status: 404, json: true, payload: { error: 'x' } }, { firstCall: false }).kind, 'unknown', 'result check: server no longer knows the request');
++  note('classification', Object.fromEntries(Object.entries(cases).map(([name, [, kind]]) => [name, kind])));
++});
++
++test('an attempt freezes its body; the same task cannot start another; drafts edited meanwhile survive success', async () => {
++  const book = new DispatchBook();
++  const entry = book.begin({ threadId: 'A', requestId: 'req-a-000000001', prompt: '원래 글', sentText: '원래 글\n', attachments: [{ id: 'F'.repeat(22), name: 'f.txt', size: 3 }], model: 'fixture-deep', effort: 'medium' });
++  assert.throws(() => book.begin({ threadId: 'A', requestId: 'req-a-000000002', prompt: '새 글', sentText: '새 글' }), /unresolved send/);
++  assert.throws(() => { entry.record.body = '{}'; }, TypeError); assert.throws(() => { entry.record.attachments.push({}); }, TypeError);
++  book.begin({ threadId: 'B', requestId: 'req-b-000000001', prompt: 'B', sentText: 'B' });
++  assert.deepEqual(JSON.parse(book.get('A').record.body), { threadId: 'A', prompt: '원래 글', attachments: ['F'.repeat(22)], model: 'fixture-deep', effort: 'medium', requestId: 'req-a-000000001' });
++  assert.deepEqual([...book.protectedIds('A')], ['F'.repeat(22)]); assert.deepEqual([...book.protectedIds('B')], []);
++  assert.equal(draftAfterSend('원래 글\n', '원래 글\n'), ''); assert.equal(draftAfterSend('원래 글\n추가로 고친 부분', '원래 글\n'), '원래 글\n추가로 고친 부분');
++  const bodies = [];
++  const result = await book.run('A', async body => { bodies.push(body); return { status: 502, json: false, payload: null }; }, { firstCall: true, ...quick });
++  assert.equal(result.outcome, 'unknown'); assert.equal(book.get('A').phase, 'unresolved'); assert.equal(bodies[0], book.get('A').record.body);
++  let clock = Date.now(); const timed = new DispatchBook({ now: () => clock });
++  timed.begin({ threadId: 'T', requestId: 'req-t-000000001', prompt: 'x', sentText: 'x' });
++  await timed.run('T', async () => { throw new Error('offline'); }, { firstCall: true, ...quick });
++  clock += REPLAY_WINDOW_MS; let called = false;
++  assert.equal((await timed.run('T', async () => { called = true; }, quick)).outcome, 'expired'); assert.equal(called, false, 'no replay after the server may have forgotten the requestId');
++  assert.equal(timed.discard('T').requestId, 'req-t-000000001'); assert.equal(timed.get('T'), null);
++});
++
++test('tray reconciliation keeps attachments of dispatching/unresolved sends even when the staged list omits them', () => {
++  const f = { key: 1, id: 'F'.repeat(22), status: 'ready', readyAt: 0 }; const g = { key: 2, id: 'G'.repeat(22), status: 'ready', readyAt: 0 };
++  const uploading = { key: 3, status: 'uploading' };
++  let r = reconcileTray([f, g, uploading], [], new Set([f.id]), 100);
++  assert.deepEqual(r.kept, [f, uploading]); assert.deepEqual(r.dropped, [g]);
++  r = reconcileTray([f], [{ id: 'H'.repeat(22), attempted: false }, { id: f.id, attempted: true }], new Set(), 100);
++  assert.deepEqual(r.kept, [f]); assert.equal(f.attempted, true); assert.deepEqual(r.added.map(item => item.id), ['H'.repeat(22)]);
++});
++
++test('unresolved A (model+attachment) survives send B, selector reset, tray resync and a timed-out check; manual check confirms exactly one turn', async t => {
++  const x = await start(t); const a = await x.thread(); const b = await x.thread();
++  const image = png();
++  const upload = await raw(x, 'POST', '/api/uploads', { ...x.auth, body: image, headers: { 'x-upload-thread': a, 'x-upload-name': encodeURIComponent('A-도식.png'), 'content-type': 'image/png' } });
++  const fileId = upload.payload.attachment.id;
++  const book = new DispatchBook();
++  let trayA = [{ key: 1, threadId: a, id: fileId, name: 'A-도식.png', status: 'ready', readyAt: 0 }];
++
++  // 1) A is sent with a non-default model/effort; the answer is lost while the server is still dispatching.
++  let release; x.app.turnStartGate = new Promise(resolve => { release = resolve; });
++  const entryA = book.begin({ threadId: a, requestId: 'dispatch-a-00001', prompt: 'A 요약', sentText: 'A 요약', attachments: [{ id: fileId, name: 'A-도식.png', size: image.length }], model: 'fixture-deep', effort: 'medium' });
++  const originalBody = entryA.record.body; let inFlight;
++  const first = await book.run(a, body => { inFlight = turnStart(x, body); throw new Error('response lost'); }, { firstCall: true, ...quick });
++  assert.equal(first.outcome, 'unknown'); assert.equal(first.reason, 'network'); assert.equal(book.get(a).phase, 'unresolved');
++  await waitFor(() => x.server.idempotency.get('dispatch-a-00001')?.status === 202);
++  x.app.turnStartGate = null; // A's call stays held on the old gate; others proceed
++
++  // 2) Reopening A while its first call is in flight: staged list omits the claimed file; the tray keeps it.
++  assert.deepEqual(await staged(x, a), []);
++  const synced = reconcileTray(trayA, await staged(x, a), book.protectedIds(a), Date.now());
++  assert.deepEqual(synced.dropped, []); trayA = synced.kept; assert.deepEqual(trayA.map(item => item.id), [fileId]);
++
++  // 3) Task B sends normally (default selectors); A's identity is untouched.
++  book.begin({ threadId: b, requestId: 'dispatch-b-00001', prompt: 'B 질문', sentText: 'B 질문' });
++  assert.equal((await book.run(b, body => turnStart(x, body), { firstCall: true, ...quick })).outcome, 'sent');
++  assert.equal(book.get(a).record.body, originalBody);
++
++  // 4) Back on A with default selectors and an edited draft: a fresh send is refused, the stored body is unchanged.
++  assert.throws(() => book.begin({ threadId: a, requestId: 'dispatch-a-00002', prompt: 'A 요약 (수정)', sentText: 'A 요약 (수정)' }), /unresolved/);
++  assert.equal(draftAfterSend('A 요약 (수정)', book.get(a).record.sentText), 'A 요약 (수정)', 'edited draft is kept');
++
++  // 5) A result check while still in flight times out (bounded, 202 only) and stays unresolved.
++  const bodies = [];
++  const check1 = await book.run(a, body => { bodies.push(body); return turnStart(x, body); }, { attempts: 2, ...quick });
++  assert.equal(check1.outcome, 'unknown'); assert.equal(check1.reason, 'timeout'); assert.equal(book.get(a).phase, 'unresolved');
++
++  // 6) The held dispatch finishes; the manual check replays the identical body and confirms success.
++  release(); assert.equal((await inFlight).status, 200);
++  const check2 = await book.run(a, body => { bodies.push(body); return turnStart(x, body); }, quick);
++  assert.equal(check2.outcome, 'sent'); assert.equal(book.get(a), null);
++  assert.ok(bodies.every(body => body === originalBody), 'every check used the frozen body');
++
++  const calls = x.app.calls.filter(call => call.method === 'turn/start');
++  const forA = calls.filter(call => call.params.threadId === a);
++  assert.equal(forA.length, 1, 'exactly one app-server turn for A'); assert.equal(calls.filter(call => call.params.threadId === b).length, 1);
++  assert.equal(forA[0].params.model, 'fixture-deep'); assert.equal(forA[0].params.effort, 'medium');
++  assert.match(forA[0].params.input[1].text, /A-도식\.png/); assert.equal(forA[0].params.input[2].type, 'localImage');
++  const report = await waitFor(() => x.app.reports.find(value => value.threadId === a));
++  assert.equal(report.images.length, 1); assert.equal(report.files[0].name, 'A-도식.png');
++  // After success the sent file disappears from the staged list; reconciliation now drops it.
++  assert.deepEqual(reconcileTray(trayA, await staged(x, a), book.protectedIds(a), Date.now()).dropped.map(item => item.id), [fileId]);
++  note('unresolved-a-then-b', { checks: bodies.length, identicalBodies: true, appServerTurnsForA: forA.length, model: forA[0].params.model, effort: forA[0].params.effort, attachmentForwarded: true });
++});
++
++test('a 502/504/non-JSON answer to the first send stays unresolved and the real outcome is recovered later', async t => {
++  const x = await start(t); const a = await x.thread(); const book = new DispatchBook();
++  book.begin({ threadId: a, requestId: 'gateway-a-000001', prompt: 'gateway', sentText: 'gateway' });
++  let delivered; // the request reached the server, but a proxy answered with an HTML gateway error
++  const first = await book.run(a, async body => { delivered = await turnStart(x, body); return { status: 502, json: false, payload: null }; }, { firstCall: true, ...quick });
++  assert.equal(delivered.status, 200); assert.equal(first.outcome, 'unknown'); assert.equal(first.reason, 'server');
++  const second = await book.run(a, async () => ({ status: 504, json: false, payload: null }), quick);
++  assert.equal(second.outcome, 'unknown'); assert.equal(book.get(a).phase, 'unresolved');
++  const third = await book.run(a, body => turnStart(x, body), quick);
++  assert.equal(third.outcome, 'sent');
++  assert.equal(x.app.calls.filter(call => call.method === 'turn/start').length, 1, 'the check found the earlier turn instead of starting another');
++  note('gateway-errors', { first: first.reason, second: second.outcome, recovered: third.outcome });
++});
++
++test('rejected and uncertain final answers close the attempt; runDispatch never builds a new request', async t => {
++  const x = await start(t); const a = await x.thread(); const book = new DispatchBook();
++  x.app.failTurns = 'rpc';
++  book.begin({ threadId: a, requestId: 'final-reject-0001', prompt: 'r', sentText: 'r' });
++  assert.equal((await book.run(a, body => turnStart(x, body), { firstCall: true, ...quick })).outcome, 'rejected'); assert.equal(book.get(a), null);
++  x.app.failTurns = true;
++  book.begin({ threadId: a, requestId: 'final-uncert-0001', prompt: 'u', sentText: 'u' });
++  assert.equal((await book.run(a, body => turnStart(x, body), { firstCall: true, ...quick })).outcome, 'uncertain'); assert.equal(book.get(a), null);
++  const sent = []; await runDispatch(async () => { sent.push(1); return { status: 202, json: true, payload: { status: 'dispatching' } }; }, { attempts: 3, ...quick });
++  assert.equal(sent.length, 4);
++});
++
++test('app.js uses the shared dispatch book and has no global retry slot left', async () => {
++  const source = await readFile(path.join(repo, 'public', 'app.js'), 'utf8');
++  assert.match(source, /from '\.\/dispatch-state\.js'/);
++  assert.doesNotMatch(source, /state\.(pendingSend|dispatchingThread|confirming)\b|resolveDispatch/);
++  assert.match(source, /reconcileTray\(trayFor\(threadId\), data\.attachments \|\| \[\], state\.dispatch\.protectedIds\(threadId\)/);
++  assert.match(source, /state\.dispatch\.run\(threadId, body => apiRaw\('\/api\/turns\/start', \{ method: 'POST', body \}\)/);
++  const html = await readFile(path.join(repo, 'public', 'index.html'), 'utf8');
++  assert.match(html, /id="task-title" tabindex="-1"/); assert.match(html, /id="pending-check"/);
++});
+diff --git "a/C:\\Codex\\2026-09-22\\new-chat\\work\\codex-remote-web\\ui-upload\\candidate-final/test/ui-core.test.mjs" "b/C:\\Codex\\2026-09-22\\new-chat\\work\\codex-remote-web\\ui-upload\\candidate-delivery/test/ui-core.test.mjs"
+index 112529f..3f80ff4 100644
+--- "a/C:\\Codex\\2026-09-22\\new-chat\\work\\codex-remote-web\\ui-upload\\candidate-final/test/ui-core.test.mjs"
++++ "b/C:\\Codex\\2026-09-22\\new-chat\\work\\codex-remote-web\\ui-upload\\candidate-delivery/test/ui-core.test.mjs"
+@@ -75,17 +75,17 @@ test('dispatch confirmation replays the identical request on 202 and stops on th
+     const result = await resolveDispatch(request, { attempts: 3, delayMs: 7, sleep: async ms => { sleeps.push(ms); }, onPending: () => { pendings++; } });
+     return { result, calls: calls.length, sleeps, pendings };
+   };
+-  let r = await run([{ status: 202, payload: { status: 'dispatching' } }, { status: 202, payload: {} }, { status: 200, payload: { result: { turn: { id: 't' } } } }]);
++  let r = await run([{ status: 202, payload: { status: 'dispatching' } }, { status: 202, payload: { status: 'dispatching' } }, { status: 200, payload: { result: { turn: { id: 't' } } } }]);
+   assert.equal(r.result.outcome, 'sent'); assert.equal(r.calls, 3); assert.deepEqual(r.sleeps, [7, 7]); assert.equal(r.pendings, 2);
+-  r = await run([{ status: 202, payload: {} }, { status: 422, payload: { rejected: true, error: 'x' } }]);
++  r = await run([{ status: 202, payload: { status: 'dispatching' } }, { status: 422, payload: { rejected: true, error: 'x' } }]);
+   assert.equal(r.result.outcome, 'rejected'); assert.equal(r.calls, 2);
+-  r = await run([{ status: 202, payload: {} }, { status: 409, payload: { uncertain: true } }]);
++  r = await run([{ status: 202, payload: { status: 'dispatching' } }, { status: 409, payload: { uncertain: true } }]);
+   assert.equal(r.result.outcome, 'uncertain');
+   r = await run([{ status: 409, payload: { error: 'requestId conflicts with a different turn' } }]);
+   assert.equal(r.result.outcome, 'failed'); assert.equal(r.calls, 1);
+-  r = await run([{ status: 202, payload: {} }, new Error('network down')]);
++  r = await run([{ status: 202, payload: { status: 'dispatching' } }, new Error('network down')]);
+   assert.equal(r.result.outcome, 'unknown'); assert.equal(r.result.timedOut, undefined);
+-  r = await run(Array.from({ length: 10 }, () => ({ status: 202, payload: {} })));
++  r = await run(Array.from({ length: 10 }, () => ({ status: 202, payload: { status: 'dispatching' } })));
+   assert.equal(r.result.outcome, 'unknown'); assert.equal(r.result.timedOut, true); assert.equal(r.calls, 4, 'bounded: initial + 3 replays');
+ });
+ 
+diff --git "a/C:\\Codex\\2026-09-22\\new-chat\\work\\codex-remote-web\\ui-upload\\candidate-final/test/uploads.test.mjs" "b/C:\\Codex\\2026-09-22\\new-chat\\work\\codex-remote-web\\ui-upload\\candidate-delivery/test/uploads.test.mjs"
+index 532d16b..3d833bc 100644
+--- "a/C:\\Codex\\2026-09-22\\new-chat\\work\\codex-remote-web\\ui-upload\\candidate-final/test/uploads.test.mjs"
++++ "b/C:\\Codex\\2026-09-22\\new-chat\\work\\codex-remote-web\\ui-upload\\candidate-delivery/test/uploads.test.mjs"
+@@ -393,7 +393,7 @@ test('retention: logout discards unsent uploads, in-use files are kept, expiry t
+ 
+ test('static UI is served with security headers and loads nothing from external origins', async t => {
+   const x = await started(t);
+-  for (const [file, type] of [['/', 'text/html'], ['/app.js', 'application/javascript'], ['/ui-core.js', 'application/javascript'], ['/styles.css', 'text/css'], ['/icon.svg', 'image/svg+xml']]) {
++  for (const [file, type] of [['/', 'text/html'], ['/app.js', 'application/javascript'], ['/ui-core.js', 'application/javascript'], ['/dispatch-state.js', 'application/javascript'], ['/styles.css', 'text/css'], ['/icon.svg', 'image/svg+xml']]) {
+     const r = await send(x.port, 'GET', file, {});
+     assert.equal(r.status, 200); assert.ok(r.headers['content-type'].startsWith(type)); assert.equal(r.headers['x-content-type-options'], 'nosniff');
+     assert.match(r.headers['content-security-policy'], /default-src 'self'/);

@@ -1,0 +1,129 @@
+﻿===========================================
+INITIAL COMMIT VALIDATION - RAW EVIDENCE
+===========================================
+Timestamp: 2026-09-24T13:45:57Z
+Node Version: v24.21.0
+Working Directory: C:\Codex\Projects\CodexRemoteWeb
+Project: CodexRemoteWeb
+
+=== SYNTAX CHECKS ===
+Command: node --check <file>
+Exit codes recorded below:
+
+Check 1: server.mjs
+  Command: C:\Codex\Apps\Development-SDKs-2026-09-20\node-lts\node.exe --check server.mjs
+  Exit Code: 0
+  Status: PASS
+
+Check 2: bridge/app-server.mjs
+  Command: C:\Codex\Apps\Development-SDKs-2026-09-20\node-lts\node.exe --check bridge/app-server.mjs
+  Exit Code: 0
+  Status: PASS
+
+Check 3: lib/uploads.mjs
+  Command: C:\Codex\Apps\Development-SDKs-2026-09-20\node-lts\node.exe --check lib/uploads.mjs
+  Exit Code: 0
+  Status: PASS
+
+Check 4: public/app.js
+  Command: C:\Codex\Apps\Development-SDKs-2026-09-20\node-lts\node.exe --check public/app.js
+  Exit Code: 0
+  Status: PASS
+
+Check 5: public/ui-core.js
+  Command: C:\Codex\Apps\Development-SDKs-2026-09-20\node-lts\node.exe --check public/ui-core.js
+  Exit Code: 0
+  Status: PASS
+
+Check 6: public/dispatch-state.js
+  Command: C:\Codex\Apps\Development-SDKs-2026-09-20\node-lts\node.exe --check public/dispatch-state.js
+  Exit Code: 0
+  Status: PASS
+
+Check 7: setup.mjs
+  Command: C:\Codex\Apps\Development-SDKs-2026-09-20\node-lts\node.exe --check setup.mjs
+  Exit Code: 0
+  Status: PASS
+
+Check 8: test/ui-fixture.mjs
+  Command: C:\Codex\Apps\Development-SDKs-2026-09-20\node-lts\node.exe --check test/ui-fixture.mjs
+  Exit Code: 0
+  Status: PASS
+
+SYNTAX CHECK SUMMARY: All 8 checks PASSED
+
+=== FULL TEST SUITE ===
+Command: C:\Codex\Apps\Development-SDKs-2026-09-20\node-lts\node.exe --test test/*.test.mjs
+Start Time: 2026-09-24T13:45:14Z (approximately)
+Exit Code: 0
+Status: PASS
+
+Test Output:
+✔ only trusted structured answers finalize; gateway 5xx/52x, non-JSON and odd shapes are unknown (1.0972ms)
+✔ an attempt freezes its body; the same task cannot start another; drafts edited meanwhile survive success (0.9525ms)
+✔ tray reconciliation keeps attachments of dispatching/unresolved sends even when the staged list omits them (0.189ms)
+✔ unresolved A (model+attachment) survives send B, selector reset, tray resync and a timed-out check; manual check confirms exactly one turn (162.1662ms)
+✔ a 502/504/non-JSON answer to the first send stays unresolved and the real outcome is recovered later (51.0203ms)
+✔ rejected and uncertain final answers close the attempt; runDispatch never builds a new request (94.6649ms)
+✔ app.js uses the shared dispatch book and has no global retry slot left (1.2411ms)
+✔ auth, csrf, origin, logout and allowed project path boundary (101.0143ms)
+✔ turn idempotency reserves the first dispatch (50.4136ms)
+✔ model catalog requires auth, follows pages, hides unavailable IDs, and exposes canonical models (49.0005ms)
+✔ turn forwards selected model and effort but omits overrides when neither is selected (50.3445ms)
+✔ selected model uses its supported default reasoning effort (47.622ms)
+✔ invalid model and effort requests do not dispatch a turn (48.4098ms)
+✔ request IDs include model choice and reserve one delayed catalog dispatch (46.92ms)
+✔ model pagination limit rejects without caching a partial catalog (45.4606ms)
+✔ session expiry and denied thread operations (53.9521ms)
+✔ approval uses controlled-thread item context and explicit resolution (61.5845ms)
+✔ JSONL preserves split UTF-8 and resolves approval explicitly (1.3013ms)
+✔ interrupt works immediately after turn/start answers, before any turn/started notification (377.2856ms)
+✔ a turn that completes before its start response is not resurrected, and late/old notifications cannot flip state (52.4161ms)
+✔ 202 dispatching is not success: replaying the identical request resolves to the real final outcome (290.7851ms)
+✔ history flattened with join("") (no separator) renders prompt text, chips and a clean task title (80.7211ms)
+✔ paste keeps normal text paste whenever the clipboard carries text, even with files (Excel range + image) (1.188ms)
+✔ attachment notice renders as chips whether it is a separate part or merged into the prompt text (1.3284ms)
+✔ a notice glued to the prompt with no separator (history flattened with join("")) still splits cleanly (0.2339ms)
+✔ bracketed text is only removed when it is a complete generated notice (0.1968ms)
+✔ task titles never show the attachment notice, even from a truncated preview (0.1473ms)
+✔ dispatch confirmation replays the identical request on 202 and stops on the first final answer (0.6161ms)
+✔ text that merely looks like a notice header is shown as the user wrote it; images without a notice get chips (0.248ms)
+✔ upload requires login, exact Origin and CSRF, and uploading alone never starts a turn (88.4441ms)
+✔ upload limits: per file, per message count and bytes, store total; config can only lower them (125.0158ms)
+✔ content is verified by signature, UTF-8 and macro-free OOXML; extension or MIME alone is not trusted (150.492ms)
+✔ client file names cannot choose the storage path, escape it, or overwrite existing files (82.9631ms)
+﹣ a file symlink planted at the generated name is not followed or overwritten (54.3896ms) # file symlink creation not permitted on this host (EPERM); junction escapes are covered separately
+✔ upload storage refuses junction/symlink escapes and placement inside allowed project roots (126.8883ms)
+✔ attachment IDs are bound to the uploading session, thread and project (76.9024ms)
+✔ turn forwards verified attachment paths, local images and an untrusted-input notice; fake Codex reads them (144.9394ms)
+✔ attachment turns are idempotent, never double-dispatch, and failed dispatch keeps files without auto-retry (194.6811ms)
+✔ image preview is authenticated, owner-only, non-images are not served, and responses are inert (64.8858ms)
+✔ retention: logout discards unsent uploads, in-use files are kept, expiry touches only tracked files, manifest survives restart (103.7036ms)
+✔ static UI is served with security headers and loads nothing from external origins (29.2292ms)
+✔ metadata preflight answers predictable rejections as JSON, stores nothing, and needs CSRF + Origin (58.6177ms)
+✔ an upload aborted mid-stream leaves no partial file, index entry or quota reservation (79.321ms)
+✔ DELETE of an attachment requires login, CSRF and the exact Origin; rejected deletes keep the file (60.0177ms)
+✔ Codex rejection (JSON-RPC error) is definitive; unknown outcomes mark files attempted and an explicit resend works (94.1891ms)
+✔ bridge tags JSON-RPC error responses as definitive and leaves timeouts untagged (45.408ms)
+✔ upload store refuses a non-empty folder it did not create and leaves every byte in it untouched (115.2494ms)
+✔ manifest replacement retries transient lock errors, then fails loudly without deleting or overwriting (965.5238ms)
+✔ history that merges prompt and attachment notice into one text part still renders prompt text and chips without paths (125.6559ms)
+✔ fixture scenarios: approval, question and slow interrupt round-trip through the server (269.6166ms)
+
+TEST SUMMARY:
+  Total: 50
+  Passed: 49
+  Failed: 0
+  Skipped: 1 (file symlink creation not permitted on this host)
+  Cancelled: 0
+  Duration: 3153.0456 ms (3.15 seconds)
+
+=== TEST FILES CREATED BY TESTS ===
+New evidence files created during test execution:
+  - dispatch-state-2026-09-24T04-45-16-649Z-4636.json
+  - turn-state-2026-09-24T04-45-16-661Z-34988.json
+  - uploads-2026-09-24T04-45-16-671Z-9068.json
+
+===========================================
+END OF VALIDATION EVIDENCE
+===========================================

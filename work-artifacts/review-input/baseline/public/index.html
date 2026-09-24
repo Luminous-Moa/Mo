@@ -1,0 +1,12 @@
+<!doctype html>
+<html lang="ko">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Codex 원격 작업</title><link rel="stylesheet" href="/styles.css"></head>
+<body>
+  <main id="login-view" class="login-card"><h1>Codex 원격 작업</h1><p>개인 PC 접근 비밀번호를 입력하세요.</p><form id="login-form"><label>접근 비밀번호<input id="password" type="password" autocomplete="current-password" required></label><button>로그인</button></form><p id="login-error" class="error" aria-live="polite"></p></main>
+  <main id="app-view" hidden>
+    <aside><div class="brand">CODEX <span>REMOTE</span></div><div id="connection" class="connection offline">오프라인</div><button id="refresh" class="quiet">새로고침</button><h2>최근 작업</h2><nav id="tasks"></nav><button id="new-task" class="new">＋ 새 작업</button><button id="logout" class="quiet bottom">로그아웃</button></aside>
+    <section class="workspace"><header><div><p class="eyebrow">개인 PC · 보안 세션</p><h1 id="task-title">작업을 선택하세요</h1></div><button id="interrupt" class="quiet" disabled>중단</button></header><div id="messages" class="messages" aria-live="polite"><p class="empty">왼쪽에서 작업을 선택하거나 새 작업을 만드세요.</p></div><section id="approvals" class="approvals"></section><form id="composer" class="composer"><div class="model-controls"><label>모델<select id="model" disabled><option value="">작업 기본값 유지</option></select></label><label>추론 수준<select id="effort" disabled><option value="">작업 기본값 유지</option></select></label><small>선택은 다음 메시지부터 적용됩니다.</small></div><textarea id="prompt" maxlength="16384" placeholder="Codex에 보낼 메시지" disabled></textarea><button id="send" disabled>보내기</button></form></section>
+  </main>
+  <dialog id="new-dialog"><form method="dialog" id="new-form"><h2>새 작업</h2><label>프로젝트 폴더<select id="project" required></select></label><button value="cancel" class="quiet">취소</button><button value="create">작업 시작</button></form></dialog>
+  <script type="module" src="/app.js"></script>
+</body></html>

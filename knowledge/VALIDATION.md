@@ -62,4 +62,10 @@
 
 ## 하지 않은 검증
 
-로그인 후 브라우저 화면(목록 표시, 이전 기록 더 보기, 안내 카드, 포커스·스크롤), 실제 데스크톱 앱이 잡은 잠금으로 409 확인, 실제 모델 turn의 승인 흐름(patchUpdated 순서, 자동 거부가 decline으로 처리되는지), 드라이브 상대 경로가 실제 쓰기로 이어지는지는 확인하지 않았습니다. 변경 코드는 Git에 커밋하지 않았습니다.
+로그인 후 브라우저 화면(목록 표시, 이전 기록 더 보기, 안내 카드, 포커스·스크롤), 실제 데스크톱 앱이 잡은 잠금으로 409 확인, 실제 모델 turn의 승인 흐름(patchUpdated 순서, 자동 거부가 decline으로 처리되는지), 드라이브 상대 경로가 실제 쓰기로 이어지는지는 확인하지 않았습니다. revision 2 기록 시점에는 변경 코드가 미커밋이었습니다.
+
+# revision 3 — 2026-09-24 커밋 기록
+
+- 사용자 요청('커밋 진행해줘.')으로 커밋 1477b14(코드 + revision 2, 65개 파일)를 만든 뒤, 그 사실을 revision 3으로 기록했습니다. session `20260924-desktop-resume-commit`, 88 nodes / 192 edges, dry-run 노드 4·관계 5, check 오류 0 / 경고 0.
+- 커밋 직후 추적 파일 131개 모두 git 저장 바이트와 작업 폴더 바이트 일치. server.mjs·test/task-scope.test.mjs·README.md 해시가 후보 r4와 같고 마지막 수정 시각이 서버 기동(16:42:42)보다 앞서, 배포된 코드와 커밋된 코드가 같습니다.
+- 원본: `C:/Codex/Scratch/CodexRemoteWebKnowledge/rev3-change-v1.json`, `rev3-dry-run.json`, `rev3-apply.json`, `rev3-check.json`, `rev3-export.json`, `rev3-status.json`.

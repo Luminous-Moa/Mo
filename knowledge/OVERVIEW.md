@@ -61,7 +61,7 @@ flowchart TD
 
 2026-09-24 첫 커밋 전 상태에서 `node --check` 8/8, `node --test` 50개 중 49 통과·1 skipped(파일 symlink 권한), 실패 0입니다(`validation.20260924_node`). 독립 코드 리뷰 결과는 `review.20260924`와 연결된 이슈 노드에 있습니다. 앱 종료 후 웹 인계는 사용자 보고로 동작을 확인했지만 메인이 화면을 직접 보지는 않았습니다.
 
-revision 2(데스크톱 이어가기): 최종 후보에서 `node --test` 72개 중 71 통과·1 skipped·실패 0, 임시 CODEX_HOME 실제 바이너리 e2e 18/18(r3 후보), 독립 리뷰 3회 블로커 없음, 배포 전 실제 데이터 목록 탐침 50개(`validation.20260924_desktop`, `obs.listing_probe_20260924`, `obs.deploy_20260924`). 브라우저 화면은 검증하지 않았고 변경 코드는 아직 커밋되지 않았습니다.
+revision 2(데스크톱 이어가기): 최종 후보에서 `node --test` 72개 중 71 통과·1 skipped·실패 0, 임시 CODEX_HOME 실제 바이너리 e2e 18/18(r3 후보), 독립 리뷰 3회 블로커 없음, 배포 전 실제 데이터 목록 탐침 50개(`validation.20260924_desktop`, `obs.listing_probe_20260924`, `obs.deploy_20260924`). 브라우저 화면은 검증하지 않았습니다. 변경 코드와 revision 2는 커밋 1477b14로 기록되었고, 그 사실은 revision 3(`obs.commit_20260924_desktop`)에 있습니다.
 
 남은 일: 미승인 개선 후보(`open.web_improvements`: 데스크톱으로 넘기기, 재연결, codex.exe 자동 탐색, 터널·서버 수명 결합, 검색), 남은 한계(`issue.resume_residual_limits`), Codex 앱 안에서 띄운 웹 서버의 수명 가설 확인(`hypothesis.server_killed_with_app`).
 

@@ -3,6 +3,7 @@
   "port": 47831,
   "publicOrigin": "https://example.trycloudflare.com",
   "allowedRoots": ["C:\\Codex\\Projects"],
+  "resumeRoots": ["C:\\Codex", "C:\\Users\\YOUR_USER\\Documents\\Codex"],
   "transport": "stdio",
   "codexExe": "C:\\Users\\YOUR_USER\\AppData\\Local\\OpenAI\\Codex\\bin\\VERSION\\codex.exe",
   "codexHome": "C:\\Users\\YOUR_USER\\.codex",

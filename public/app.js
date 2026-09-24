@@ -9,8 +9,13 @@ const DEFAULT_HINT = 'Ctrl+Enter로 보내기 · 모델과 추론 수준은 다�
 const SERVER_MESSAGES = {
   'Login required': '로그인이 필요합니다.',
   'CSRF validation failed': '보안 확인에 실패했습니다. 페이지를 새로고침한 뒤 다시 시도하세요.',
-  'Thread is not in an allowed project': '허용된 프로젝트의 작업이 아닙니다.',
-  'Active thread cannot be taken over': '다른 곳에서 실행 중인 작업이라 이어갈 수 없습니다.',
+  'Thread is not in an allowed project': '허용된 범위의 작업이 아닙니다.',
+  'Thread not found': '작업을 찾을 수 없습니다.',
+  'threadId is required': '작업을 선택하세요.',
+  'Codex response is too large': 'Codex 응답이 너무 커서 불러오지 못했습니다.',
+  'Codex could not read this task': 'Codex가 이 작업을 읽지 못했습니다.',
+  'Invalid history cursor': '기록 위치가 올바르지 않습니다. 작업을 다시 열어 주세요.',
+  'Active thread cannot be taken over': '이 작업은 지금 실행 중이라 이어갈 수 없습니다. 끝난 뒤 다시 시도하세요.',
   'Resume this inactive allowed thread before sending a turn': '이 작업을 먼저 이어가기 해야 보낼 수 있습니다.',
   'No controlled active turn to interrupt': '중단할 실행 중인 작업이 없습니다.',
   'Selected model is unavailable': '선택한 모델을 사용할 수 없습니다.',
@@ -34,8 +39,15 @@ const SERVER_MESSAGES = {
   'The running turn changed; refresh and try again': '실행 중인 작업이 바뀌었습니다. 잠시 뒤 다시 시도하세요.'
 };
 
+// Shown when Codex refuses to resume because another process (usually the desktop app) holds the thread's writer lock.
+const LOCKED_TITLE = '다른 Codex 프로세스가 사용 중인 작업입니다';
+const LOCKED_GUIDE = '이 작업은 다른 Codex 프로세스(데스크톱 앱 등)가 사용 중입니다. 데스크톱 앱을 트레이까지 완전히 종료한 뒤 다시 시도하세요.';
+// Tasks whose folder overlaps the panel's own runtime data are view-only here (server answers 409 thread_scope_protected).
+const PROTECTED_TITLE = '웹에서 이어갈 수 없는 작업입니다';
+const PROTECTED_GUIDE = '이 작업 폴더는 웹 패널의 운영 데이터 폴더를 포함하거나 그 안에 있어 웹에서 이어갈 수 없습니다. 데스크톱 앱에서 이어가세요.';
+
 const state = {
-  csrf: null, cursor: 0, thread: null, tasks: [], controlled: new Set(), models: [], activeTurns: {},
+  csrf: null, cursor: 0, thread: null, tasks: [], tasksTruncated: false, taskLimit: 0, controlled: new Set(), models: [], activeTurns: {},
   dispatch: new DispatchBook(), polling: false, connection: null, taskSignature: '',
   uploads: { enabled: false, status: 'unknown', limits: { ...DEFAULT_LIMITS }, storage: null, retries: 0 }, trays: new Map(), agentText: new Map(), drafts: new Map(), attachmentSeq: 0
 };
@@ -79,7 +91,7 @@ async function api(path, options = {}) {
   const payload = await response.json().catch(() => ({ error: '응답을 읽을 수 없습니다.' }));
   if (!response.ok) {
     if (response.status === 401) handleUnauthorized();
-    throw Object.assign(new Error(friendly(payload.error) || '요청을 처리하지 못했습니다.'), { status: response.status });
+    throw Object.assign(new Error(friendly(payload.error) || '요청을 처리하지 못했습니다.'), { status: response.status, code: typeof payload.code === 'string' ? payload.code : null });
   }
   return payload;
 }
@@ -246,16 +258,54 @@ function renderItem(item) {
   return null;
 }
 
-function renderThread(result) {
-  const thread = result?.thread || result || {};
-  withAutoScroll(() => {
-    for (const turn of thread.turns || result?.turns || []) for (const item of turn.items || []) {
+// History pages arrive oldest→newest within the page. The first page holds the newest turns; "이전 기록 더 보기"
+// prepends the next older page and keeps the reader's scroll position.
+function turnNodes(turns) {
+  const nodes = [];
+  for (const turn of turns || []) {
+    for (const item of turn.items || []) {
+      if (item.id && findItem(item.id)) continue;
       const node = renderItem(item); if (!node) continue;
       if (item.id) node.dataset.itemId = item.id;
-      $('messages').append(node);
+      nodes.push(node);
+    }
+    if (turn.partial) nodes.push(notice('info', '이 turn은 너무 커서 요약만 표시합니다', '사용자 메시지와 Codex 응답만 보이며, 명령 실행·파일 변경 기록은 생략했습니다.'));
+    if (turn.unavailable) nodes.push(notice('warn', '불러올 수 없는 turn입니다', '이 turn은 요약조차 너무 커서 웹에서 표시할 수 없습니다. 데스크톱 앱에서 확인하세요. 이전 기록은 계속 불러올 수 있습니다.'));
+  }
+  return nodes;
+}
+
+// older: prepend and keep the reader's place; focus then moves to the new "more" button, or the first new entry.
+function renderHistoryPage(thread, page, older) {
+  const box = $('messages'); const feed = $('feed');
+  box.querySelector('.history-more')?.remove();
+  const nodes = turnNodes(page.turns);
+  if (older) { const before = feed.scrollHeight; box.prepend(...nodes); feed.scrollTop += feed.scrollHeight - before; }
+  else { withAutoScroll(() => box.append(...nodes)); feed.scrollTop = feed.scrollHeight; }
+  thread.historyCursor = page.nextCursor || null;
+  const more = thread.historyCursor ? historyMoreButton(thread) : null;
+  if (more) box.prepend(more);
+  syncEmpty();
+  if (older) {
+    const target = more?.querySelector('button') || nodes[0];
+    if (target) { if (target !== more?.querySelector('button')) target.setAttribute('tabindex', '-1'); target.focus({ preventScroll: true }); }
+  }
+}
+
+function historyMoreButton(thread) {
+  const button = el('button', { class: 'btn btn-ghost btn-sm', type: 'button' }, '이전 기록 더 보기');
+  button.addEventListener('click', async () => {
+    if (state.thread !== thread || !thread.historyCursor) return;
+    button.disabled = true; button.classList.add('is-busy');
+    try {
+      const page = await api('/api/tasks/turns', { method: 'POST', body: JSON.stringify({ threadId: thread.id, cursor: thread.historyCursor }) });
+      if (state.thread === thread) renderHistoryPage(thread, page, true);
+    } catch (error) {
+      button.disabled = false; button.classList.remove('is-busy');
+      if (error.status !== 401) toast(`이전 기록을 불러오지 못했습니다. ${error.message}`);
     }
   });
-  $('feed').scrollTop = $('feed').scrollHeight;
+  return el('div', { class: 'history-more' }, button);
 }
 
 /* ---------- Header, tasks, controls ---------- */
@@ -263,6 +313,8 @@ function taskId(task) { return String(task.id || task.threadId || ''); }
 function taskState(task) { return String(task.status?.type || task.status || task.turn?.status?.type || task.turn?.status || '').toLowerCase(); }
 function taskTitle(task) { return titleText(task.name || task.title || task.preview || ''); }
 function taskCwd(task) { return task.cwd || task.workspace?.cwd || ''; }
+// Project name, or the path under the resume root (e.g. "Codex\2026-09-22\new-chat") so date folders stay distinct.
+function taskLocation(task) { return task.location || baseName(taskCwd(task)); }
 function relativeTime(value) {
   if (value == null || value === '') return '';
   const ms = typeof value === 'number' ? (value < 1e12 ? value * 1000 : value) : Date.parse(value);
@@ -276,8 +328,14 @@ function relativeTime(value) {
 }
 const isRunning = id => Boolean(id && state.activeTurns?.[id]);
 
+// Why the list stopped: the display cap (more tasks exist) or the scan cap (older tasks were not examined).
+function truncationNote() {
+  if (state.tasksTruncated === 'pages') return `최근 작업 ${state.taskScanLimit || '일부'}개까지만 검사했습니다. 그보다 오래된 작업은 목록에 나오지 않을 수 있습니다.`;
+  return `최근 활동 순으로 ${state.taskLimit || state.tasks.length}개까지만 표시합니다. 더 오래된 작업은 목록에 나오지 않습니다.`;
+}
+
 function renderTasks(force = true) {
-  const signature = JSON.stringify([state.tasks.map(task => [taskId(task), taskTitle(task), taskState(task)]), state.thread?.id, [...state.controlled], Object.keys(state.activeTurns || {})]);
+  const signature = JSON.stringify([state.tasks.map(task => [taskId(task), taskTitle(task), taskState(task), taskLocation(task), task.lock || '', Boolean(task.folderMissing), Boolean(task.protected)]), state.tasksTruncated, state.thread?.id, [...state.controlled], Object.keys(state.activeTurns || {})]);
   if (!force && signature === state.taskSignature) return;
   state.taskSignature = signature;
   const nav = $('tasks');
@@ -286,13 +344,16 @@ function renderTasks(force = true) {
   if (!state.tasks.length) { nav.replaceChildren(el('p', { class: 'task-list-empty', text: '아직 작업이 없습니다. 새 작업을 만들어 시작하세요.' })); return; }
   nav.replaceChildren(...state.tasks.map(task => {
     const id = taskId(task); const running = isRunning(id) || (!state.controlled.has(id) && ACTIVE_STATES.includes(taskState(task))); const controlled = state.controlled.has(id);
-    const sub = [baseName(taskCwd(task)), running ? '실행 중' : relativeTime(task.updatedAt ?? task.createdAt)].filter(Boolean).join(' · ');
-    const button = el('button', { class: 'task', type: 'button', 'data-task-id': id, 'aria-current': state.thread?.id === id ? 'page' : null },
-      el('span', { class: `task-dot${running ? ' is-active' : controlled ? ' is-controlled' : ''}`, 'aria-hidden': 'true' }),
-      el('span', { class: 'task-text' }, el('span', { class: 'task-title', text: taskTitle(task) }), el('span', { class: 'task-sub', text: sub })));
+    // 'busy' is a read-only hint (writer lock held by another Codex process); resuming still decides for real.
+    const busyElsewhere = !controlled && task.lock === 'busy';
+    const when = running ? '실행 중' : busyElsewhere ? '다른 곳에서 사용 중' : relativeTime(task.updatedAt ?? task.createdAt);
+    const sub = [taskLocation(task), task.protected ? '보호됨 · 기록만' : task.folderMissing ? '폴더 없음' : null, when].filter(Boolean).join(' · ');
+    const button = el('button', { class: 'task', type: 'button', 'data-task-id': id, 'aria-current': state.thread?.id === id ? 'page' : null, title: taskCwd(task) || null },
+      el('span', { class: `task-dot${running ? ' is-active' : controlled ? ' is-controlled' : busyElsewhere ? ' is-busy' : ''}`, 'aria-hidden': 'true' }),
+      el('span', { class: 'task-text' }, el('span', { class: 'task-title', text: taskTitle(task) }), el('span', { class: `task-sub${busyElsewhere ? ' is-busy' : ''}`, text: sub })));
     button.addEventListener('click', () => selectTask(task));
     return button;
-  }));
+  }), ...(state.tasksTruncated ? [el('p', { class: 'task-list-note', text: truncationNote() })] : []));
   if (focusedTask) nav.querySelector(`[data-task-id="${CSS.escape(focusedTask)}"]`)?.focus();
 }
 
@@ -407,14 +468,15 @@ async function loadModels() {
 /* ---------- Tasks ---------- */
 async function refreshTasks() {
   const data = await api('/api/tasks'); state.tasks = data.tasks || [];
+  state.tasksTruncated = data.truncatedReason || (data.truncated ? 'items' : false); state.taskLimit = Number(data.limit) || 0; state.taskScanLimit = Number(data.scanLimit) || 0;
   const current = state.thread && state.tasks.find(task => taskId(task) === state.thread.id);
-  if (current) { state.thread.title = taskTitle(current); state.thread.project ||= baseName(taskCwd(current)); renderHeader(); }
+  if (current) { state.thread.title = taskTitle(current); state.thread.project ||= taskLocation(current); renderHeader(); }
   renderTasks();
 }
 
 async function selectTask(task) {
   const id = taskId(task);
-  const thread = { id, title: taskTitle(task), project: baseName(taskCwd(task)), controlled: state.controlled.has(id), status: taskState(task) };
+  const thread = { id, title: taskTitle(task), project: taskLocation(task), controlled: state.controlled.has(id), status: taskState(task) };
   const fromDrawer = $('sidebar').classList.contains('is-open');
   saveDraft();
   state.thread = thread; state.loadingThread = thread;
@@ -428,19 +490,36 @@ async function selectTask(task) {
   try { data = await api('/api/tasks/read', { method: 'POST', body: JSON.stringify({ threadId: id }) }); }
   catch (error) { if (state.thread === thread && error.status !== 401) { state.loadingThread = null; addNotice('error', '작업을 불러오지 못했습니다', error.message); } }
   if (state.thread !== thread) { if (state.loadingThread === thread) { state.loadingThread = null; syncEmpty(); } return; }
+  // History is a separate, paged request: newest turns first, older ones on demand. A failure here still leaves the
+  // task open (access notices and resume stay available).
+  let page = null; let historyError = null;
+  if (data) {
+    try { page = await api('/api/tasks/turns', { method: 'POST', body: JSON.stringify({ threadId: id }) }); }
+    catch (error) { historyError = error; }
+    if (state.thread !== thread) { if (state.loadingThread === thread) { state.loadingThread = null; syncEmpty(); } return; }
+  }
   state.loadingThread = null;
   if (data) {
-    renderThread(data.result);
+    if (page) renderHistoryPage(thread, page, false);
+    else if (historyError && historyError.status !== 401) addNotice('error', '대화 기록을 불러오지 못했습니다', historyError.message);
+    const access = data.access || {};
+    if (access.location) thread.project = access.location;
     if (thread.controlled) syncTray(id).catch(error => { if (error.status !== 401) toast(`첨부 목록을 불러오지 못했습니다. ${error.message}`); });
-    else if (ACTIVE_STATES.includes(thread.status)) addNotice('warn', '다른 곳에서 실행 중인 작업입니다', '다른 실행자가 사용 중이라 여기서는 제어할 수 없습니다. 기록만 볼 수 있습니다.');
-    else addResumeNotice(thread);
+    else if (ACTIVE_STATES.includes(access.status || thread.status)) addNotice('warn', '실행 중인 작업입니다', '이 작업은 지금 실행 중이라 여기서 이어갈 수 없습니다. 끝난 뒤 다시 열어 보세요. 기록은 볼 수 있습니다.');
+    else if (access.protected) addNotice('info', PROTECTED_TITLE, PROTECTED_GUIDE);
+    else if (access.folderMissing) addNotice('info', '작업 폴더가 없어 기록만 볼 수 있습니다', '이 작업을 시작한 폴더가 지금 없어서 이어갈 수 없습니다.');
+    else addResumeNotice(thread, { locked: access.lock === 'busy' });
   }
   syncEmpty(); updateControls();
 }
 
-function addResumeNotice(thread) {
-  const button = el('button', { class: 'btn btn-primary btn-sm', type: 'button' }, icon('play'), '이 작업 이어가기');
-  const node = addNotice('info', '지금은 기록만 볼 수 있습니다', '이어가면 이 웹 세션에서 새 메시지와 파일을 보낼 수 있습니다. 데스크톱 등 다른 곳에서 같은 작업을 동시에 진행하지 마세요.', [button]);
+// locked: the writer lock looked held (hint) or Codex just refused with "active writer" (409 thread_locked).
+function addResumeNotice(thread, { locked = false, message = LOCKED_GUIDE } = {}) {
+  const button = el('button', { class: `btn ${locked ? 'btn-ghost' : 'btn-primary'} btn-sm`, type: 'button' }, icon('play'), locked ? '다시 시도' : '이 작업 이어가기');
+  const node = locked
+    ? notice('warn', LOCKED_TITLE, `${message} 웹에서 이어가면, 이 웹 서버가 켜져 있는 동안 데스크톱 앱에서는 이 작업을 보기만 할 수 있습니다.`, [button])
+    : notice('info', '지금은 기록만 볼 수 있습니다', '이어가면 이 웹에서 새 메시지와 파일을 보낼 수 있습니다. 이어간 뒤에는 이 웹 서버가 켜져 있는 동안 데스크톱 앱에서 이 작업을 보기만 할 수 있습니다.', [button]);
+  appendNode(node);
   button.addEventListener('click', async () => {
     button.disabled = true; button.classList.add('is-busy');
     try {
@@ -449,10 +528,19 @@ function addResumeNotice(thread) {
       if (state.thread === thread) { toast('작업을 이어갑니다. 이제 메시지를 보낼 수 있습니다.', 'info'); await syncTray(thread.id).catch(() => {}); updateControls(); $('prompt').focus(); }
     } catch (error) {
       button.disabled = false; button.classList.remove('is-busy');
-      if (error.status !== 401) toast(error.message);
+      if (error.code === 'thread_locked' && state.thread === thread) {
+        // Not a generic failure: explain the single-writer rule in place, with a retry button.
+        node.remove(); addResumeNotice(thread, { locked: true, message: error.message || LOCKED_GUIDE });
+        announce(LOCKED_TITLE);
+      } else if (error.code === 'thread_scope_protected' && state.thread === thread) {
+        node.remove(); addNotice('info', PROTECTED_TITLE, error.message || PROTECTED_GUIDE);
+      } else if (error.code === 'thread_folder_missing' && state.thread === thread) {
+        node.remove(); addNotice('info', '작업 폴더가 없어 기록만 볼 수 있습니다', error.message);
+      } else if (error.status !== 401) toast(error.message);
     }
     renderTasks(); updateControls();
   });
+  return node;
 }
 
 /* ---------- Attachments ---------- */
@@ -808,8 +896,13 @@ function renderApprovals(approvals) {
   const box = $('approvals'); const wanted = new Set(approvals.map(approval => String(approval.id)));
   for (const node of [...box.children]) if (!wanted.has(node.dataset.requestId)) node.remove();
   for (const approval of approvals) {
-    if (box.querySelector(`[data-request-id="${CSS.escape(String(approval.id))}"]`)) continue;
-    const node = approvalCard(approval); node.dataset.requestId = String(approval.id); box.append(node);
+    // A file-change card is rebuilt when Codex updates its change list (server re-checked it; item/fileChange/patchUpdated).
+    const signature = JSON.stringify(approval.display || null);
+    const existing = box.querySelector(`[data-request-id="${CSS.escape(String(approval.id))}"]`);
+    if (existing && existing.dataset.signature === signature) continue;
+    const node = approvalCard(approval); node.dataset.requestId = String(approval.id); node.dataset.signature = signature;
+    if (existing) { existing.replaceWith(node); continue; }
+    box.append(node);
     announce(approval.display?.kind === 'input' ? 'Codex가 질문을 보냈습니다. 입력창 위에서 답하세요.' : '승인 요청이 도착했습니다. 입력창 위에서 승인하거나 거부하세요.');
   }
 }
@@ -843,7 +936,7 @@ function handleEvent(event, dirty, ending) {
   const params = event.data?.params || {};
   const thread = String(params.threadId || params.thread?.id || params.item?.threadId || '');
   if (thread && thread !== state.thread?.id) return;
-  if (event.type === 'blockedApproval' || event.type === 'unsupported') { addNotice('warn', '승인 요청이 차단되었습니다', event.data?.reason === 'outside allowed project' ? '허용된 프로젝트 밖의 요청이라 자동으로 거부했습니다.' : '처리할 수 없는 형식의 요청이라 자동으로 거부했습니다.'); return; }
+  if (event.type === 'blockedApproval' || event.type === 'unsupported') { addNotice('warn', '승인 요청이 차단되었습니다', event.data?.reason === 'outside allowed project' ? '허용된 프로젝트 밖의 요청이라 자동으로 거부했습니다.' : event.data?.reason === 'protected folder' ? '웹 패널의 운영 데이터 폴더 안의 요청이라 자동으로 거부했습니다.' : '처리할 수 없는 형식의 요청이라 자동으로 거부했습니다.'); return; }
   if (event.type !== 'notification' || !state.thread) return;
   const method = event.data.method;
   if (method === 'item/agentMessage/delta') {

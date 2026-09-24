@@ -34,3 +34,32 @@
 ## 하지 않은 검증
 
 실제 브라우저 화면, 실기기 터치, Cloudflare를 거친 업로드, 공식 원격 제어 접속, Codex 앱 안에서 띄운 웹 서버의 수명은 확인하지 않았습니다. 앱 종료 후 웹 인계 성공은 사용자 보고(`obs.user_handover_success_20260924`)이며 메인이 화면을 직접 보지 않았습니다.
+
+# revision 2 검증 — 2026-09-24 데스크톱 이어가기
+
+기준: 첫 커밋 3748874 + 미커밋 변경(후보 r4: server.mjs `AED584A11A85EA67`, test/task-scope.test.mjs `14B4AF128CEC1692`, README.md `FEB5C163D09AAFA7`, 나머지 파일은 `C:/Codex/Scratch/CodexRemoteWebKnowledge/candidate-desktop-resume-r3-20260924.json`과 동일). 운영 배포는 이 작업 트리로 했습니다.
+
+## 기준 DB
+
+- schema 1, revision 2, session `20260924-desktop-resume`. 86 nodes / 187 edges.
+- dry-run: revision 1 유지, 노드 50(갱신 27·신규 23)·관계 68 변경 예정. 실제 적용: revision 2.
+- check: 오류 0 / 경고 0. 적용 전 check는 코드 변경으로 앵커 누락 6건·지문 경고를 정확히 보고했고, 해당 노드를 새 앵커로 갱신해 해소했습니다.
+- export `knowledge/exports/revision-000002/`의 정규화 SHA256과 payload_hash 일치.
+- node_history revision 2: 27건(갱신 전 payload 보존, 예: `issue.task_list_hidden` 이전 status verified → 현재 historical).
+- 적용 직전 백업 `revision-000002-5b1149c894d3.sqlite3` 내부 meta revision 1·노드 63.
+- 비밀 검사(export graph.json): Quick Tunnel URL, 이메일, hash/salt/sessionKey 필드, bearer 토큰 형태 없음.
+
+원본: `C:/Codex/Scratch/CodexRemoteWebKnowledge/`의 `20260924-web-panel-decision-draft.json`(결정 시점 원문), `rev2-nodes-v1.json`, `rev2-edges-v1.json`, `merge-rev2.mjs`, `rev2-change-v1.json`, `rev2-dry-run.json`, `rev2-apply.json`, `rev2-check.json`, `rev2-export.json`, `rev2-status.json`, `verify-rev2.py`, `rev2-verification.json`, `deploy-listing-probe.mjs`, `deploy-listing-probe-output.txt`, 후보 해시 `candidate-desktop-resume-*.json`.
+
+## 제품 검증
+
+- 최종 후보 r4: `node --check` 10개 종료 0, `node --test` 72개 중 71 통과·1 skipped(파일 symlink 권한)·실패 0.
+- 임시 CODEX_HOME에서 실제 codex 0.155.0-alpha.16.3 두 프로세스 e2e 18/18(r3 후보; r4는 보호 경로 판정 함수만 변경). notLoaded 탐침 PASS.
+- 실제 계정 기록에 기록 API 적용(읽기 전용): new-chat 5/5/3 turn, 27.6 MiB turn은 요약 재시도로 열림.
+- 독립 리뷰 3회(r1·r2·r3) 블로커 없음. r3 뒤 F1(드라이브 상대 경로) 3줄 수정은 메인이 코드를 직접 확인했고 별도 독립 리뷰는 없습니다.
+- 배포 전 실제 데이터 목록 탐침(읽기 전용): 50개, 날짜 폴더 22·프로젝트 7·Documents 20(폴더 없음)·보호 1·잠김 2.
+- 배포 후: 서버·터널·웹 app-server 실행, 로컬·외부 /health 200, stderr 0바이트, writer lock 해제.
+
+## 하지 않은 검증
+
+로그인 후 브라우저 화면(목록 표시, 이전 기록 더 보기, 안내 카드, 포커스·스크롤), 실제 데스크톱 앱이 잡은 잠금으로 409 확인, 실제 모델 turn의 승인 흐름(patchUpdated 순서, 자동 거부가 decline으로 처리되는지), 드라이브 상대 경로가 실제 쓰기로 이어지는지는 확인하지 않았습니다. 변경 코드는 Git에 커밋하지 않았습니다.

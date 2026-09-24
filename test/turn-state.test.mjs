@@ -125,8 +125,9 @@ test('history flattened with join("") (no separator) renders prompt text, chips 
   const prompt = '이 그림 설명해줘 [참고] <i>원문</i>';
   assert.equal((await send(x, 'POST', '/api/turns/start', { ...x.auth, body: { threadId: x.threadId, prompt, attachments: [upload.body.attachment.id], requestId: 'join-history-001' } })).status, 200);
   await waitFor(() => x.app.reports[0]);
-  const read = await send(x, 'POST', '/api/tasks/read', { ...x.auth, body: { threadId: x.threadId } });
-  const user = read.body.result.thread.turns[0].items.find(item => item.type === 'userMessage');
+  // History now comes from the paged /api/tasks/turns (thread/turns/list), not a full thread/read.
+  const read = await send(x, 'POST', '/api/tasks/turns', { ...x.auth, body: { threadId: x.threadId } });
+  const user = read.body.turns[0].items.find(item => item.type === 'userMessage');
   assert.ok(user.content[0].text.startsWith(`${prompt}[Codex 원격 웹 첨부 파일 1개]`), 'glued with no separator');
   const view = parseUserContent(user.content);
   assert.deepEqual(view.texts, [prompt]); assert.deepEqual(view.files.map(file => file.name), ['도식.png']);

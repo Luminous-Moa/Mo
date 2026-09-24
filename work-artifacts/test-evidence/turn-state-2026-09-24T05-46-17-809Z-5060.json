@@ -1,0 +1,57 @@
+{
+  "suite": "turn-state.test.mjs",
+  "startedAt": "2026-09-24T05:46:17.809Z",
+  "node": "v24.21.0",
+  "checks": [
+    {
+      "name": "early-interrupt",
+      "responseToInterruptMs": "immediate",
+      "foreignTurnId": 409,
+      "interrupt": 200,
+      "completedStatus": "interrupted"
+    },
+    {
+      "name": "completion-ordering",
+      "completedBeforeResponse": "not active",
+      "lateStarted": "ignored",
+      "olderCompletion": "ignored"
+    },
+    {
+      "name": "pending-202-success",
+      "statuses": [
+        202,
+        200
+      ],
+      "outcome": "sent",
+      "turnStartCalls": 1
+    },
+    {
+      "name": "pending-202-rejected",
+      "statuses": [
+        202,
+        422
+      ],
+      "outcome": "rejected",
+      "turnStartCalls": 1
+    },
+    {
+      "name": "pending-202-uncertain",
+      "statuses": [
+        202,
+        409
+      ],
+      "outcome": "uncertain",
+      "turnStartCalls": 1
+    },
+    {
+      "name": "join-history",
+      "texts": [
+        "이 그림 설명해줘 [참고] <i>원문</i>"
+      ],
+      "files": [
+        "도식.png"
+      ],
+      "title": "이 그림 설명해줘 [참고] <i>원문</i>"
+    }
+  ]
+}

@@ -124,6 +124,10 @@ h1, h2, p { margin: 0; }
 .task-title { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 500; }
 .task-sub { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 12px; color: var(--muted); }
 .task-list-empty { padding: 10px; color: var(--muted); font-size: 13px; }
+.task-dot.is-busy { background: var(--warn); }
+.task-sub.is-busy { color: var(--warn); }
+.task-list-note { padding: 8px 10px; color: var(--muted); font-size: 12px; }
+.history-more { display: flex; justify-content: center; padding: 4px 0 8px; }
 .sidebar-foot { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding-top: 12px; border-top: 1px solid var(--border); }
 .conn { display: inline-flex; align-items: center; gap: 7px; font-size: 12px; color: var(--muted); }
 .conn-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--warn); }
@@ -145,7 +149,7 @@ h1, h2, p { margin: 0; }
 .badge.is-running::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; animation: pulse 1.4s ease-in-out infinite; }
 @keyframes pulse { 50% { opacity: .3; } }
 
-.feed { min-height: 0; overflow-y: auto; overscroll-behavior: contain; scroll-behavior: auto; }
+.feed { min-height: 0; overflow-y: auto; overscroll-behavior: contain; scroll-behavior: auto; overflow-anchor: none; }
 .feed-inner { width: min(820px, 100%); margin: 0 auto; padding: 28px 24px 20px; }
 .messages { display: grid; gap: 18px; }
 .empty-state { display: grid; justify-items: center; gap: 6px; padding: 12vh 12px 0; text-align: center; }

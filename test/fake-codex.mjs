@@ -28,6 +28,17 @@ export class FakeCodex extends EventEmitter {
     super();
     this.project = project; this.stepMs = stepMs; this.mergeHistory = mergeHistory; this.connected = false; this.incoming = new Map();
     this.calls = []; this.threads = new Map(); this.sequence = 0; this.failTurns = false; this.timers = new Set(); this.reports = []; this.waiters = new Map();
+    // Threads whose writer lock another process holds: thread/resume answers like the real binary (-32600 active writer).
+    this.lockedThreads = new Set();
+    // thread/list page size when the caller sends no limit (the real server picks one; 25 was observed).
+    this.defaultPageSize = 25;
+    // Optional hook(params) → response for thread/list, to imitate unusual servers (duplicates, loops, empty state DB).
+    this.listHook = null;
+    // Turn IDs whose full-view payload is "larger than the bridge line limit": a full-view page containing one of them
+    // fails like bridge/app-server.mjs does for an oversized line (tooLarge), summary view still works.
+    this.oversizedTurns = new Set();
+    // Turns too large even in summary view (only itemsView notLoaded answers).
+    this.oversizedSummaryTurns = new Set();
     if (seedHistory) {
       const now = Math.floor(Date.now() / 1000);
       this.threads.set('fixture-existing', { id: 'fixture-existing', name: 'UI 확인용 기존 작업', cwd: project, updatedAt: now - 3600, active: false, turns: [{ id: 'seed-turn', items: [
@@ -50,20 +61,27 @@ export class FakeCodex extends EventEmitter {
   async request(method, params = {}) {
     this.calls.push({ method, params });
     if (method === 'model/list') return { data: FAKE_MODELS };
-    if (method === 'thread/list') return { threads: [...this.threads.values()].map(thread => ({ id: thread.id, name: thread.name, preview: this.preview(thread), cwd: thread.cwd, updatedAt: thread.updatedAt, status: { type: thread.active ? 'active' : 'idle' } })) };
+    if (method === 'thread/list') return this.listHook ? this.listHook(params, this) : this.listThreads(params);
+    if (method === 'thread/turns/list') return this.listTurns(params);
     if (method === 'thread/read') {
-      const thread = this.threads.get(params.threadId); let turns = thread?.turns || [];
+      const thread = this.threads.get(params.threadId);
+      if (!thread) throw Object.assign(new Error(`thread not found: ${params.threadId}`), { rpcError: true, code: -32600 });
+      let turns = params.includeTurns === false ? [] : thread.turns || [];
       if (this.mergeHistory !== false) turns = turns.map(turn => ({ ...turn, items: turn.items.map(item => item.type !== 'userMessage' ? item : { ...item, content: [
         { type: 'text', text: this.flatten(item) },
         ...item.content.filter(part => part.type !== 'text')] }) }));
-      return { thread: { id: params.threadId, turns } };
+      return { thread: { ...this.summary(thread), turns } };
     }
     if (method === 'thread/start') {
-      const id = `fake-thread-${++this.sequence}`;
-      this.threads.set(id, { id, name: '', cwd: params.cwd, updatedAt: Math.floor(Date.now() / 1000), active: false, turns: [] });
+      const id = `fake-thread-${++this.sequence}`; const now = Math.floor(Date.now() / 1000);
+      this.threads.set(id, { id, name: '', cwd: params.cwd, createdAt: now, updatedAt: now, recencyAt: now, active: false, turns: [] });
       return { thread: { id } };
     }
-    if (method === 'thread/resume') return { thread: { id: params.threadId } };
+    if (method === 'thread/resume') {
+      if (!this.threads.has(params.threadId)) throw Object.assign(new Error(`thread not found: ${params.threadId}`), { rpcError: true, code: -32600 });
+      if (this.lockedThreads.has(params.threadId)) throw Object.assign(new Error(`thread ${params.threadId} already has an active writer`), { rpcError: true, code: -32600 });
+      return { thread: { id: params.threadId } };
+    }
     if (method === 'turn/interrupt') { this.interrupted = params.turnId; return {}; }
     if (method === 'turn/start') {
       if (this.turnStartGate) await this.turnStartGate;
@@ -76,6 +94,48 @@ export class FakeCodex extends EventEmitter {
       return { turn: { id: turnId } };
     }
     return {};
+  }
+
+  // Shape of a real Thread summary (subset). Extra fields stand in for data the web server must not forward.
+  summary(thread) {
+    return { id: thread.id, name: thread.name || null, preview: thread.preview ?? this.preview(thread), cwd: thread.cwd, createdAt: thread.createdAt ?? thread.updatedAt, updatedAt: thread.updatedAt, recencyAt: thread.recencyAt ?? thread.updatedAt,
+      status: { type: thread.active ? 'active' : thread.loaded === false ? 'notLoaded' : 'idle' }, source: 'vscode', path: `C:\\fake-codex-home\\sessions\\${thread.id}.jsonl`, gitInfo: thread.gitInfo || null, turns: [] };
+  }
+
+  // Paged like the real thread/list: sortKey (default created_at, newest first), limit, opaque cursor, archived filter.
+  listThreads(params = {}) {
+    const key = params.sortKey === 'updated_at' ? 'updatedAt' : params.sortKey === 'recency_at' ? 'recencyAt' : 'createdAt';
+    const value = thread => thread[key] ?? thread.updatedAt ?? 0;
+    const direction = params.sortDirection === 'asc' ? -1 : 1;
+    const all = [...this.threads.values()].filter(thread => Boolean(thread.archived) === Boolean(params.archived)).sort((a, b) => direction * (value(b) - value(a)));
+    const size = Math.max(1, Math.min(params.limit ?? this.defaultPageSize, 100));
+    const start = params.cursor ? Number(String(params.cursor).replace(/^page-/, '')) : 0;
+    const next = start + size < all.length ? `page-${start + size}` : null;
+    return { data: all.slice(start, start + size).map(thread => this.summary(thread)), nextCursor: next, backwardsCursor: null };
+  }
+
+  // Like the real thread/turns/list: newest first by default, opaque cursor, itemsView full|summary (summary keeps only
+  // user and agent messages), and the "not materialized" error before the first user message.
+  listTurns(params = {}) {
+    const thread = this.threads.get(params.threadId);
+    if (!thread) throw Object.assign(new Error(`thread not loaded: ${params.threadId}`), { rpcError: true, code: -32600 });
+    if (!thread.turns.length) throw Object.assign(new Error(`thread ${params.threadId} is not materialized yet; thread/turns/list is unavailable before first user message`), { rpcError: true, code: -32600 });
+    const ordered = params.sortDirection === 'asc' ? [...thread.turns] : [...thread.turns].reverse();
+    const size = Math.max(1, Math.min(params.limit ?? 25, 100));
+    const start = params.cursor ? Number(String(params.cursor).replace(/^turn-/, '')) : 0;
+    const slice = ordered.slice(start, start + size);
+    const view = params.itemsView || 'summary';
+    const tooLarge = () => Object.assign(new Error(`thread/turns/list response exceeded 16777216 characters`), { tooLarge: true });
+    if (view === 'full' && slice.some(turn => this.oversizedTurns.has(turn.id) || this.oversizedSummaryTurns.has(turn.id))) throw tooLarge();
+    if (view === 'summary' && slice.some(turn => this.oversizedSummaryTurns.has(turn.id))) throw tooLarge();
+    const data = slice.map(turn => {
+      let items = turn.items;
+      if (view === 'notLoaded') items = [];
+      if (view === 'summary') items = items.filter(item => item.type === 'userMessage' || item.type === 'agentMessage');
+      if (this.mergeHistory !== false) items = items.map(item => item.type !== 'userMessage' ? item : { ...item, content: [{ type: 'text', text: this.flatten(item) }, ...item.content.filter(part => part.type !== 'text')] });
+      return { id: turn.id, status: turn.status || 'completed', itemsView: view, items };
+    });
+    return { data, nextCursor: start + size < ordered.length ? `turn-${start + size}` : null, backwardsCursor: null };
   }
 
   flatten(item) {
@@ -119,7 +179,7 @@ export class FakeCodex extends EventEmitter {
 
   async runTurn(params, turnId) {
     const { threadId } = params; const thread = this.threads.get(threadId) || { id: threadId, turns: [] };
-    const items = []; thread.turns.push({ id: turnId, items }); thread.active = true; thread.updatedAt = Math.floor(Date.now() / 1000);
+    const items = []; thread.turns.push({ id: turnId, items }); thread.active = true; thread.updatedAt = Math.floor(Date.now() / 1000); thread.recencyAt = thread.updatedAt;
     const prompt = params.input.find(part => part.type === 'text' && !part.text.startsWith('[Codex 원격 웹 첨부 파일'))?.text || '';
     const user = { id: `${turnId}-user`, type: 'userMessage', content: params.input }; items.push(user);
     if (this.interrupted === turnId) { thread.active = false; this.notify('turn/completed', { threadId, turnId, turn: { id: turnId, status: 'interrupted' } }); return; }

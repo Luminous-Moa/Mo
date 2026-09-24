@@ -1,0 +1,110 @@
+{
+  "suite": "task-scope.test.mjs",
+  "startedAt": "2026-09-24T05:41:59.208Z",
+  "node": "v24.21.0",
+  "platform": "win32",
+  "checks": [
+    {
+      "name": "compat-without-resumeRoots",
+      "listed": [
+        "proj-new-activity",
+        "proj-old-activity"
+      ],
+      "listParams": {
+        "limit": 50,
+        "sortKey": "recency_at",
+        "sortDirection": "desc",
+        "useStateDbOnly": true
+      }
+    },
+    {
+      "name": "resumeRoots-listing",
+      "listed": [
+        [
+          "proj-new-activity",
+          "one",
+          false
+        ],
+        [
+          "dated",
+          "c\\Codex\\2026-09-22\\new-chat",
+          false
+        ],
+        [
+          "deep",
+          "c\\Codex\\2026-09-22\\new-chat\\deep\\er",
+          false
+        ],
+        [
+          "root-itself",
+          "c\\Codex",
+          false
+        ],
+        [
+          "gone",
+          "Documents\\Codex\\2026-09-17\\gone",
+          true
+        ],
+        [
+          "proj-old-activity",
+          "one",
+          false
+        ]
+      ]
+    },
+    {
+      "name": "open-resume-by-id",
+      "beyondListCap": "old-dated",
+      "outside403": [
+        "outside",
+        "junction-escape",
+        "relative"
+      ],
+      "unknown404": true,
+      "missingFolder": "409 thread_folder_missing"
+    },
+    {
+      "name": "active-writer-409",
+      "status": 409,
+      "code": "thread_locked",
+      "releasedThenResumed": true,
+      "otherRpcRefusal": 422
+    },
+    {
+      "name": "approval-and-start-scope",
+      "insideApproval": "pending",
+      "siblingApproval": "blocked",
+      "startOutsideProjects": 403
+    },
+    {
+      "name": "item-cap",
+      "returned": 100,
+      "pagesRequested": 3
+    },
+    {
+      "name": "page-cap-loop-dedupe-fallback",
+      "pageCapRequests": 6,
+      "loopRequests": 2,
+      "emptyStateDbFallsBackToScan": true
+    },
+    {
+      "name": "unexpected-error-logging",
+      "sample": "[server] 502 GET /api/tasks: thread/list response exceeded 16 characters (at x.app.listHook (file:///C:/Codex/Projects/CodexRemoteWeb/test/task-scope.test.mjs:241:48))"
+    },
+    {
+      "name": "writer-lock-hint",
+      "heldByOtherProcess": "busy",
+      "afterRelease": null
+    },
+    {
+      "name": "bridge-oversize",
+      "maxLine": 1000,
+      "failedOnlyOwnRequest": true,
+      "connectionKept": true,
+      "protocolErrors": [
+        "App Server JSONL line over 1000 characters was discarded (thread/list)",
+        "App Server JSONL line over 1000 characters was discarded (thread/read)"
+      ]
+    }
+  ]
+}

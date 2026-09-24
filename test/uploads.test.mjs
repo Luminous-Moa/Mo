@@ -560,8 +560,9 @@ test('history that merges prompt and attachment notice into one text part still 
   const prompt = '첫 줄\n<b>그대로</b> 표시';
   assert.equal((await turn(x, auth, { threadId, prompt, attachments: [txt, img], requestId: 'merged-history-1' })).status, 200);
   await waitFor(() => x.app.reports[0]); await idle(x, auth, threadId);
-  const read = await send(x.port, 'POST', '/api/tasks/read', { ...auth, body: { threadId } });
-  const user = read.body.result.thread.turns[0].items.find(item => item.type === 'userMessage');
+  // History now comes from the paged /api/tasks/turns (thread/turns/list), not a full thread/read.
+  const read = await send(x.port, 'POST', '/api/tasks/turns', { ...auth, body: { threadId } });
+  const user = read.body.turns[0].items.find(item => item.type === 'userMessage');
   assert.equal(user.content.filter(part => part.type === 'text').length, 1); assert.match(user.content[0].text, /경로: /);
   const view = parseUserContent(user.content);
   assert.deepEqual(view.texts, [prompt]); assert.deepEqual(view.files.map(file => file.name), ['memo.txt', 'shot.png']);

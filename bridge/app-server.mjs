@@ -2,13 +2,20 @@ import { spawn } from 'node:child_process';
 import { EventEmitter } from 'node:events';
 import { StringDecoder } from 'node:string_decoder';
 
-const MAX_LINE = 1024 * 1024;
+// Longest accepted JSONL line, in UTF-16 code units. thread/read (full history) and thread/list pages carry untrimmed
+// previews and outputs, so 1 MiB was reachable in normal use (a measured 50-thread page was ~83 K). A longer line is
+// discarded on its own and only the request it answers fails (tooLarge); the connection is never dropped for it.
+export const MAX_LINE = 16 * 1024 * 1024;
+// Responses are serialized as {"id":…,"result":…} (verified against the real binary), so the id is at the front.
+const LEADING_ID = /^\s*\{\s*"id"\s*:\s*("(?:[^"\\]|\\.)*"|-?\d+)/;
 
 export class AppServer extends EventEmitter {
-  constructor(config, { spawnImpl = spawn } = {}) {
+  constructor(config, { spawnImpl = spawn, maxLine = MAX_LINE } = {}) {
     super();
     this.config = config;
     this.spawnImpl = spawnImpl;
+    this.maxLine = maxLine;
+    this.discarding = false;
     this.child = null;
     this.sequence = 0;
     this.pending = new Map();
@@ -83,17 +90,41 @@ export class AppServer extends EventEmitter {
   }
 
   #read(chunk) {
-    this.buffer += chunk;
-    if (this.buffer.length > MAX_LINE) return this.#disconnect(new Error('App Server JSONL line is too large'));
-    let end;
-    while ((end = this.buffer.indexOf('\n')) >= 0) {
-      const line = this.buffer.slice(0, end).trim();
-      this.buffer = this.buffer.slice(end + 1);
+    let text = chunk;
+    while (text.length) {
+      const end = text.indexOf('\n');
+      if (this.discarding) {
+        // Skipping the rest of an oversized line until its newline.
+        if (end < 0) return;
+        this.discarding = false; text = text.slice(end + 1); continue;
+      }
+      if (end < 0) {
+        this.buffer += text;
+        if (this.buffer.length > this.maxLine) { const head = this.buffer.slice(0, 256); this.buffer = ''; this.discarding = true; this.#dropLine(head); }
+        return;
+      }
+      const raw = this.buffer + text.slice(0, end);
+      this.buffer = ''; text = text.slice(end + 1);
+      if (raw.length > this.maxLine) { this.#dropLine(raw.slice(0, 256)); continue; }
+      const line = raw.trim();
       if (!line) continue;
       let message;
       try { message = JSON.parse(line); } catch { this.emit('protocolError', new Error('Invalid App Server JSONL')); continue; }
       this.#message(message);
     }
+  }
+
+  // Fails only the request the oversized line answered (when its id is readable); everything else keeps working.
+  #dropLine(head) {
+    let id = null;
+    const match = head.match(LEADING_ID);
+    if (match) { try { id = String(JSON.parse(match[1])); } catch { id = null; } }
+    const call = id != null ? this.pending.get(id) : null;
+    if (call) {
+      this.pending.delete(id); clearTimeout(call.timer);
+      call.reject(Object.assign(new Error(`${call.method} response exceeded ${this.maxLine} characters`), { tooLarge: true }));
+    }
+    this.emit('protocolError', new Error(`App Server JSONL line over ${this.maxLine} characters was discarded${call ? ` (${call.method})` : ''}`));
   }
 
   #message(message) {

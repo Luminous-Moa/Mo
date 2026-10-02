@@ -20,7 +20,10 @@ export function pasteAction({ text = '', fileCount = 0, canAttach = false }) {
   return canAttach ? 'attach' : 'blocked';
 }
 
-const HEADER_ANYWHERE = /\[Codex 원격 웹 첨부 파일 (\d+)개\]/g;
+// Notice header "[<NOTICE_TITLE> N개]"; NOTICE_TITLE is plain text (no regex metacharacters) and must match lib/uploads.mjs.
+const HEADER_SOURCE = `\\[${NOTICE_TITLE} (\\d+)개\\]`;
+const HEADER_ANYWHERE = new RegExp(HEADER_SOURCE, 'g');
+const HEADER_LINE = new RegExp(`^${HEADER_SOURCE}$`);
 const ITEM = /^(\d+)\.\s(.+)\s—\s(.+)$/;
 const PATH_LINE = /^ {3}경로: \S/;
 // Guidance lines the server has generated (current and earlier wording); nothing else may sit between header and items.
@@ -36,7 +39,7 @@ function fileFromItem(name, meta) {
 // Parses a complete generated notice starting exactly at `rest` (header already at index 0). Returns null unless the
 // whole structure is valid: header count N, only known guidance lines, then items 1..N each followed by a path line.
 function parseNoticeAt(rest) {
-  const lines = rest.split('\n'); const header = lines[0].match(/^\[Codex 원격 웹 첨부 파일 (\d+)개\]$/);
+  const lines = rest.split('\n'); const header = lines[0].match(HEADER_LINE);
   if (!header) return null;
   const count = Number(header[1]); if (!count || count > 20) return null;
   let i = 1;
@@ -65,7 +68,7 @@ export function splitNotice(text) {
 // Task titles come from a preview that may include (possibly truncated) notice text; cut at the header.
 export function titleText(raw, fallback = '새 작업') {
   const text = String(raw || '');
-  const cut = text.search(/\[Codex 원격 웹 첨부 파일 \d+개\]/);
+  const cut = text.search(HEADER_ANYWHERE); // search() always starts at 0 and ignores the g flag
   const head = (cut >= 0 ? text.slice(0, cut) : text).trim().split('\n')[0].trim().slice(0, 80);
   return head || (cut >= 0 ? '첨부 파일' : fallback);
 }

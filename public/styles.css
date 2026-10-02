@@ -144,8 +144,7 @@ h1, h2, p { margin: 0; }
 .task-meta { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 12px; color: var(--muted); }
 .task-meta:empty { display: none; }
 .badge { display: inline-flex; align-items: center; gap: 6px; flex: none; padding: 3px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; background: var(--surface-3); color: var(--text-2); }
-.badge.is-controlled { background: var(--accent-soft); color: var(--accent); }
-.badge.is-running { background: var(--accent-soft); color: var(--accent); }
+.badge.is-controlled, .badge.is-running { background: var(--accent-soft); color: var(--accent); }
 .badge.is-running::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; animation: pulse 1.4s ease-in-out infinite; }
 @keyframes pulse { 50% { opacity: .3; } }
 
@@ -256,7 +255,7 @@ h1, h2, p { margin: 0; }
 .attachment.is-busy { opacity: .65; }
 .attachment.is-attempted { border-color: color-mix(in srgb, var(--warn) 45%, var(--border)); background: var(--warn-soft); }
 .attachment.is-attempted .attachment-meta { color: var(--warn); white-space: normal; }
-.attachment.is-checking .attachment-meta { color: var(--text-2); }
+.attachment.is-checking .attachment-meta, .attachment.is-uploading .attachment-meta { color: var(--text-2); }
 .pending-attempt { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 8px 10px; margin: 12px 12px 0; padding: 10px 12px; border: 1px solid color-mix(in srgb, var(--warn) 45%, var(--border)); border-radius: 10px; background: var(--warn-soft); font-size: 13px; }
 .pending-attempt > .icon { margin-top: 2px; color: var(--warn); }
 .pending-text { display: grid; gap: 2px; flex: 1 1 240px; min-width: 0; color: var(--text-2); overflow-wrap: anywhere; }
@@ -266,7 +265,6 @@ h1, h2, p { margin: 0; }
 #task-title:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; border-radius: 4px; }
 .msg-terminal { margin-top: 8px; font-size: 12px; font-weight: 600; color: var(--warn); }
 .empty-state.is-loading .empty-mark { animation: pulse 1.2s ease-in-out infinite; }
-.attachment.is-uploading .attachment-meta { color: var(--text-2); }
 
 /* Toasts */
 .toasts { position: fixed; right: 16px; bottom: 16px; z-index: 50; display: grid; gap: 8px; width: min(380px, calc(100% - 32px)); pointer-events: none; }

@@ -68,8 +68,15 @@ export function resolveCodexExe(configured, { env = process.env, platform = proc
 export const MAX_LINE = 16 * 1024 * 1024;
 // Responses are serialized as {"id":…,"result":…} (verified against the real binary), so the id is at the front.
 const LEADING_ID = /^\s*\{\s*"id"\s*:\s*("(?:[^"\\]|\\.)*"|-?\d+)/;
+// stderr is redacted per complete line; of a line longer than this only the first STDERR_LINE_LIMIT characters are kept.
+const STDERR_LINE_LIMIT = 4096;
 
 export class AppServer extends EventEmitter {
+  // Unredacted stderr waiting for its newline, and whether the rest of an over-long line is being skipped.
+  #stderrLine = '';
+  #stderrDecoder = new StringDecoder('utf8');
+  #stderrDiscarding = false;
+
   constructor(config, { spawnImpl = spawn, maxLine = MAX_LINE, resolveExe = resolveCodexExe, warn = message => process.stderr.write(`${message}\n`) } = {}) {
     super();
     this.config = config;
@@ -104,6 +111,9 @@ export class AppServer extends EventEmitter {
     this.child.stdout.on('data', (chunk) => this.#read(this.decoder.write(chunk)));
     this.child.stdout.on('end', () => this.#read(this.decoder.end()));
     this.child.stderr.on('data', (chunk) => this.#stderr(chunk));
+    // A write to an App Server that has died (before its exit is reported) or closed its input fails later with an
+    // 'error' here (EPIPE); unhandled, that would end the whole web server process.
+    this.child.stdin.on('error', (error) => this.#disconnect(new Error(`App Server input closed (${error.code || error.message})`)));
     this.child.on('error', (error) => this.#disconnect(error));
     this.child.on('exit', (code, signal) => this.#disconnect(new Error(`App Server exited (${code ?? signal})`)));
     await this.request('initialize', { clientInfo: { name: 'codex-remote-web', version: '0.2.0' } }, 10_000);
@@ -247,11 +257,32 @@ export class AppServer extends EventEmitter {
       this.incoming.delete(id);
       this.emit('serverRequestResolved', { id, failed: true, message: 'App Server disconnected' });
     }
+    const rest = this.#stderrDecoder.end();
+    if (!this.#stderrDiscarding) this.#keepStderr(this.#stderrLine + rest);
+    this.#stderrLine = ''; this.#stderrDiscarding = false;
     if (wasConnected) this.emit('status', { connected: false, error: `${error.message}${this.stderr ? `: ${this.stderr}` : ''}` });
   }
 
+  // A chunk can end inside "password=value" or inside a UTF-8 character, so text is decoded across chunks and only
+  // complete lines are redacted and kept; the unterminated rest waits for its newline (or the disconnect). A line that
+  // grows past STDERR_LINE_LIMIT keeps only its redacted head and the rest is skipped up to its newline (as #read does),
+  // so a cut inside "token=value" never leaves the value's tail as a line of its own.
   #stderr(chunk) {
-    const sanitized = String(chunk).replace(/(password|secret|token)\s*[=:]\s*\S+/gi, '$1=[redacted]').replace(/[\r\n]+/g, ' ').trim();
+    let text = this.#stderrLine + this.#stderrDecoder.write(chunk);
+    if (this.#stderrDiscarding) {
+      const skipEnd = text.indexOf('\n');
+      if (skipEnd < 0) return;
+      this.#stderrDiscarding = false; text = text.slice(skipEnd + 1);
+    }
+    const end = text.lastIndexOf('\n') + 1;
+    this.#stderrLine = text.slice(end);
+    let complete = text.slice(0, end);
+    if (this.#stderrLine.length > STDERR_LINE_LIMIT) { complete += this.#stderrLine.slice(0, STDERR_LINE_LIMIT); this.#stderrLine = ''; this.#stderrDiscarding = true; }
+    this.#keepStderr(complete);
+  }
+
+  #keepStderr(text) {
+    const sanitized = text.replace(/(password|secret|token)\s*[=:]\s*\S+/gi, '$1=[redacted]').replace(/[\r\n]+/g, ' ').trim();
     if (!sanitized) return;
     this.stderr = `${this.stderr} ${sanitized}`.trim().slice(-2000);
   }

@@ -1,6 +1,6 @@
 import http from 'node:http';
 import { readFile, realpath, readdir, stat, open } from 'node:fs/promises';
-import { createReadStream, existsSync } from 'node:fs';
+import { createReadStream, existsSync, readFileSync, realpathSync } from 'node:fs';
 import { pipeline } from 'node:stream/promises';
 import { createHash, randomBytes, scrypt as scryptCallback, timingSafeEqual } from 'node:crypto';
 import { promisify } from 'node:util';
@@ -25,8 +25,8 @@ const TASK_MAX_PAGES = 6;
 const TASK_MAX_ITEMS = 100;
 const TASK_TEXT_LIMIT = 240;
 const THREAD_ID = /^[A-Za-z0-9_-]{1,128}$/;
-// History is paged with thread/turns/list (newest first). Measured on the real account: single turns of 6.3 MiB and
-// 27.6 MiB in full view, while whole-history thread/read reached 26 MiB. 5 turns keeps ordinary pages far below the
+// History is paged with thread/turns/list (newest first). A single turn can reach tens of MiB in full view, and a
+// whole-history thread/read more than that. 5 turns keeps ordinary pages far below the
 // bridge line limit; an oversized page is retried with 1 turn, then that turn in summary view (user text + reply).
 const TURN_PAGE_SIZE = 5;
 const TURN_TEXT_LIMIT = 200_000;
@@ -102,7 +102,7 @@ function win32Form(value) {
   return { kind: 'drive', path: path.resolve(`${cleaned.join('\\')}${cleaned.length === 1 ? '\\' : ''}`) };
 }
 
-// Shortest trailing part of each root that no other root shares, e.g. C:\Codex vs Documents\Codex.
+// Shortest trailing part of each root that no other root shares, e.g. D:\Work\Codex vs Documents\Codex.
 function rootLabels(roots) {
   const parts = roots.map(root => root.split(/[\\/]+/).filter(Boolean));
   return parts.map((segments, index) => {
@@ -113,8 +113,8 @@ function rootLabels(roots) {
     return roots[index];
   });
 }
-// History for the browser: only the item kinds the UI renders, with very large outputs cut (a 27 MiB turn is mostly
-// tool output). Image parts keep their local path only (never inline data).
+// History for the browser: only the item kinds the UI renders, with very large outputs cut (a turn of tens of MiB is
+// mostly tool output). Image parts keep their local path only (never inline data).
 function clipText(value, limit, label) {
   const text = typeof value === 'string' ? value : value == null ? '' : String(value);
   return text.length > limit ? `${text.slice(0, limit)}\n… (${label} ${text.length.toLocaleString('en-US')}자 중 앞 ${limit.toLocaleString('en-US')}자만 표시)` : text;
@@ -151,7 +151,7 @@ function publicTurn(turn, view = 'full') {
 }
 
 // Unexpected-error log line: one line, bounded, with credential-looking values removed.
-// Long runs that look like encoded secrets. Plain paths (file:///C:/Codex/Projects/...) are kept: a run is redacted
+// Long runs that look like encoded secrets. Plain paths (file:///C:/Users/me/Projects/...) are kept: a run is redacted
 // only if it has no '/' at all, or carries base64 markers ('+', '=' padding), or has a mixed-case+digit segment ≥ 20.
 // When in doubt this redacts (a hidden secret matters more than a readable log).
 function opaqueRun(run) {
@@ -169,7 +169,7 @@ const SECRET_KEY = String.raw`(password|passwd|pass\s?phrase|secret|client[ _-]?
 export function sanitizeForLog(value) {
   return String(value ?? '').replace(/[\r\n\t]+/g, ' ')
     // ESC and other C0/C1 controls could rewrite the operator's terminal; bidi controls could disguise the line.
-    .replace(/[\u0000-\u001f\u007f-\u009f‎‏‪-‮⁦-⁩]/g, '')
+    .replace(/[\u0000-\u001f\u007f-\u009f\u200e\u200f\u202a-\u202e\u2066-\u2069]/g, '')
     // user:password@ in URLs
     .replace(/\b([a-z][a-z0-9+.-]*:\/\/)[^\s\/@]+@/gi, '$1[redacted]@')
     .replace(/\b(bearer|basic|token)\s+[A-Za-z0-9._~+/=-]+/gi, '$1 [redacted]')
@@ -195,6 +195,70 @@ async function body(req) {
 
 export async function loadConfig(configPath) {
   return JSON.parse((await readFile(configPath, 'utf8')).replace(/^\uFEFF/, ''));
+}
+
+// Per-machine paths. For each value the first non-empty source wins:
+//   environment variable > local.settings.json (repository root, git-ignored) > portable default.
+// start.ps1 and stop.ps1 implement the same rules (with -DataDir/-OutputDir/-NodeExe parameters in front; the parity
+// test in test/portable-config.test.mjs feeds both the same inputs); setup.mjs uses this function.
+//   dataDir   CODEX_REMOTE_DATA_DIR   default %LOCALAPPDATA%\CodexRemoteWeb\data (runtime config, uploads, logs)
+//   outputDir CODEX_REMOTE_OUTPUT_DIR default = dataDir (initial access password file, tunnel URL file)
+//   nodeExe   CODEX_REMOTE_NODE_EXE   default '' = node on PATH (used by start.ps1; validated here for the same errors)
+//   configPath is always <dataDir>\runtime-config.json (the setup-secured folder).
+// Rules shared with the PowerShell side (for standard JSON; PowerShell 5.1 also accepts some non-standard JSON such as
+// single-quoted strings, which setup never writes): keys are case-sensitive and a file whose keys differ only in case is invalid
+// JSON (PowerShell 5.1 cannot load it); missing, null, empty or blank values mean "not set"; any other non-string
+// value stops; paths must be drive-absolute (C:\ or C:/) or UNC (\\server\share) \u2014 C:rel and \rel are refused.
+// CODEX_REMOTE_SETTINGS points at a different settings file (tests use it to keep the real one out of reach).
+export const SETTINGS_FILE = 'local.settings.json';
+export const ABSOLUTE_PATH = /^(?:[A-Za-z]:[\\/]|\\\\)/;
+export function resolveSettings({ env = process.env, root = ROOT, readText = file => readFileSync(file, 'utf8') } = {}) {
+  const given = value => typeof value === 'string' && value.trim() ? value.trim() : '';
+  const settingsFile = given(env.CODEX_REMOTE_SETTINGS) || path.join(root, SETTINGS_FILE);
+  let text = null; let local = {};
+  try { text = readText(settingsFile); } catch (error) {
+    if (error?.code === 'EISDIR') throw new Error(`Cannot read ${settingsFile}: it is a folder`);
+    if (error?.code !== 'ENOENT') throw new Error(`Cannot read ${settingsFile}: ${error.message}`);
+  }
+  if (text != null) {
+    try { local = JSON.parse(String(text).replace(/^\uFEFF/, '')); } catch { throw new Error(`${settingsFile} is not valid JSON`); }
+    if (!local || typeof local !== 'object' || Array.isArray(local)) throw new Error(`${settingsFile} must contain a JSON object`);
+    const keys = Object.keys(local).map(key => key.toLowerCase());
+    if (new Set(keys).size !== keys.length) throw new Error(`${settingsFile} is not valid JSON`);
+  }
+  const pick = (envName, key, fallback) => {
+    let value = given(env[envName]); let source = `env:${envName}`;
+    if (!value && Object.hasOwn(local, key) && local[key] !== null) {
+      if (typeof local[key] !== 'string') throw new Error(`${key} in ${settingsFile} must be a string`);
+      value = given(local[key]); source = SETTINGS_FILE;
+    }
+    if (!value) return { value: fallback, source: 'default' };
+    if (!ABSOLUTE_PATH.test(value)) throw new Error(`${key} must be an absolute path (${source}): ${value}`);
+    return { value, source };
+  };
+  const localAppData = given(env.LOCALAPPDATA) || path.join(given(env.USERPROFILE) || os.homedir(), 'AppData', 'Local');
+  const dataDir = pick('CODEX_REMOTE_DATA_DIR', 'dataDir', path.join(localAppData, 'CodexRemoteWeb', 'data'));
+  const outputDir = pick('CODEX_REMOTE_OUTPUT_DIR', 'outputDir', dataDir.value);
+  const nodeExe = pick('CODEX_REMOTE_NODE_EXE', 'nodeExe', '');
+  return {
+    settingsFile, settingsFound: text != null, dataDir: dataDir.value, dataDirSource: dataDir.source,
+    outputDir: outputDir.value, outputDirSource: outputDir.source, nodeExe: nodeExe.value, nodeExeSource: nodeExe.source,
+    configPath: path.join(dataDir.value, 'runtime-config.json')
+  };
+}
+
+// Config file server.mjs loads. start.ps1 passes the exact file in CODEX_REMOTE_CONFIG (internal hand-over); then the
+// settings file is not consulted at all, so a value the server does not use cannot stop it.
+export function runtimeConfigPath(options = {}) {
+  const exact = (options.env || process.env).CODEX_REMOTE_CONFIG;
+  return typeof exact === 'string' && exact.trim() ? exact.trim() : resolveSettings(options).configPath;
+}
+
+// True when this module is the script node was started with, also when started through a junction or symlink
+// (node resolves the main module to its real path, process.argv[1] keeps the typed one).
+export function isEntryPoint(moduleUrl, argv1 = process.argv[1]) {
+  if (!argv1) return false;
+  try { return realpathSync(argv1) === realpathSync(fileURLToPath(moduleUrl)); } catch { return false; }
 }
 
 export class RemoteServer {
@@ -394,7 +458,7 @@ export class RemoteServer {
 
   // Opening and resuming are judged by the thread's own recorded cwd (thread/read), not by membership in the task
   // list page, so any in-scope task can be opened by ID. Out-of-scope data is never returned (403).
-  // Metadata-only read (includeTurns:false, ~1 KB even for 50 MiB rollouts); history comes from readTurns.
+  // Metadata-only read (includeTurns:false, small even for very large rollouts); history comes from readTurns.
   async readScopedThread(threadId) {
     // Any listed-or-not ID now reaches Codex, so only plain ID characters are forwarded.
     if (!THREAD_ID.test(threadId)) throw httpError(404, 'Thread not found');
@@ -987,8 +1051,10 @@ export class RemoteServer {
 }
 
 async function main() {
-  const configPath = process.env.CODEX_REMOTE_CONFIG || path.join(process.env.CODEX_REMOTE_DATA_DIR || 'C:\\Codex\\Apps\\CodexRemoteWeb\\data', 'runtime-config.json');
-  const config = await loadConfig(configPath);
+  const configPath = runtimeConfigPath();
+  let config;
+  // A JSON parse message quotes the text around the error; the config holds the password hash and session key.
+  try { config = await loadConfig(configPath); } catch (error) { throw error instanceof SyntaxError ? new Error(`Runtime config is not valid JSON: ${configPath}`) : error; }
   // Attachments default to a private folder beside the runtime config (the setup-secured data directory).
   if (config.uploadDir === undefined) config.uploadDir = path.join(path.dirname(path.resolve(configPath)), 'uploads');
   const server = new RemoteServer(config, { runtimeDir: path.dirname(path.resolve(configPath)) });
@@ -996,4 +1062,4 @@ async function main() {
   process.on('SIGINT', () => server.stop().then(() => process.exit(0)));
   process.on('SIGTERM', () => server.stop().then(() => process.exit(0)));
 }
-if (process.argv[1] === fileURLToPath(import.meta.url)) main().catch(error => { process.stderr.write(`Startup failed: ${error.message}\n`); process.exitCode = 1; });
+if (isEntryPoint(import.meta.url)) main().catch(error => { process.stderr.write(`Startup failed: ${error.message}\n`); process.exitCode = 1; });

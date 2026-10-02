@@ -32,15 +32,15 @@ for (const sample of sampleFiles()) await writeSample(sample.name, sample.data);
 if (process.argv.includes('--large-sample')) await writeSample('reject-too-large-21MiB.txt', Buffer.alloc(21 * 1024 * 1024, 0x61));
 
 const project = await realpath(path.join(projectsRoot, 'demo-project'));
-// Stand-in for desktop-app work folders (C:\Codex\YYYY-MM-DD\<name>), reachable through resumeRoots only.
+// Stand-in for desktop-app work folders (<resume root>\YYYY-MM-DD\<name>), reachable through resumeRoots only.
 const desktopRoot = path.join(base, 'desktop-root');
-await mkdir(path.join(desktopRoot, '2026-09-22', 'new-chat'), { recursive: true });
+await mkdir(path.join(desktopRoot, '2026-01-15', 'sample-task'), { recursive: true });
 await mkdir(path.join(desktopRoot, '2026-09-23', 'report'), { recursive: true });
 const salt = randomBytes(16); const hash = await scrypt(password, salt, 32);
 const fake = new FakeCodex({ project, stepMs: 250, seedHistory: true, mergeHistory: process.argv.includes('--split-history') ? false : process.argv.includes('--newline-history') ? '\n\n' : true });
 const now = Math.floor(Date.now() / 1000);
 const desktopTurn = text => [{ id: `seed-${text.length}`, items: [{ id: `seed-u-${text.length}`, type: 'userMessage', content: [{ type: 'text', text }] }, { id: `seed-a-${text.length}`, type: 'agentMessage', text: '(fixture) 데스크톱 앱에서 진행한 기록입니다.' }] }];
-fake.threads.set('fixture-desktop', { id: 'fixture-desktop', name: '데스크톱에서 시작한 작업 (이어가기 가능)', cwd: await realpath(path.join(desktopRoot, '2026-09-22', 'new-chat')), updatedAt: now - 600, active: false, turns: desktopTurn('회의록 정리해줘') });
+fake.threads.set('fixture-desktop', { id: 'fixture-desktop', name: '데스크톱에서 시작한 작업 (이어가기 가능)', cwd: await realpath(path.join(desktopRoot, '2026-01-15', 'sample-task')), updatedAt: now - 600, active: false, turns: desktopTurn('회의록 정리해줘') });
 // thread/resume answers "already has an active writer" (409 guidance in the UI) until the fixture restarts.
 fake.threads.set('fixture-desktop-locked', { id: 'fixture-desktop-locked', name: '데스크톱 앱이 열어 둔 작업 (잠김)', cwd: await realpath(path.join(desktopRoot, '2026-09-23', 'report')), updatedAt: now - 120, active: false, turns: desktopTurn('보고서 초안 작성') });
 fake.lockedThreads.add('fixture-desktop-locked');

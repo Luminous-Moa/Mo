@@ -4,6 +4,8 @@ data/
 *.pid
 .env
 runtime-config.json
+# Per-machine path settings (dataDir, outputDir, nodeExe); see README "경로 설정"
+/local.settings.json
 __pycache__/
 *.tmp
 *.tmp.md

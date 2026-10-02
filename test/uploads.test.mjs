@@ -498,7 +498,7 @@ test('Codex rejection (JSON-RPC error) is definitive; unknown outcomes mark file
 
 test('bridge tags JSON-RPC error responses as definitive and leaves timeouts untagged', async () => {
   let child;
-  const app = new AppServer({ transport: 'stdio' }, { spawnImpl: () => {
+  const app = new AppServer({ transport: 'stdio' }, { resolveExe: () => ({ command: 'codex', source: 'config', missing: null }), spawnImpl: () => {
     child = new EventEmitter(); child.stdin = new PassThrough(); child.stdout = new PassThrough(); child.stderr = new PassThrough(); child.killed = false; child.kill = () => { child.killed = true; };
     child.stdin.on('data', data => { for (const line of String(data).split('\n').filter(Boolean)) {
       const message = JSON.parse(line);

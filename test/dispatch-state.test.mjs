@@ -1,4 +1,4 @@
-// F1–F3 (main-triaged): per-task unresolved sends keep their exact identity across task switches, selector changes,
+// Unresolved sends: per-task unresolved sends keep their exact identity across task switches, selector changes,
 // other tasks' sends and tray resyncs; only trusted response shapes finalize. Uses the production dispatch-state.js.
 import test, { after } from 'node:test';
 import assert from 'node:assert/strict';

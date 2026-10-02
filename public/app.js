@@ -313,7 +313,7 @@ function taskId(task) { return String(task.id || task.threadId || ''); }
 function taskState(task) { return String(task.status?.type || task.status || task.turn?.status?.type || task.turn?.status || '').toLowerCase(); }
 function taskTitle(task) { return titleText(task.name || task.title || task.preview || ''); }
 function taskCwd(task) { return task.cwd || task.workspace?.cwd || ''; }
-// Project name, or the path under the resume root (e.g. "Codex\2026-09-22\new-chat") so date folders stay distinct.
+// Project name, or the path under the resume root (e.g. "Codex\2026-01-15\my-task") so date folders stay distinct.
 function taskLocation(task) { return task.location || baseName(taskCwd(task)); }
 function relativeTime(value) {
   if (value == null || value === '') return '';

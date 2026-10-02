@@ -157,7 +157,7 @@ export class FakeCodex extends EventEmitter {
   async inspect(name, file) {
     try {
       const data = await readFile(file);
-      const firstLine = TEXT_TYPES.test(name) ? data.toString('utf8').replace(/^﻿/, '').split(/\r?\n/).find(line => line.trim()) || '' : '';
+      const firstLine = TEXT_TYPES.test(name) ? data.toString('utf8').replace(/^\ufeff/, '').split(/\r?\n/).find(line => line.trim()) || '' : '';
       return { name, path: file, bytes: data.length, sha256: createHash('sha256').update(data).digest('hex'), signature: data.subarray(0, 5).toString('latin1').replace(/[^\x20-\x7e]/g, '.'), firstLine: firstLine.slice(0, 60) };
     } catch (error) { return { name, path: file, error: error.code || error.message }; }
   }

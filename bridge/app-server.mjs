@@ -1,19 +1,81 @@
 import { spawn } from 'node:child_process';
 import { EventEmitter } from 'node:events';
+import { existsSync, readdirSync, statSync } from 'node:fs';
+import path from 'node:path';
 import { StringDecoder } from 'node:string_decoder';
 
+const nodeFs = { existsSync, readdirSync, statSync };
+function isFile(file, fs) { try { return fs.statSync(file).isFile(); } catch { return false; } }
+function envValue(env, name) { const key = Object.keys(env).find(k => k.toUpperCase() === name); return key ? env[key] : undefined; }
+// Drive-absolute (C:\ or C:/) or UNC on Windows; C:rel and \rel depend on the current drive/folder and are not used.
+function absolute(value, platform) { return platform === 'win32' ? /^(?:[A-Za-z]:[\\/]|\\\\)/.test(value) : value.startsWith('/'); }
+
+// Executable lookup the way a shell-less spawn can use it: real files only, and on Windows only '<name>.exe' for a bare
+// name (a .cmd/.ps1 shim cannot be started without a shell). Relative PATH entries ('.', 'bin') are skipped so a file
+// in whatever folder the server was started from is never picked up.
+export function findOnPath(name, { env = process.env, platform = process.platform, fs = nodeFs } = {}) {
+  const file = platform === 'win32' && !path.extname(name) ? `${name}.exe` : name;
+  const delimiter = platform === 'win32' ? ';' : ':';
+  for (const raw of String(envValue(env, 'PATH') || '').split(delimiter)) {
+    const dir = raw.trim().replace(/^"(.*)"$/, '$1');
+    if (!dir || !absolute(dir, platform)) continue;
+    const candidate = path.join(dir, file);
+    if (isFile(candidate, fs)) return candidate;
+  }
+  return null;
+}
+
+// The Codex desktop app keeps its CLI in %LOCALAPPDATA%\OpenAI\Codex\bin\<build id>\codex.exe and replaces that folder
+// on update, so a saved path goes stale. Chosen: the copy whose codex.exe file modification time (usually its build
+// time) is the most recent. Folder names are opaque build ids, and asking each binary for --version would start old or
+// half-installed copies.
+export function desktopCodexCandidates({ env = process.env, fs = nodeFs } = {}) {
+  const localAppData = envValue(env, 'LOCALAPPDATA');
+  if (!localAppData) return [];
+  const bin = path.join(localAppData, 'OpenAI', 'Codex', 'bin');
+  let names = [];
+  try { names = fs.readdirSync(bin); } catch { return []; }
+  const found = [];
+  for (const name of names) {
+    const file = path.join(bin, String(name), 'codex.exe');
+    try { const info = fs.statSync(file); if (info.isFile()) found.push({ path: file, mtimeMs: info.mtimeMs }); } catch { /* folder without codex.exe */ }
+  }
+  return found.sort((a, b) => b.mtimeMs - a.mtimeMs || (a.path < b.path ? 1 : a.path > b.path ? -1 : 0));
+}
+
+// → { command, source: 'config' | 'desktop' | 'path' | 'none', missing }. codexExe is used when it is an absolute path to
+// an existing file (or, as a bare name like "codex", an executable on PATH). Otherwise: newest desktop-app copy, then
+// codex.exe on PATH. missing: the configured value that could not be used (the caller reports the fallback).
+// 'none': nothing usable was found; AppServer.connect refuses to start rather than spawning a bare name.
+export function resolveCodexExe(configured, { env = process.env, platform = process.platform, fs = nodeFs } = {}) {
+  const wanted = typeof configured === 'string' ? configured.trim() : '';
+  if (wanted) {
+    const bare = !/[\\/]/.test(wanted);
+    const hit = bare ? findOnPath(wanted, { env, platform, fs }) : (absolute(wanted, platform) && isFile(wanted, fs) ? wanted : null);
+    if (hit) return { command: hit, source: 'config', missing: null };
+  }
+  const missing = wanted || null;
+  const desktop = platform === 'win32' ? desktopCodexCandidates({ env, fs })[0] : null;
+  if (desktop) return { command: desktop.path, source: 'desktop', missing };
+  const onPath = findOnPath('codex', { env, platform, fs });
+  if (onPath) return { command: onPath, source: 'path', missing };
+  return { command: wanted || 'codex', source: 'none', missing };
+}
+
 // Longest accepted JSONL line, in UTF-16 code units. thread/read (full history) and thread/list pages carry untrimmed
-// previews and outputs, so 1 MiB was reachable in normal use (a measured 50-thread page was ~83 K). A longer line is
+// previews and outputs, so 1 MiB was reachable in normal use. A longer line is
 // discarded on its own and only the request it answers fails (tooLarge); the connection is never dropped for it.
 export const MAX_LINE = 16 * 1024 * 1024;
 // Responses are serialized as {"id":…,"result":…} (verified against the real binary), so the id is at the front.
 const LEADING_ID = /^\s*\{\s*"id"\s*:\s*("(?:[^"\\]|\\.)*"|-?\d+)/;
 
 export class AppServer extends EventEmitter {
-  constructor(config, { spawnImpl = spawn, maxLine = MAX_LINE } = {}) {
+  constructor(config, { spawnImpl = spawn, maxLine = MAX_LINE, resolveExe = resolveCodexExe, warn = message => process.stderr.write(`${message}\n`) } = {}) {
     super();
     this.config = config;
     this.spawnImpl = spawnImpl;
+    this.resolveExe = resolveExe;
+    this.warn = warn;
     this.maxLine = maxLine;
     this.discarding = false;
     this.child = null;
@@ -28,7 +90,12 @@ export class AppServer extends EventEmitter {
 
   async connect() {
     if (this.connected) return;
-    const command = this.config.codexExe || 'codex';
+    const resolved = this.resolveExe(this.config.codexExe);
+    if (!resolved || resolved.source === 'none' || !resolved.command) {
+      throw new Error(`codex.exe not found${resolved?.missing ? ` (configured codexExe: ${resolved.missing})` : ''}: install and sign in to the Codex desktop app, put codex.exe on PATH, or set codexExe in runtime-config.json to its absolute path`);
+    }
+    const command = resolved.command;
+    if (resolved.missing) this.warn(`[app-server] codexExe not found: ${resolved.missing}; using ${command} (${resolved.source})`);
     const args = this.config.transport === 'proxy' ? ['app-server', 'proxy'] : ['app-server'];
     const env = { ...process.env };
     if (this.config.codexHome) env.CODEX_HOME = this.config.codexHome;
@@ -39,7 +106,7 @@ export class AppServer extends EventEmitter {
     this.child.stderr.on('data', (chunk) => this.#stderr(chunk));
     this.child.on('error', (error) => this.#disconnect(error));
     this.child.on('exit', (code, signal) => this.#disconnect(new Error(`App Server exited (${code ?? signal})`)));
-    await this.request('initialize', { clientInfo: { name: 'codex-remote-web', version: '0.1.0' } }, 10_000);
+    await this.request('initialize', { clientInfo: { name: 'codex-remote-web', version: '0.2.0' } }, 10_000);
     this.notify('initialized', {});
     this.connected = true;
     this.emit('status', { connected: true });

@@ -69,3 +69,10 @@
 - 사용자 요청('커밋 진행해줘.')으로 커밋 1477b14(코드 + revision 2, 65개 파일)를 만든 뒤, 그 사실을 revision 3으로 기록했습니다. session `20260924-desktop-resume-commit`, 88 nodes / 192 edges, dry-run 노드 4·관계 5, check 오류 0 / 경고 0.
 - 커밋 직후 추적 파일 131개 모두 git 저장 바이트와 작업 폴더 바이트 일치. server.mjs·test/task-scope.test.mjs·README.md 해시가 후보 r4와 같고 마지막 수정 시각이 서버 기동(16:42:42)보다 앞서, 배포된 코드와 커밋된 코드가 같습니다.
 - 원본: `C:/Codex/Scratch/CodexRemoteWebKnowledge/rev3-change-v1.json`, `rev3-dry-run.json`, `rev3-apply.json`, `rev3-check.json`, `rev3-export.json`, `rev3-status.json`.
+
+# revision 4 — 2026-09-24 타인 Codex용 이식성·공유 패키지
+
+- session `20260924-share-handoff`, 101 nodes / 217 edges. dry-run 노드 54(설명 유지 지문 갱신 33, 설명 변경 8, 신규 13)·관계 25, check 오류 0 / 경고 0, export 정규화 SHA256과 payload_hash 일치, node_history revision 4 41건, 비밀 검사(터널 URL·이메일·hash/salt/sessionKey 필드) 없음.
+- 적용 전 check는 코드 변경으로 41개 노드의 지문 불일치를 보고했습니다(앵커 누락 0). 설명이 그대로인 노드는 독립 감사 r1~r3가 본 diff를 근거로 지문만 갱신했고, 설명이 바뀐 노드(setup, start/stop, 브리지, README, codexExe 이슈 등)는 새 설명으로 교체했습니다.
+- 제품 검증: 최종 작업 트리 `node --test` 94개 중 93 통과·1 skipped·실패 0, 배포 29개 파일과 최종 zip 해제본 민감정보 스캔 0건, 소유자 `-CheckOnly` 운영 경로 동일. 공유 zip 179,222 bytes, SHA256 `40D51116FFF073CAA0EBC99D1732E7A74E5AA5EEEF53289F4974137513594275`. Drive 업로드는 크기·이름·위치·권한(소유자만)을 Drive API로 대조했고 체크섬은 Drive 메타데이터에 없어 대조하지 못했습니다.
+- 원본: `C:/Codex/Scratch/CodexRemoteWebKnowledge/`의 `20260924-handoff-decision-draft.json`, `rev4-new-v1.json`, `merge-rev4.mjs`, `rev4-change-v1.json`, `rev4-dry-run.json`, `rev4-apply.json`, `rev4-check.json`, `rev4-export.json`, `rev4-status.json`, `rev4-verification.json`, 패키지 매니페스트 `CodexRemoteWeb-source-0.2.0-share-20260924-r*.manifest.json`, 빌드 스크립트 `build-handoff-zip*.ps1`.

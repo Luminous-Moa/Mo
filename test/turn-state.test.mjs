@@ -1,4 +1,4 @@
-// Turn lifecycle races (round 2): early interrupt, completion-before-response ordering, 202 confirmation, flattened history.
+// Turn lifecycle races: early interrupt, completion-before-response ordering, 202 confirmation, flattened history.
 import test, { after } from 'node:test';
 import assert from 'node:assert/strict';
 import http from 'node:http';

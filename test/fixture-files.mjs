@@ -83,7 +83,7 @@ export function sampleFiles() {
   return [
     { name: 'sample-report.pdf', type: 'application/pdf', data: pdf(), expect: 'accept' },
     { name: 'sample-notes.docx', type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', data: docx(['Codex 원격 웹 합성 DOCX 문서입니다.', '두 번째 문단입니다.']), expect: 'accept' },
-    { name: 'sample-table.csv', type: 'text/csv', data: Buffer.from('﻿항목,수량,단가\n사과,3,1200\n배,5,2300\n', 'utf8'), expect: 'accept' },
+    { name: 'sample-table.csv', type: 'text/csv', data: Buffer.from('\ufeff항목,수량,단가\n사과,3,1200\n배,5,2300\n', 'utf8'), expect: 'accept' },
     { name: 'sample-sheet.xlsx', type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', data: xlsx(), expect: 'accept' },
     { name: 'sample-readme.txt', type: 'text/plain', data: Buffer.from('Codex 원격 웹 합성 텍스트 파일입니다.\n둘째 줄입니다.\n', 'utf8'), expect: 'accept' },
     { name: 'sample-guide.md', type: 'text/markdown', data: Buffer.from('# 합성 안내서\n\n- 항목 하나\n- 항목 둘\n', 'utf8'), expect: 'accept' },

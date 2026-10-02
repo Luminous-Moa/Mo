@@ -63,6 +63,8 @@ flowchart TD
 
 revision 2(데스크톱 이어가기): 최종 후보에서 `node --test` 72개 중 71 통과·1 skipped·실패 0, 임시 CODEX_HOME 실제 바이너리 e2e 18/18(r3 후보), 독립 리뷰 3회 블로커 없음, 배포 전 실제 데이터 목록 탐침 50개(`validation.20260924_desktop`, `obs.listing_probe_20260924`, `obs.deploy_20260924`). 브라우저 화면은 검증하지 않았습니다. 변경 코드와 revision 2는 커밋 1477b14로 기록되었고, 그 사실은 revision 3(`obs.commit_20260924_desktop`)에 있습니다.
 
+revision 4(타인 Codex용 공유): 0.2.0 이식성 변경(경로 해석 규칙, `local.settings.json`, codex.exe 자동 탐색, `start.ps1 -CheckOnly`, `AGENTS.md`)과 민감정보를 뺀 공유 zip(`obs.share_package_20260924`), Google Drive 업로드(`obs.drive_upload_20260924`), 독립 감사 3회(`review.20260924_share_r1~r3`), 남은 한계(`issue.share_residual_limits`)를 기록했습니다. 이 변경은 아직 커밋되지 않았습니다. 지식그래프·개발 증거는 공유 zip에 들어가지 않습니다.
+
 남은 일: 미승인 개선 후보(`open.web_improvements`: 데스크톱으로 넘기기, 재연결, codex.exe 자동 탐색, 터널·서버 수명 결합, 검색), 남은 한계(`issue.resume_residual_limits`), Codex 앱 안에서 띄운 웹 서버의 수명 가설 확인(`hypothesis.server_killed_with_app`).
 
 ## 실행과 정보 보존

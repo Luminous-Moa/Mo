@@ -1,5 +1,5 @@
 // Desktop-started tasks in the web panel: resumeRoots scope, recency-ordered paged listing, open/resume by ID,
-// single-writer lock handling (409), bridge oversize handling (H5) and sanitized logging of unexpected errors (M3).
+// single-writer lock handling (409), bridge oversize handling and sanitized logging of unexpected errors.
 import test, { after } from 'node:test';
 import assert from 'node:assert/strict';
 import http from 'node:http';
@@ -31,19 +31,19 @@ const TASK_KEYS = ['cwd', 'folderMissing', 'id', 'location', 'lock', 'name', 'pr
 // Layout (all under a fresh temp dir):
 //   projects\one            allowedRoots direct child (project)
 //   projects\one\sub        deeper than a project: not a project, not in scope without resumeRoots
-//   c\Codex                 resume root A (root itself may hold a task)
-//   c\Codex\2026-09-22\new-chat, c\Codex\2026-09-23\other, c\Codex\2026-09-22\new-chat\deep\er
+//   work\Codex              resume root A (root itself may hold a task)
+//   work\Codex\2026-01-15\sample-task, work\Codex\2026-09-23\other, work\Codex\2026-01-15\sample-task\deep\er
 //   Documents\Codex         resume root B (same basename as A → labels must differ)
 //   Documents\Codex\2026-09-17\gone   (never created: missing folder)
 //   outside\x               outside every root
-//   c\Codex\link -> outside (junction): c\Codex\link\x must stay out of scope
+//   work\Codex\link -> outside (junction): work\Codex\link\x must stay out of scope
 async function layout() {
   const base = await realpath(await mkdtemp(path.join(os.tmpdir(), 'crw-scope-')));
   const dirs = {
     base, projects: path.join(base, 'projects'), one: path.join(base, 'projects', 'one'), sub: path.join(base, 'projects', 'one', 'sub'),
-    rootA: path.join(base, 'c', 'Codex'), dated: path.join(base, 'c', 'Codex', '2026-09-22', 'new-chat'), other: path.join(base, 'c', 'Codex', '2026-09-23', 'other'),
-    deep: path.join(base, 'c', 'Codex', '2026-09-22', 'new-chat', 'deep', 'er'), rootB: path.join(base, 'Documents', 'Codex'),
-    gone: path.join(base, 'Documents', 'Codex', '2026-09-17', 'gone'), outside: path.join(base, 'outside', 'x'), link: path.join(base, 'c', 'Codex', 'link'),
+    rootA: path.join(base, 'work', 'Codex'), dated: path.join(base, 'work', 'Codex', '2026-01-15', 'sample-task'), other: path.join(base, 'work', 'Codex', '2026-09-23', 'other'),
+    deep: path.join(base, 'work', 'Codex', '2026-01-15', 'sample-task', 'deep', 'er'), rootB: path.join(base, 'Documents', 'Codex'),
+    gone: path.join(base, 'Documents', 'Codex', '2026-09-17', 'gone'), outside: path.join(base, 'outside', 'x'), link: path.join(base, 'work', 'Codex', 'link'),
     codexHome: path.join(base, 'codex-home')
   };
   for (const key of ['one', 'sub', 'dated', 'other', 'deep', 'rootB', 'outside', 'codexHome']) await mkdir(dirs[key], { recursive: true });
@@ -131,9 +131,9 @@ test('resumeRoots: any depth and the root itself are listed with distinguishable
   const byId = Object.fromEntries(r.body.tasks.map(task => [task.id, task]));
   const sep = path.sep;
   assert.equal(byId['proj-new-activity'].location, 'one');
-  assert.equal(byId.dated.location, `c${sep}Codex${sep}2026-09-22${sep}new-chat`); assert.equal(byId.dated.cwd, dirs.dated); assert.equal(byId.dated.name, '데스크톱 날짜 폴더 작업');
-  assert.equal(byId.deep.location, `c${sep}Codex${sep}2026-09-22${sep}new-chat${sep}deep${sep}er`);
-  assert.equal(byId['root-itself'].location, `c${sep}Codex`);
+  assert.equal(byId.dated.location, `work${sep}Codex${sep}2026-01-15${sep}sample-task`); assert.equal(byId.dated.cwd, dirs.dated); assert.equal(byId.dated.name, '데스크톱 날짜 폴더 작업');
+  assert.equal(byId.deep.location, `work${sep}Codex${sep}2026-01-15${sep}sample-task${sep}deep${sep}er`);
+  assert.equal(byId['root-itself'].location, `work${sep}Codex`);
   assert.equal(byId.gone.location, `Documents${sep}Codex${sep}2026-09-17${sep}gone`); assert.equal(byId.gone.folderMissing, true);
   // proj-sub sits under projects\, which is not a resume root: still hidden.
   assert.equal(byId['proj-sub'], undefined);
@@ -149,7 +149,7 @@ test('opening and resuming are judged by the thread cwd itself: works beyond the
   const list = await tasks(x);
   assert.equal(list.body.tasks.some(task => task.id === 'old-dated'), false);
   let r = await read(x, 'old-dated'); assert.equal(r.status, 200);
-  assert.equal(r.body.access.location, `c${path.sep}Codex${path.sep}2026-09-23${path.sep}other`); assert.equal(r.body.access.folderMissing, false); assert.equal(r.body.result.thread.id, 'old-dated');
+  assert.equal(r.body.access.location, `work${path.sep}Codex${path.sep}2026-09-23${path.sep}other`); assert.equal(r.body.access.folderMissing, false); assert.equal(r.body.result.thread.id, 'old-dated');
   r = await resume(x, 'old-dated'); assert.equal(r.status, 200);
   assert.equal(x.server.threadProjects.get('old-dated'), dirs.other); assert.ok(x.server.controlledThreads.has('old-dated'));
   for (const id of ['outside', 'junction-escape', 'relative']) {
@@ -443,11 +443,11 @@ test('log sanitizing covers bearer tokens, base64 with / and +, and terminal con
   assert.equal(sanitizeForLog('blob a1B2c3/D4e5F6+g7H8i9J0kLmNoPqRsTuVwXyZ0123456789abcd== end'), 'blob [redacted] end');
   assert.equal(sanitizeForLog('blob Zm9vYmFyYmF6cXV4/QUJDREVGR0hJSktMTU5PUFFSU1RVVldY end'), 'blob [redacted] end');
   assert.equal(sanitizeForLog('\u001b[31mred\u001b[0m \u0007bell\u009b'), '[31mred[0m bell');
-  const frame = 'at failure (file:///C:/Codex/Projects/CodexRemoteWeb/lib/uploads.mjs:37:58)';
+  const frame = 'at failure (file:///C:/Users/me/Projects/CodexRemoteWeb/lib/uploads.mjs:37:58)';
   assert.equal(sanitizeForLog(frame), frame);
 });
 
-test('log sanitizing round 2: quoted values with spaces, URL user info, spaced key names, bidi controls; plain names kept', () => {
+test('log sanitizing: quoted values with spaces, URL user info, spaced key names, bidi controls; plain names kept', () => {
   assert.equal(sanitizeForLog('password: "hunter two words" next'), 'password: "[redacted]" next');
   assert.equal(sanitizeForLog(`{"client_secret":"a b c","ok":1}`), `{"client_secret":"[redacted]","ok":1}`);
   assert.equal(sanitizeForLog("secret='x y'"), "secret='[redacted]'");
@@ -455,9 +455,9 @@ test('log sanitizing round 2: quoted values with spaces, URL user info, spaced k
   assert.equal(sanitizeForLog('api key = abc123XYZ'), 'api key = [redacted]');
   assert.equal(sanitizeForLog('access token: qwerty'), 'access token: [redacted]');
   assert.equal(sanitizeForLog('a\u202Eb\u2066c\u2069d\u200Fe'), 'abcde');
-  const rollout = 'rollout-2026-09-22T10-11-12-01a0c958-f3cb-77d3-84d1-f37391a1055e.jsonl';
+  const rollout = 'rollout-2026-01-15T10-11-12-00000000-1111-7222-8333-444444444444.jsonl';
   assert.equal(sanitizeForLog(`open ${rollout} failed`), `open ${rollout} failed`);
-  assert.equal(sanitizeForLog('C:\\Codex\\Apps\\Development-SDKs-2026-09-20\\node-lts'), 'C:\\Codex\\Apps\\Development-SDKs-2026-09-20\\node-lts');
+  assert.equal(sanitizeForLog('C:\\Users\\example\\Toolchains-2026-01-20\\node-lts'), 'C:\\Users\\example\\Toolchains-2026-01-20\\node-lts');
   assert.equal(sanitizeForLog('hex 9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08 end'), 'hex [redacted] end');
 });
 
@@ -566,7 +566,7 @@ test('the UI fixture uses its own Codex home, never the real ~/.codex lock files
 
 test('resumeRoots must be an array of absolute paths', async () => {
   const base = { bindHost: '127.0.0.1', port: 0, publicOrigin: 'http://127.0.0.1', allowedRoots: [], password: { salt: 'a', hash: 'b' } };
-  for (const resumeRoots of ['C:\\Codex', ['relative'], [42]]) assert.throws(() => new RemoteServer({ ...base, resumeRoots }, { appServer: new FakeCodex() }), /resumeRoots/);
+  for (const resumeRoots of ['C:\\Work', ['relative'], [42]]) assert.throws(() => new RemoteServer({ ...base, resumeRoots }, { appServer: new FakeCodex() }), /resumeRoots/);
   for (const resumeRoots of [[], null, undefined]) assert.doesNotThrow(() => new RemoteServer({ ...base, resumeRoots }, { appServer: new FakeCodex() }));
 });
 
@@ -590,7 +590,7 @@ test('writer lock hint: a lock file held by another process shows as busy in the
 
 function bridge(maxLine) {
   let child;
-  const app = new AppServer({ transport: 'stdio' }, { maxLine, spawnImpl: () => {
+  const app = new AppServer({ transport: 'stdio' }, { maxLine, resolveExe: () => ({ command: 'codex', source: 'config', missing: null }), spawnImpl: () => {
     child = new EventEmitter(); child.stdin = new PassThrough(); child.stdout = new PassThrough(); child.stderr = new PassThrough(); child.killed = false; child.kill = () => { child.killed = true; };
     child.stdin.on('data', data => { for (const line of String(data).split('\n').filter(Boolean)) { const m = JSON.parse(line); if (m.method === 'initialize') child.stdout.write(`${JSON.stringify({ id: m.id, result: { ok: true } })}\n`); else if (m.id) child.requests.push(m); } });
     child.requests = [];

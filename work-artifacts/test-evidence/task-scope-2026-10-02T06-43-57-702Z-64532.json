@@ -1,0 +1,217 @@
+{
+  "suite": "task-scope.test.mjs",
+  "startedAt": "2026-10-02T06:43:57.702Z",
+  "node": "v24.21.0",
+  "platform": "win32",
+  "checks": [
+    {
+      "name": "compat-without-resumeRoots",
+      "listed": [
+        "proj-new-activity",
+        "proj-old-activity"
+      ],
+      "listParams": {
+        "limit": 50,
+        "sortKey": "recency_at",
+        "sortDirection": "desc",
+        "useStateDbOnly": true
+      }
+    },
+    {
+      "name": "resumeRoots-listing",
+      "listed": [
+        [
+          "proj-new-activity",
+          "one",
+          false
+        ],
+        [
+          "dated",
+          "work\\Codex\\2026-01-15\\sample-task",
+          false
+        ],
+        [
+          "deep",
+          "work\\Codex\\2026-01-15\\sample-task\\deep\\er",
+          false
+        ],
+        [
+          "root-itself",
+          "work\\Codex",
+          false
+        ],
+        [
+          "gone",
+          "Documents\\Codex\\2026-09-17\\gone",
+          true
+        ],
+        [
+          "proj-old-activity",
+          "one",
+          false
+        ]
+      ]
+    },
+    {
+      "name": "open-resume-by-id",
+      "beyondListCap": "old-dated",
+      "outside403": [
+        "outside",
+        "junction-escape",
+        "relative"
+      ],
+      "unknown404": true,
+      "missingFolder": "409 thread_folder_missing"
+    },
+    {
+      "name": "active-writer-409",
+      "status": 409,
+      "code": "thread_locked",
+      "releasedThenResumed": true,
+      "otherRpcRefusal": 422
+    },
+    {
+      "name": "approval-and-start-scope",
+      "insideApproval": "pending",
+      "siblingApproval": "blocked",
+      "startOutsideProjects": 403
+    },
+    {
+      "name": "protected-runtime-folders",
+      "protectedIds": [
+        "root-itself",
+        "apps-ancestor",
+        "same-data",
+        "in-data",
+        "in-uploads"
+      ],
+      "allowedSiblings": [
+        "sibling",
+        "dated"
+      ],
+      "readAllowed": true,
+      "resume409": "thread_scope_protected"
+    },
+    {
+      "name": "protected-approvals",
+      "withoutResumeRoots": "resume 409",
+      "approvalInsideProtected": "blocked (protected folder)",
+      "approvalElsewhereInProject": "pending"
+    },
+    {
+      "name": "item-cap",
+      "returned": 100,
+      "pagesRequested": 3
+    },
+    {
+      "name": "page-cap-loop-dedupe-fallback",
+      "pageCapRequests": 6,
+      "loopRequests": 2,
+      "emptyStateDbFallsBackToScan": true
+    },
+    {
+      "name": "unexpected-error-logging",
+      "sample": "[server] 502 GET /api/tasks: thread/list response exceeded 16 characters (at x.app.listHook (file:///C:/Codex/Projects/CodexRemoteWeb/test/task-scope.test.mjs:303:48))"
+    },
+    {
+      "name": "paged-history",
+      "pages": [
+        5,
+        5,
+        2
+      ],
+      "clippedOutput": true,
+      "droppedKinds": [
+        "reasoning"
+      ]
+    },
+    {
+      "name": "oversized-history-fallback",
+      "attempts": [
+        "5/full",
+        "1/full",
+        "5/full",
+        "1/full",
+        "1/summary",
+        "5/full"
+      ]
+    },
+    {
+      "name": "empty-history-and-read-errors",
+      "emptyHistory": true,
+      "missing404": true,
+      "other502Logged": true,
+      "resumeExcludeTurns": true
+    },
+    {
+      "name": "file-change-paths-protected",
+      "rel-protected": "protected folder",
+      "abs-upload": "protected folder",
+      "move-into": "protected folder",
+      "grant-root": "protected folder",
+      "context": "protected folder",
+      "fine": "pending",
+      "command": "pending"
+    },
+    {
+      "name": "win32-normalized-protection",
+      "approvals": {
+        "dot-dir-relative": "protected folder",
+        "dot-dir-absolute": "protected folder",
+        "space-dir": "protected folder",
+        "dots-and-spaces": "protected folder",
+        "grant-root-dot": "protected folder",
+        "verbatim-drive": "protected folder",
+        "device-drive": "protected folder",
+        "unc-admin-share": "protected folder",
+        "verbatim-unc": "protected folder",
+        "dots-only-component": "protected folder",
+        "stream-alias": "protected folder",
+        "drive-relative-path": "protected folder",
+        "drive-relative-move": "protected folder",
+        "drive-relative-grant": "protected folder",
+        "nt-prefix-drive": "protected folder",
+        "nt-prefix-unc": "protected folder",
+        "normal-dotted-name": "pending",
+        "normal": "pending",
+        "normal-relative-sub": "pending",
+        "normal-relative-sibling": "pending",
+        "normal-absolute": "pending"
+      },
+      "cwdFlags": {
+        "cwd-dot": true,
+        "cwd-space-sub": true,
+        "cwd-src-dot": false
+      }
+    },
+    {
+      "name": "patch-updated",
+      "updatedDisplay": 2,
+      "refusedAfterProtectedPath": true,
+      "patchBeforeApproval": "protected folder"
+    },
+    {
+      "name": "history-notLoaded-and-cursor",
+      "placeholder": "t05",
+      "cursor400": 4,
+      "sameCursorEnds": true,
+      "totalFailure": 502,
+      "rpc32601": "read_failed"
+    },
+    {
+      "name": "writer-lock-hint",
+      "heldByOtherProcess": "busy",
+      "afterRelease": null
+    },
+    {
+      "name": "bridge-oversize",
+      "maxLine": 1000,
+      "failedOnlyOwnRequest": true,
+      "connectionKept": true,
+      "protocolErrors": [
+        "App Server JSONL line over 1000 characters was discarded (thread/list)",
+        "App Server JSONL line over 1000 characters was discarded (thread/read)"
+      ]
+    }
+  ]
+}

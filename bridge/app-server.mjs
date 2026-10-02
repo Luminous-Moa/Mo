@@ -122,7 +122,7 @@ export class AppServer extends EventEmitter {
         reject(new Error(`${method} timed out`));
       }, timeout);
       this.pending.set(id, { resolve, reject, timer, method });
-      this.#write(payload);
+      try { this.#write(payload); } catch (error) { this.pending.delete(id); clearTimeout(timer); reject(error); }
     });
   }
 
@@ -251,7 +251,7 @@ export class AppServer extends EventEmitter {
   }
 
   #stderr(chunk) {
-    const sanitized = String(chunk).replace(/(?:password|secret|token)\s*[=:]\s*\S+/gi, '$1=[redacted]').replace(/[\r\n]+/g, ' ').trim();
+    const sanitized = String(chunk).replace(/(password|secret|token)\s*[=:]\s*\S+/gi, '$1=[redacted]').replace(/[\r\n]+/g, ' ').trim();
     if (!sanitized) return;
     this.stderr = `${this.stderr} ${sanitized}`.trim().slice(-2000);
   }

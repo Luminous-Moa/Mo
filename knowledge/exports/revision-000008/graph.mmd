@@ -1,0 +1,350 @@
+flowchart LR
+  n0["bridge 결함 회귀 테스트 (verified)"]
+  n1["bridge stdin EPIPE 처리와 줄 단위 stderr 가림 (verified)"]
+  n2["App Server stdio 브리지 (verified)"]
+  n3["codex.exe 자동 탐색 resolveCodexExe (verified)"]
+  n4["지원 서버 요청 목록 (verified)"]
+  n5["지식그래프 관리 도구 (verified)"]
+  n6["RemoteServer HTTP 서버 (verified)"]
+  n7["파일 변경 승인 경로 검사 (verified)"]
+  n8["허용 프로젝트 판정 (verified)"]
+  n9["작업 목록 조회 listTasks (verified)"]
+  n10["루프백 바인딩 강제 (verified)"]
+  n11["보호 폴더 경로 판정 (verified)"]
+  n12["대화 기록 페이지 readTurns (verified)"]
+  n13["작업 이어가기 resumeThread (verified)"]
+  n14["로그 정제 sanitizeForLog (verified)"]
+  n15["turn 시작 startTurn (verified)"]
+  n16["기존 작업 범위·보호 판정 threadScope (verified)"]
+  n17["잠금 미리 표시 writerLock (verified)"]
+  n18["초기 설정 setup.mjs (verified)"]
+  n19["기동 스크립트 start.ps1 (verified)"]
+  n20["종료 스크립트 stop.ps1 (verified)"]
+  n21["UI 공통 로직 ui-core (verified)"]
+  n22["결과 모름 전송 관리 DispatchBook (verified)"]
+  n23["웹 UI 대화 기록 페이지 표시 (verified)"]
+  n24["웹 UI 작업 목록·이어가기 (verified)"]
+  n25["첨부 저장소 UploadStore (verified)"]
+  n26["2026-10-03 개선사항 로컬 커밋과 지식그래프 기록 승인 (documented)"]
+  n27["첫 커밋 작성자 승인 (verified)"]
+  n28["데스크톱 이어가기 변경 커밋 승인 (verified)"]
+  n29["첫 커밋 포함·제외 범위 (메인 결정) (verified)"]
+  n30["운영 설정 codexExe·port 수정 승인 (verified)"]
+  n31["2026-10-02 남은 일 직접 수행 승인 (verified)"]
+  n32["타인 Codex 이식성·민감정보 제외 공유 패키지·Drive 업로드 지시 (verified)"]
+  n33["상세 확인 후 지식그래프 저장과 커밋 승인 (verified)"]
+  n34["2026-10-02 병합·지식그래프 갱신·결함 수정 승인 (verified)"]
+  n35["운영 데이터 폴더·업로드 저장소 보호 (메인 결정) (verified)"]
+  n36["2026-10-02 리팩터링 요청과 선택 (verified)"]
+  n37["resumeRoots 범위 설계 (메인 결정) (verified)"]
+  n38["데스크톱 이어가기 리뷰 후속 처리 (메인 결정) (verified)"]
+  n39["이어가기 방식: 웹 패널 채택과 데스크톱 작업 표시·이어가기 수정 지시 (verified)"]
+  n40["AGENTS.md (받는 쪽 Codex 안내) (verified)"]
+  n41["README 제품 명세 (verified)"]
+  n42["데스크톱 시작 작업의 웹 목록 표시와 이어가기 (verified)"]
+  n43["타인 PC 설치·경로 이식성 (verified)"]
+  n44["집 데스크톱 앱과 외부 웹에서 같은 작업 이어가기 (documented)"]
+  n45["Codex 앱 안에서 띄운 웹 서버는 앱 종료 시 함께 종료될 수 있음 (hypothesis)"]
+  n46["M1 codexExe가 버전별 bin 폴더에 고정 (historical)"]
+  n47["M3 예상 밖 오류가 어디에도 기록되지 않음 (historical)"]
+  n48["전역 danger-full-access 상속 (verified)"]
+  n49["H5 JSONL 한 줄 1 MiB 초과 시 연결 전체 끊김 (historical)"]
+  n50["H4 App Server 끊김 후 자동 재연결 없음 (verified)"]
+  n51["16 MiB 넘는 서버→클라이언트 요청 무응답 (verified)"]
+  n52["기본 포트 47831을 LocalDeck이 점유 (verified)"]
+  n53["README와 실제 동작 불일치 (verified)"]
+  n54["H1 잠긴 작업 이어가기가 원인 없는 500으로 끝남 (historical)"]
+  n55["데스크톱 이어가기 기능의 남은 한계 (verified)"]
+  n56["2026-09-24 리뷰 LOW·INFO 묶음 (verified)"]
+  n57["공유 패키지·이식성의 남은 한계 (verified)"]
+  n58["작업별 단일 writer 잠금으로 앱↔웹 동시 이어가기 불가 (verified)"]
+  n59["H3 데스크톱 작업이 웹 목록에 안 보이고 목록 밖 작업은 열 수 없음 (historical)"]
+  n60["테스트 공백 (verified)"]
+  n61["M2 터널과 서버 수명이 묶여 있지 않음 (verified)"]
+  n62["L1 승인 3종 외 서버 요청 자동 거절과 엉뚱한 안내 (verified)"]
+  n63["H2 웹이 연 작업은 웹 서버 종료 전까지 데스크톱에서 이어갈 수 없음 (verified)"]
+  n64["커밋 1477b14 (데스크톱 이어가기 + 지식그래프 revision 2) (verified)"]
+  n65["2026-09-24 데스크톱 이어가기 기능 운영 배포 (verified)"]
+  n66["데스크톱 app-server는 stdio 전용 (verified)"]
+  n67["데스크톱 작업의 폴더 분포와 기록 크기 (verified)"]
+  n68["Google Drive 업로드 (verified)"]
+  n69["앱 종료 후 웹 기동 인계 준비 확인 (verified)"]
+  n70["배포 전 실제 데이터 목록 탐침 (verified)"]
+  n71["공식 Codex 원격 제어 등록·활성 (verified)"]
+  n72["공유 패키지 CodexRemoteWeb-source-0.2.0-share-20260924.zip (verified)"]
+  n73["웹과 데스크톱이 같은 CODEX_HOME 공유 (verified)"]
+  n74["사용자 보고: 앱 종료 상태에서 웹으로 이어가기 동작 (documented)"]
+  n75["남은 가림 한계와 기존 bridge 노드 지문 미재관측 (untested)"]
+  n76["bridge 결함 수정 커밋의 master 병합 보류 (historical)"]
+  n77["이어가기 방식 선택 미결 (historical)"]
+  n78["웹 패널 개선 후보 (미승인분) (untested)"]
+  n79["허용 루트의 직접 하위 프로젝트만 (verified)"]
+  n80["인증·세션·CSRF·Host/Origin 경계 (documented)"]
+  n81["사용자 명시 조작만 실행 (documented)"]
+  n82["루프백 전용 + Quick Tunnel 노출 (verified)"]
+  n83["활성·점유 작업 인수 금지와 새 작업 우선 (documented)"]
+  n84["Codex Remote Web (verified)"]
+  n85["2026-09-24 독립 코드 리뷰 (첫 커밋 전 전체) (verified)"]
+  n86["데스크톱 이어가기 1차 독립 리뷰 (verified)"]
+  n87["데스크톱 이어가기 2차 독립 재리뷰 (verified)"]
+  n88["데스크톱 이어가기 3차 독립 리뷰 (보강 회차) (verified)"]
+  n89["공유 패키지 1차 독립 리뷰·감사 (verified)"]
+  n90["공유 패키지 2차 독립 재리뷰·감사 (FAIL) (verified)"]
+  n91["공유 패키지 최종 독립 감사 (verified)"]
+  n92["2026-09-24 데스크톱 시작 작업 웹 표시·이어가기 구현과 배포 (verified)"]
+  n93["2026-09-24 원격 이어가기 진단·지식그래프 구축·첫 커밋 (verified)"]
+  n94["2026-09-24 타인 Codex용 이식성 작업·공유 패키지·Drive 업로드 (verified)"]
+  n95["2026-10-02 미커밋 작업 커밋·브랜치 병합·정리 (verified)"]
+  n96["2026-10-02 안전 리팩터링(포크 브랜치)·병합·bridge 결함 수정 (verified)"]
+  n97["2026-10-03 검수·개선 세션 (verified)"]
+  n98["전송 상태 테스트 (verified)"]
+  n99["fake App Server (verified)"]
+  n100["지식그래프 도구 테스트 (verified)"]
+  n101["이식성·경로 해석 테스트 (verified)"]
+  n102["인증·보안 경계 테스트 (verified)"]
+  n103["작업 범위·이어가기·기록 테스트 (verified)"]
+  n104["turn 상태 테스트 (verified)"]
+  n105["UI 공통 로직 테스트 (verified)"]
+  n106["업로드 경계 테스트 (verified)"]
+  n107["2026-09-23 개발 리뷰·검증 라운드 기록 (historical)"]
+  n108["2026-09-24 데스크톱 이어가기 검증 (verified)"]
+  n109["2026-09-24 지식그래프 도구 테스트 (verified)"]
+  n110["2026-09-24 문법 검사·전체 테스트 (verified)"]
+  n111["2026-09-24 이식성·공유 패키지 검증 (verified)"]
+  n112["병합된 master 검증 2026-10-02 (verified)"]
+  n113["리팩터링·결함 수정 검증 2026-10-02 (verified)"]
+  n114["2026-10-03 독립 리뷰와 최종 테스트 (verified)"]
+  n2 -->|"contains"| n3
+  n2 -->|"contains"| n4
+  n3 -->|"tested_by"| n101
+  n5 -->|"tested_by"| n100
+  n7 -->|"depends_on"| n11
+  n7 -->|"tested_by"| n103
+  n6 -->|"contains"| n7
+  n6 -->|"contains"| n8
+  n6 -->|"contains"| n9
+  n6 -->|"contains"| n10
+  n6 -->|"contains"| n11
+  n6 -->|"contains"| n12
+  n6 -->|"contains"| n13
+  n6 -->|"contains"| n14
+  n6 -->|"contains"| n15
+  n6 -->|"contains"| n16
+  n6 -->|"contains"| n17
+  n6 -->|"depends_on"| n2
+  n6 -->|"depends_on"| n25
+  n9 -->|"depends_on"| n8
+  n9 -->|"depends_on"| n16
+  n9 -->|"depends_on"| n17
+  n11 -->|"tested_by"| n103
+  n12 -->|"depends_on"| n2
+  n12 -->|"depends_on"| n16
+  n12 -->|"tested_by"| n103
+  n13 -->|"depends_on"| n9
+  n13 -->|"depends_on"| n16
+  n14 -->|"tested_by"| n103
+  n15 -->|"tested_by"| n104
+  n6 -->|"tested_by"| n102
+  n16 -->|"depends_on"| n11
+  n16 -->|"tested_by"| n103
+  n19 -->|"depends_on"| n6
+  n21 -->|"tested_by"| n105
+  n22 -->|"tested_by"| n98
+  n23 -->|"depends_on"| n12
+  n24 -->|"depends_on"| n9
+  n24 -->|"depends_on"| n13
+  n24 -->|"depends_on"| n22
+  n25 -->|"tested_by"| n106
+  n28 -->|"authorizes"| n64
+  n30 -->|"enabled"| n69
+  n32 -->|"authorizes"| n94
+  n32 -->|"shapes"| n43
+  n32 -->|"shapes"| n72
+  n33 -->|"authorizes"| n29
+  n33 -->|"authorizes"| n93
+  n35 -->|"shapes"| n11
+  n37 -->|"shapes"| n16
+  n38 -->|"recorded_in"| n92
+  n39 -->|"authorizes"| n37
+  n39 -->|"authorizes"| n92
+  n39 -->|"resolves"| n77
+  n42 -->|"constrained_by"| n58
+  n42 -->|"implemented_by"| n9
+  n42 -->|"implemented_by"| n11
+  n42 -->|"implemented_by"| n12
+  n42 -->|"implemented_by"| n13
+  n42 -->|"implemented_by"| n16
+  n42 -->|"implemented_by"| n17
+  n42 -->|"implemented_by"| n23
+  n42 -->|"implemented_by"| n24
+  n42 -->|"limited_by"| n55
+  n42 -->|"limited_by"| n63
+  n42 -->|"serves"| n44
+  n42 -->|"tested_by"| n103
+  n43 -->|"implemented_by"| n3
+  n43 -->|"implemented_by"| n18
+  n43 -->|"implemented_by"| n19
+  n43 -->|"implemented_by"| n20
+  n43 -->|"limited_by"| n57
+  n43 -->|"tested_by"| n101
+  n45 -->|"affects"| n19
+  n46 -->|"affects"| n2
+  n46 -->|"mitigated_by"| n30
+  n46 -->|"resolved_by"| n3
+  n47 -->|"affects"| n6
+  n47 -->|"resolved_by"| n14
+  n48 -->|"affects"| n84
+  n48 -->|"documented_in"| n41
+  n49 -->|"affects"| n2
+  n49 -->|"aggravates"| n50
+  n49 -->|"mitigated_by"| n2
+  n49 -->|"mitigated_by"| n12
+  n50 -->|"affects"| n2
+  n50 -->|"blocks"| n44
+  n51 -->|"affects"| n2
+  n52 -->|"affects"| n19
+  n52 -->|"resolved_by"| n30
+  n53 -->|"diverges_from"| n41
+  n54 -->|"affects"| n13
+  n54 -->|"blocks"| n44
+  n54 -->|"consequence_of"| n58
+  n54 -->|"related_to"| n47
+  n54 -->|"resolved_by"| n13
+  n55 -->|"affects"| n42
+  n56 -->|"affects"| n84
+  n58 -->|"affects"| n13
+  n58 -->|"blocks"| n44
+  n58 -->|"motivates"| n77
+  n59 -->|"blocks"| n44
+  n59 -->|"caused_by"| n9
+  n59 -->|"caused_by"| n79
+  n59 -->|"resolved_by"| n42
+  n60 -->|"affects"| n99
+  n61 -->|"affects"| n19
+  n61 -->|"related_to"| n52
+  n62 -->|"affects"| n4
+  n63 -->|"affects"| n2
+  n63 -->|"blocks"| n44
+  n63 -->|"consequence_of"| n58
+  n64 -->|"records"| n42
+  n64 -->|"same_content_as"| n65
+  n65 -->|"deploys"| n42
+  n66 -->|"constrains"| n77
+  n67 -->|"motivates"| n12
+  n67 -->|"supports"| n37
+  n68 -->|"uploads"| n72
+  n69 -->|"enabled"| n74
+  n70 -->|"validates"| n42
+  n71 -->|"option_for"| n77
+  n72 -->|"includes"| n40
+  n73 -->|"context_for"| n58
+  n74 -->|"supports"| n77
+  n76 -->|"affects"| n2
+  n76 -->|"resolved_by"| n95
+  n78 -->|"addresses"| n45
+  n78 -->|"addresses"| n46
+  n78 -->|"addresses"| n47
+  n78 -->|"addresses"| n49
+  n78 -->|"addresses"| n50
+  n78 -->|"addresses"| n51
+  n78 -->|"addresses"| n54
+  n78 -->|"addresses"| n58
+  n78 -->|"addresses"| n59
+  n78 -->|"addresses"| n61
+  n78 -->|"addresses"| n63
+  n79 -->|"enforced_by"| n8
+  n79 -->|"enforced_by"| n9
+  n80 -->|"enforced_by"| n6
+  n80 -->|"tested_by"| n102
+  n81 -->|"enforced_by"| n22
+  n82 -->|"enforced_by"| n10
+  n82 -->|"enforced_by"| n19
+  n83 -->|"partially_enforced_by"| n13
+  n84 -->|"contains"| n2
+  n84 -->|"contains"| n5
+  n84 -->|"contains"| n6
+  n84 -->|"contains"| n18
+  n84 -->|"contains"| n19
+  n84 -->|"contains"| n20
+  n84 -->|"contains"| n21
+  n84 -->|"contains"| n22
+  n84 -->|"contains"| n24
+  n84 -->|"contains"| n25
+  n84 -->|"contains"| n42
+  n84 -->|"contains"| n43
+  n84 -->|"documented_in"| n40
+  n84 -->|"documented_in"| n41
+  n84 -->|"pursues"| n44
+  n85 -->|"found"| n46
+  n85 -->|"found"| n47
+  n85 -->|"found"| n49
+  n85 -->|"found"| n50
+  n85 -->|"found"| n53
+  n85 -->|"found"| n54
+  n85 -->|"found"| n56
+  n85 -->|"found"| n59
+  n85 -->|"found"| n60
+  n85 -->|"found"| n61
+  n85 -->|"found"| n62
+  n85 -->|"found"| n63
+  n85 -->|"rechecked"| n107
+  n86 -->|"found"| n51
+  n86 -->|"found"| n55
+  n88 -->|"found"| n55
+  n91 -->|"found"| n57
+  n91 -->|"validates"| n72
+  n92 -->|"observed"| n67
+  n92 -->|"observed"| n70
+  n92 -->|"performed"| n64
+  n92 -->|"performed"| n65
+  n92 -->|"produced"| n86
+  n92 -->|"produced"| n87
+  n92 -->|"produced"| n88
+  n92 -->|"produced"| n108
+  n92 -->|"recorded"| n28
+  n93 -->|"observed"| n58
+  n93 -->|"observed"| n59
+  n93 -->|"produced"| n85
+  n93 -->|"produced"| n109
+  n93 -->|"produced"| n110
+  n93 -->|"recorded"| n27
+  n93 -->|"recorded"| n29
+  n93 -->|"recorded"| n30
+  n94 -->|"performed"| n68
+  n94 -->|"produced"| n72
+  n94 -->|"produced"| n89
+  n94 -->|"produced"| n90
+  n94 -->|"produced"| n91
+  n94 -->|"produced"| n111
+  n95 -->|"affects"| n2
+  n95 -->|"produced"| n112
+  n95 -->|"recorded"| n31
+  n96 -->|"affects"| n2
+  n96 -->|"affects"| n21
+  n96 -->|"produced"| n76
+  n96 -->|"produced"| n113
+  n96 -->|"recorded"| n34
+  n96 -->|"recorded"| n36
+  n102 -->|"depends_on"| n99
+  n103 -->|"depends_on"| n99
+  n104 -->|"depends_on"| n99
+  n107 -->|"historical_record_of"| n84
+  n108 -->|"covers"| n98
+  n108 -->|"covers"| n102
+  n108 -->|"covers"| n103
+  n108 -->|"covers"| n104
+  n108 -->|"covers"| n105
+  n108 -->|"covers"| n106
+  n109 -->|"covers"| n100
+  n110 -->|"covers"| n98
+  n110 -->|"covers"| n102
+  n110 -->|"covers"| n104
+  n110 -->|"covers"| n105
+  n110 -->|"covers"| n106
+  n111 -->|"covers"| n101
+  n97 -->|"produced"| n1
+  n97 -->|"approved_by"| n26
+  n97 -->|"leaves_open"| n75
+  n97 -->|"verified_by"| n114
+  n114 -->|"verifies"| n1
+  n114 -->|"uses_test"| n0
